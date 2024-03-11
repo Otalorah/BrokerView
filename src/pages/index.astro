@@ -1,0 +1,126 @@
+---
+import Layout from "@layouts/Layout.astro";
+import FormLogin from "@components/FormLogin.astro";
+import TextLink from "@components/TextLink.astro";
+---
+
+<Layout title="BrokerView">
+	<h1 class="title">Welcome</h1>
+
+	<div class="background__form background__form-login">
+		<FormLogin />
+	</div>
+
+	<TextLink
+		href="./signin"
+		text="¿No tiene una cuenta?"
+		textN="Crear cuenta"
+	/>
+
+	<style>
+		h1 {
+			color: #fff;
+		}
+		.background__form {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 300px;
+
+			&.background__form-login {
+				height: 280px;
+			}
+			&.background__form-signin {
+				height: 630px;
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: repeating-conic-gradient(
+					from var(--a),
+					#0f0,
+					#ff0,
+					#0ff,
+					#f0f,
+					#0ff
+				);
+				border-radius: 10px;
+				animation: rotating 20s linear infinite;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: repeating-conic-gradient(
+					from var(--a),
+					#0f0,
+					#ff0,
+					#0ff,
+					#f0f,
+					#0ff
+				);
+				border-radius: 10px;
+				animation: rotating 20s linear infinite;
+				filter: blur(5px);
+			}
+		}
+		/* Theme mode styles */
+
+		.light {
+			.title {
+				color: #000;
+			}
+
+			.form {
+				background-color: #efefef;
+				color: #000;
+
+				.form__input {
+					background-color: rgba(200, 200, 200, 100);
+				}
+
+				.background__btn {
+					background-color: #000;
+
+					.backfill__btn {
+						background-color: #efefef;
+					}
+
+					&:hover .btn {
+						background-clip: text;
+						color: transparent;
+						background-image: linear-gradient(
+							to right,
+							#0f0,
+							#ff0,
+							#0ff,
+							#f0f,
+							#0ff
+						);
+					}
+
+					.btn {
+						background: #efefef;
+						color: #000;
+					}
+				}
+			}
+			.text__link {
+				color: #000;
+			}
+			.btnTheme__box {
+				background: linear-gradient(to left, #ababab, #fefefe);
+
+				.btnTheme {
+					left: 22px;
+					border: 1px solid #fefefe;
+					background-color: #fff;
+				}
+			}
+		}
+	</style>
+</Layout>

@@ -1,0 +1,32 @@
+
+<div class="btnTheme__box">
+    <button class="btnTheme"></button>
+</div>
+<style>
+    .btnTheme__box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 50px;
+        height: 30px;
+        border-radius: 70px;
+        background: linear-gradient(to right, #000, #434343);
+        border: 1px solid #696969;
+
+        .btnTheme {
+            display: block;
+            position: absolute;
+            width: 25px;
+            height: 28.5px;
+            border-radius: 100%;
+            border: 1px solid #434343;
+            background-color: #434343;
+        }
+    }
+</style>
+<script>
+    import changeTheme from "../lib/changeTheme.js";
+
+    const $boxTheme = document.querySelector(".btnTheme__box");
+    changeTheme($boxTheme);
+</script>

@@ -1,0 +1,19 @@
+---
+interface Props {
+    text: string;
+    textN: string;
+    href: string;
+}
+
+const { text, textN, href } = Astro.props;
+---
+
+<a class="text__link" href={href}>{text} <b>{textN}</b></a>
+<style>
+    .text__link {
+        text-decoration: none;
+        margin: 1.5rem auto;
+        font-size: 1rem;
+        color: #fff;
+    }
+</style>
