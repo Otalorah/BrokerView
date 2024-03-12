@@ -1,0 +1,114 @@
+---
+import FormSignin from "./forms/FormSignin.astro";
+import FormLogin from "./forms/FormLogin.astro";
+
+const { type } = Astro.props;
+---
+
+<div
+    class:list={[
+        "background__form",
+        {
+            "background__form-login": type == "login",
+            "background__form-signin": type == "signin",
+        },
+    ]}
+>
+    <form
+        class:list={[
+            "form",
+            {
+                form__login: type == "login",
+                form__signin: type == "signin",
+            },
+        ]}
+    >
+        {type == "signin" ? <FormSignin /> : <FormLogin />}
+    </form>
+</div>
+<style>
+    html.light {
+        .form {
+            color: #222;
+            background-color: #efefef;
+        }
+    }
+    @property --a {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+    @keyframes rotating {
+        0% {
+            --a: 0deg;
+        }
+        100% {
+            --a: 360deg;
+        }
+    }
+    .background__form {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+
+        &.background__form-login {
+            height: 280px;
+        }
+        &.background__form-signin {
+            height: 630px;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-conic-gradient(
+                from var(--a),
+                #0f0,
+                #ff0,
+                #0ff,
+                #f0f,
+                #0ff
+            );
+            border-radius: 10px;
+            animation: rotating 20s linear infinite;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-conic-gradient(
+                from var(--a),
+                #0f0,
+                #ff0,
+                #0ff,
+                #f0f,
+                #0ff
+            );
+            border-radius: 10px;
+            animation: rotating 20s linear infinite;
+            filter: blur(5px);
+        }
+    }
+    .form {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 20px;
+        border-radius: 8px;
+        width: 295px;
+        z-index: 50;
+        color: #efefef;
+        background-color: #222;
+
+        &.form__login {
+            height: 275px;
+        }
+        &.form__signin {
+            height: 625px;
+        }
+    }
+</style>

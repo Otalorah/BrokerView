@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+    margin: 0;
+    margin-top: 55px;
+    padding: 0;
+    background: #222;
+}
+h1 {
+    color: #fff;
+}
+/* Theme mode styles */
+.light {
+    #body {
+        background-color: #efefef;
+    }
+
+    .navBar {
+        background-color: #efefef;
+    }
+
+    .title {
+        color: #000;
+    }
+
+    #btnTheme__box {
+        background: linear-gradient(to left, #ababab, #fefefe);
+
+        #btnTheme {
+            left: 22px;
+            border: 1px solid #fefefe;
+            background-color: #fff;
+        }
+    }
+}

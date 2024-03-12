@@ -1,0 +1,32 @@
+---
+import BtnColor from "../BtnColor.astro";
+import InputSignin from "./InputSignin.astro";
+
+import 'src/styles/form.css'
+---
+
+<InputSignin id="user" type="text" text="Usuario:" />
+
+<InputSignin id="lastname" type="text" text="1° Apellido:" />
+
+<InputSignin id="lastname2" type="text" text="2° Apellido:" />
+
+<InputSignin id="name" type="text" text="Nombre:" />
+
+<InputSignin id="email" type="email" text="Correo:" />
+
+<InputSignin
+    id="password"
+    type="password"
+    text="Contraseña:"
+    textError="Más de 6 caracteres, y un carácter especial"
+/>
+
+<InputSignin
+    id="password2"
+    type="password"
+    text="Confirmar contraseña:"
+    textError="Las contraseñas no coinciden"
+/>
+
+<BtnColor text="CONFIRMAR" />

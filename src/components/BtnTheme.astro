@@ -1,9 +1,9 @@
 
-<div class="btnTheme__box">
-    <button class="btnTheme"></button>
+<div id="btnTheme__box">
+    <button id="btnTheme"></button>
 </div>
 <style>
-    .btnTheme__box {
+    #btnTheme__box {
         position: relative;
         display: flex;
         align-items: center;
@@ -13,7 +13,7 @@
         background: linear-gradient(to right, #000, #434343);
         border: 1px solid #696969;
 
-        .btnTheme {
+        #btnTheme {
             display: block;
             position: absolute;
             width: 25px;
@@ -24,9 +24,37 @@
         }
     }
 </style>
-<script>
-    import changeTheme from "../lib/changeTheme.js";
+<script is:inline>
+    const theme = (() => {
+        if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+        ) {
+            return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+        }
+        return "dark";
+    })();
 
-    const $boxTheme = document.querySelector(".btnTheme__box");
-    changeTheme($boxTheme);
+    if (theme === "dark") {
+        document.documentElement.classList.remove("light");
+    } else {
+        document.documentElement.classList.add("light");
+    }
+
+    window.localStorage.setItem("theme", theme);
+
+    const handleToggleClick = () => {
+        const element = document.documentElement;
+        element.classList.toggle("light");
+
+        const isLight = element.classList.contains("light");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+    };
+
+    document
+        .getElementById("btnTheme__box")
+        .addEventListener("click", handleToggleClick);
 </script>

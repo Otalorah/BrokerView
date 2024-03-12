@@ -1,5 +1,6 @@
 ---
 import Navbar from "@components/Navbar.astro";
+import '../styles/global.css'
 interface Props {
 	title: string;
 }
@@ -16,116 +17,19 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<script>
-			if (window && document.documentElement) {
-				try {
-					const storedTheme = window.localStorage.getItem("theme");
-					if (storedTheme) {
-						document.documentElement.className = storedTheme;
-					}
-				} catch (error) {
-					console.warn(
-						"Unable to read theme from localStorage",
-						error,
-					);
+			try {
+				const storedTheme = window.localStorage.getItem("theme");
+				if (storedTheme) {
+					document.documentElement.className = storedTheme;
 				}
+			} catch (error) {
+				console.warn("Unable to read theme from localStorage", error);
 			}
 		</script>
 		<title>{title}</title>
 	</head>
 	<body id="body">
-		<Navbar />
+		<Navbar/>
 		<slot />
 	</body>
 </html>
-<style is:global>
-	* {
-		box-sizing: border-box;
-	}
-	@property --a {
-		syntax: "<angle>";
-		inherits: false;
-		initial-value: 0deg;
-	}
-	@keyframes rotating {
-		0% {
-			--a: 0deg;
-		}
-		100% {
-			--a: 360deg;
-		}
-	}
-	body {
-		font-family: Arial;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		position: relative;
-		height: 100vh;
-		margin: 0;
-		margin-top: 55px;
-		padding: 0;
-		background: #222;
-	}
-	/* Theme mode styles */
-	.light {
-		#body {
-			background-color: #efefef;
-		}
-
-		.navBar {
-			background-color: #efefef;
-		}
-
-		.title {
-			color: #000;
-		}
-
-		.form {
-			background-color: #efefef;
-			color: #000;
-
-			.form__input {
-				background-color: rgba(200, 200, 200, 100);
-			}
-
-			.background__btn {
-				background-color: #000;
-
-				.backfill__btn {
-					background-color: #efefef;
-				}
-
-				&:hover .btn {
-					background-clip: text;
-					color: transparent;
-					background-image: linear-gradient(
-						to right,
-						#0f0,
-						#ff0,
-						#0ff,
-						#f0f,
-						#0ff
-					);
-				}
-
-				.btn {
-					background: #efefef;
-					color: #000;
-				}
-			}
-		}
-		.text__link {
-			color: #000;
-		}
-		.btnTheme__box {
-			background: linear-gradient(to left, #ababab, #fefefe);
-
-			.btnTheme {
-				left: 22px;
-				border: 1px solid #fefefe;
-				background-color: #fff;
-			}
-		}
-	}
-</style>

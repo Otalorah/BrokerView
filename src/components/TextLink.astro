@@ -10,6 +10,11 @@ const { text, textN, href } = Astro.props;
 
 <a class="text__link" href={href}>{text} <b>{textN}</b></a>
 <style>
+    html.light {
+        .text__link {
+            color: #222;
+        }
+    }
     .text__link {
         text-decoration: none;
         margin: 1.5rem auto;

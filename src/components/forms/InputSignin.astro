@@ -1,0 +1,86 @@
+---
+const { id, type,text, textError } = Astro.props;
+---
+
+<div class="form__group" id={`group_${id}`}>
+    <label class="form__label" for={id}>{text}</label>
+    <div class="form__group-input">
+        <input
+            type={type}
+            class="form__input"
+            name={id}
+            id={id}
+        />
+        {
+            type == "password" ? (
+                <i class="password_icon fa-solid fa-eye-slash" />
+            ) : (
+                <i class="status_icon fas fa-times-circle" />
+            )
+        }
+    </div>
+    {type == "password" && <p class="form__text form__error">
+        {textError}
+    </p>}
+</div>
+
+<style>
+    .form__label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .form__group-input {
+        position: relative;
+        margin: 0;
+
+        .status_icon {
+            position: absolute;
+            right: 0.55rem;
+            top: 0.6rem;
+            opacity: 0;
+            color: #0ff;
+        }
+        .password_icon {
+            position: absolute;
+            cursor: pointer;
+            right: 0.55rem;
+            top: 0.6rem;
+            color: #222;
+        }
+    }
+
+    .form__input {
+        border: none;
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .form__text {
+        text-align: center;
+        margin: 0.05rem;
+
+        &.form__error {
+            display: none;
+            margin: 0;
+            margin-bottom: 0.4rem;
+            font-size: 0.82rem;
+            color: #f33;
+        }
+
+        &.forget-password {
+            text-align: end;
+            margin: 0;
+        }
+
+        .text__link {
+            font-size: 0.8rem;
+        }
+    }
+</style>
