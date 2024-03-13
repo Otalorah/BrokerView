@@ -51,13 +51,16 @@ const { type } = Astro.props;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 300px;
+        width: 95%;
 
         &.background__form-login {
             height: 280px;
+            max-width: 400px;
         }
         &.background__form-signin {
             height: 630px;
+            max-width: 600px;
+
         }
 
         &::before {
@@ -97,9 +100,10 @@ const { type } = Astro.props;
         position: relative;
         display: grid;
         grid-template-columns: 1fr;
+        margin: 0;
         padding: 20px;
         border-radius: 8px;
-        width: 295px;
+        width: calc(100% - 5px);
         z-index: 50;
         color: #efefef;
         background-color: #222;
@@ -112,3 +116,21 @@ const { type } = Astro.props;
         }
     }
 </style>
+<script>
+    const showPassword = (icon, inputPassword) => {
+        if (inputPassword.type === "password") {
+            inputPassword.type = "text";
+            icon.setAttribute("src", "public/view.svg");
+        } else {
+            inputPassword.type = "password";
+            icon.setAttribute("src", "public/no-view.svg");
+        }
+    };
+    const $passwordIcons = document.querySelectorAll(".password_icon");
+
+    $passwordIcons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+            showPassword(icon, icon.previousElementSibling);
+        });
+    });
+</script>

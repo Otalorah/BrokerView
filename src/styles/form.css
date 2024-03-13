@@ -7,19 +7,21 @@
     position: relative;
     margin: 0;
 
-    .status_icon {
+    .icon{
         position: absolute;
         right: 0.55rem;
-        top: 0.6rem;
-        opacity: 0;
-        color: #0ff;
-    }
-    .password_icon {
-        position: absolute;
-        cursor: pointer;
-        right: 0.55rem;
-        top: 0.6rem;
-        color: #222;
+        top: 0.5rem;
+        
+        &.status_icon 
+        {
+            opacity: 0;
+            color: #0ff;
+        }
+        &.password_icon 
+        {
+            cursor: pointer;
+            color: #222;
+        }
     }
 }
 
@@ -61,4 +63,36 @@
     margin: 1.5rem auto;
     font-size: 1rem;
     color: #fff;
+}
+.form__group-wrong {
+    .form__label {
+        color: #f00;
+    }
+    .form__input {
+        border: 2px solid #f00;
+    }
+
+    .form__group-input {
+        .status_icon {
+            color: #f00;
+            opacity: 1;
+        }
+    }
+}
+.form__group-correct {
+    .form__label {
+        color: #0f0;
+    }
+    .form__input {
+        border: 2px solid #0f0;
+    }
+    .form__group-input {
+        .status_icon {
+            color: #0f0;
+            opacity: 1;
+        }
+    }
+}
+html.light{
+    .form__input{background-color: rgba(200, 200, 200, 100);}
 }
