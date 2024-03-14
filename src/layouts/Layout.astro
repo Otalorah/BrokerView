@@ -1,6 +1,7 @@
 ---
 import Navbar from "@components/Navbar.astro";
 import '../styles/global.css'
+
 interface Props {
 	title: string;
 }
@@ -19,7 +20,7 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body id="body">
-		<Navbar transition:persist/>
+		<Navbar />
 		<slot />
 	</body>
 </html>

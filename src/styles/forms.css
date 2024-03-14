@@ -5,24 +5,9 @@
 
 .form__group-input {
     position: relative;
+    display: flex;
+    align-items: center;
     margin: 0;
-
-    .icon{
-        position: absolute;
-        right: 0.55rem;
-        top: 0.5rem;
-        
-        &.status_icon 
-        {
-            opacity: 0;
-            color: #0ff;
-        }
-        &.password_icon 
-        {
-            cursor: pointer;
-            color: #222;
-        }
-    }
 }
 
 .form__input {
@@ -46,7 +31,7 @@
         margin: 0;
         margin-bottom: 0.4rem;
         font-size: 0.82rem;
-        color: #f33;
+        color: var(--error-color);
     }
 
     &.forget-password {
@@ -66,29 +51,29 @@
 }
 .form__group-wrong {
     .form__label {
-        color: #f00;
+        color: var(--error-color);
     }
     .form__input {
-        border: 2px solid #f00;
+        border: 2px solid var(--error-color);
     }
 
     .form__group-input {
         .status_icon {
-            color: #f00;
+            color: var(--error-color);
             opacity: 1;
         }
     }
 }
 .form__group-correct {
     .form__label {
-        color: #0f0;
+        color: var(--check-color);
     }
     .form__input {
-        border: 2px solid #0f0;
+        border: 2px solid var(--check-color);
     }
     .form__group-input {
         .status_icon {
-            color: #0f0;
+            color: var(--check-color);
             opacity: 1;
         }
     }

@@ -1,7 +1,14 @@
 * {
     box-sizing: border-box;
 }
-
+:root{
+    --primary-color: #232323;
+    --secondary-color: #efefef;
+    --primary-color-text: #fefefe;
+    --secondary-color-text: #010101;
+    --error-color: #ff0000;
+    --check-color: #00ff00;
+}
 body {
     font-family: Arial;
     display: flex;
@@ -9,35 +16,26 @@ body {
     align-items: center;
     position: relative;
     height: 100vh;
+    min-width: 300px;
     margin: 0;
     margin-top: 55px;
     padding: 0;
     background: #222;
 }
 h1 {
-    color: #fff;
+    color: var(--primary-color-text);
 }
 /* Theme mode styles */
 html.light {
     #body {
-        background-color: #efefef;
+        background-color: var(--secondary-color);
     }
 
     .navBar {
-        background-color: #efefef;
+        background-color: var(--secondary-color);
     }
 
     .title {
-        color: #000;
-    }
-
-    #btnTheme__box {
-        background: linear-gradient(to left, #ababab, #fefefe);
-
-        #btnTheme {
-            left: 22px;
-            border: 1px solid #fefefe;
-            background-color: #fff;
-        }
+        color: var(--secondary-color-text);
     }
 }

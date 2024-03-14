@@ -1,7 +1,8 @@
 ---
 import BtnColor from "../BtnColor.astro";
+import IconForm from "../IconForm.astro";
 
-import "src/styles/form.css";
+import "src/styles/forms.css";
 ---
 
 <div class="form__group">
@@ -19,13 +20,7 @@ import "src/styles/form.css";
 			id="password"
 			required
 		/>
-		<img
-			class="password_icon icon"
-			src="public/no-view.svg"
-			alt="icono"
-			width="18"
-			height="18"
-		/>
+		<IconForm type="no-view"/>
 	</div>
 	<p class="form__text forget-password">
 		<a class="text__link" href="/signin">¿Has olvidado tu contraseña?</a>
@@ -33,6 +28,7 @@ import "src/styles/form.css";
 </div>
 
 <BtnColor text="INGRESAR" />
+
 <script is:inline>
 	const $form = document.querySelector(".form"),
 		$user = document.getElementById("user"),

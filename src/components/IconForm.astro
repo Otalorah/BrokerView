@@ -1,0 +1,38 @@
+---
+const { type, id } = Astro.props;
+
+let iconClass;
+
+if (type == "no-view") iconClass = "password_icon"
+else if (type == "error") iconClass = "status_icon"
+else if (type == "moon") iconClass = "theme_icon"
+
+---
+
+<img
+    class=`icon ${iconClass}`
+    src=`src/icons/${type}.svg`
+    id={id}
+    alt="icono"
+    width="18"
+    height="18"
+/>
+<style>
+    .icon {
+        position: absolute;
+        right: 0.55rem;
+
+        &.status_icon {
+            opacity: 0;
+            top: 8.5px;
+        }
+        &.password_icon {
+            cursor: pointer;
+            top: 6.5px;
+        }
+        &.theme_icon{
+            top: 4px;
+            right: 2.5px;
+        }
+    }
+</style>

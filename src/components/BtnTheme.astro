@@ -1,6 +1,10 @@
-
+---
+import IconForm from "./IconForm.astro";
+---
 <div id="btnTheme__box">
-    <button id="btnTheme"></button>
+    <button id="btnTheme">
+        <IconForm type="moon" id="theme"/>
+    </button>
 </div>
 <style>
     #btnTheme__box {
@@ -11,16 +15,32 @@
         height: 30px;
         border-radius: 70px;
         background: linear-gradient(to right, #000, #434343);
-        border: 1px solid #696969;
+        border: 1px solid #434343;
 
         #btnTheme {
             display: block;
             position: absolute;
             width: 25px;
             height: 28.5px;
-            border-radius: 100%;
+            border-radius: 70px;
             border: 1px solid #434343;
             background-color: #434343;
+        }
+    }
+    html.light {
+        #btnTheme__box {
+            border: 1px solid var(--secondary-color);
+            background: linear-gradient(
+                to left,
+                #ababab,
+                var(--secondary-color)
+            );
+
+            #btnTheme {
+                left: 24px;
+                border: 1px solid var(--secondary-color);
+                background-color: var(--secondary-color);
+            }
         }
     }
 </style>
@@ -42,6 +62,7 @@
         document.documentElement.classList.remove("light");
     } else {
         document.documentElement.classList.add("light");
+        document.getElementById('theme').setAttribute("src",'src/icons/sun.svg')
     }
 
     window.localStorage.setItem("theme", theme);
@@ -51,7 +72,14 @@
         element.classList.toggle("light");
 
         const isLight = element.classList.contains("light");
-        localStorage.setItem("theme", isLight ? "light" : "dark");
+
+        if (isLight){
+            document.getElementById('theme').setAttribute("src",'src/icons/sun.svg')
+            localStorage.setItem("theme","light");
+        }else{
+            document.getElementById('theme').setAttribute("src",'src/icons/moon.svg')
+            localStorage.setItem("theme","dark");
+        }
     };
 
     document

@@ -2,11 +2,9 @@
 const { text } = Astro.props;
 ---
 
-<div class="form__group">
-    <div class="background__btn">
-        <span class="backfill__btn"></span>
-        <button class="btn" id="submit" type="submit">{text}</button>
-    </div>
+<div class="background__btn">
+    <span class="backfill__btn"></span>
+    <button class="btn" id="submit" type="submit">{text}</button>
 </div>
 
 <style>
@@ -32,6 +30,7 @@ const { text } = Astro.props;
         margin: auto;
         margin-top: 5px;
         width: 90%;
+        max-width: 400px;
         height: 40px;
         background: #fff;
 
