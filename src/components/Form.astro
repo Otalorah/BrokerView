@@ -1,86 +1,23 @@
 ---
-import FormSignin from "./forms/FormSignin.astro";
-import FormLogin from "./forms/FormLogin.astro";
+import FormSignin from "@components/forms/FormSignin.astro";
+import FormLogin from "@components/forms/FormLogin.astro";
+import BackgroundColors from "@components/BackgroundColors.astro";
 
 const { type } = Astro.props;
 
-const backgroundForm =
-    type == "login" ? "background__form-login" : "background__form-signin";
-const typeForm = type == "login" ? "form__login" : "form__signin";
+const typeForm = type == "login" ? "form-login" : "form-signin";
 ---
 
-<div class=`background__form ${backgroundForm}`>
+<BackgroundColors type={typeForm}>
     <form class=`form ${typeForm}`>
         {type == "signin" ? <FormSignin /> : <FormLogin />}
     </form>
-</div>
-
+</BackgroundColors>
 <style>
     html.light {
         .form {
             color: #222;
             background-color: #efefef;
-        }
-    }
-    @property --a {
-        syntax: "<angle>";
-        inherits: false;
-        initial-value: 0deg;
-    }
-    @keyframes rotating {
-        0% {
-            --a: 0deg;
-        }
-        100% {
-            --a: 360deg;
-        }
-    }
-    .background__form {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 95%;
-
-        &.background__form-login {
-            height: 280px;
-            max-width: 400px;
-        }
-        &.background__form-signin {
-            height: 750px;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: repeating-conic-gradient(
-                from var(--a),
-                #0f0,
-                #ff0,
-                #0ff,
-                #f0f,
-                #0ff
-            );
-            border-radius: 10px;
-            animation: rotating 20s linear infinite;
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: repeating-conic-gradient(
-                from var(--a),
-                #0f0,
-                #ff0,
-                #0ff,
-                #f0f,
-                #0ff
-            );
-            border-radius: 10px;
-            animation: rotating 20s linear infinite;
-            filter: blur(5px);
         }
     }
     .form {
@@ -98,14 +35,8 @@ const typeForm = type == "login" ? "form__login" : "form__signin";
         background-color: var(--primary-color);
     }
     @media (666px < width) {
-        .background__form {
-            &.background__form-signin {
-                height: 392.5px;
-                max-width: 900px;
-            }
-        }
         .form {
-            &.form__signin {
+            &.form-signin {
                 grid-template-columns: 1fr 1fr;
                 height: 387.5px;
                 gap: 20px;

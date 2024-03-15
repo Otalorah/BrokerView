@@ -9,6 +9,19 @@
     --error-color: #ff0000;
     --check-color: #00ff00;
 }
+@property --a {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+@keyframes rotating {
+    0% {
+        --a: 0deg;
+    }
+    100% {
+        --a: 360deg;
+    }
+}
 body {
     font-family: Arial;
     display: flex;
@@ -20,7 +33,7 @@ body {
     margin: 0;
     margin-top: 55px;
     padding: 0;
-    background: #222;
+    background: var(--primary-color);
 }
 h1 {
     color: var(--primary-color-text);

@@ -1,0 +1,48 @@
+---
+import Layout from "@layouts/Layout.astro";
+import TitlesWelcome from "@components/TitlesWelcome.astro";
+import BackgroundColors from "@components/BackgroundColors.astro";
+---
+
+<Layout title="BrokerView | Inicio">
+    <main class="titles">
+        <TitlesWelcome />
+        <BackgroundColors type="money">
+            <div class="money">
+                <h3>Tu inversión</h3>
+                <h1>$ 1.000.000 USDT</h1>
+            </div>
+        </BackgroundColors>
+    </main>
+</Layout>
+
+<style>
+    .titles {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+        width: 95%;
+        margin: 2rem;
+    }
+    .money {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr;
+        margin: 0;
+        padding: 20px;
+        gap: 10px;
+        border-radius: 8px;
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        z-index: 50;
+        color: var(--primary-color-text);
+        background-color: #000;
+
+        h1,
+        h3 {
+            margin: 0;
+            text-align: center;
+        }
+    }
+</style>

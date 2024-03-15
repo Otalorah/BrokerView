@@ -1,0 +1,95 @@
+---
+const { type } = Astro.props;
+---
+
+<div class=`background ${type}`>
+    <slot />
+</div>
+
+<style>
+    .background {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.navBar {
+            position: fixed;
+            height: 55px;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+            &::after{border-radius: 0;}
+            &::before{border-radius: 0;}
+        }
+
+        &.form-login {
+            position: relative;
+            height: 55px;
+            width: 95%;
+            height: 280px;
+            max-width: 400px;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        &.form-signin {
+            position: relative;
+            width: 95%;
+            height: 750px;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        &.money {
+            position: relative;
+            margin-top: 2rem;
+            width: 50%;
+            height: 100px;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            background: repeating-conic-gradient(
+                from var(--a),
+                #0f0,
+                #ff0,
+                #0ff,
+                #f0f,
+                #0ff
+            );
+            animation: rotating 20s linear infinite;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            background: repeating-conic-gradient(
+                from var(--a),
+                #0f0,
+                #ff0,
+                #0ff,
+                #f0f,
+                #0ff
+            );
+            animation: rotating 20s linear infinite;
+            filter: blur(5px);
+        }
+    }
+
+    @media (666px < width) {
+        .background {
+            &.form-signin {
+                height: 392.5px;
+                max-width: 900px;
+            }
+        }
+    }
+</style>

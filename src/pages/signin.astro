@@ -4,14 +4,13 @@ import Form from "@components/Form.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="BrokerView | Registro" />
+<Layout title="BrokerView | Registro">
+    <h1 class="title">Registrarse</h1>
 
-<h1 class="title">Registrarse</h1>
+    <Form type="signin" />
 
-<Form type="signin" />
-
-<TextLink href="../" text="¿Ya tienes una cuenta?" textN="Iniciar sesión" />
-
+    <TextLink href="../" text="¿Ya tienes una cuenta?" textN="Iniciar sesión" />
+</Layout>
 <style>
     body {
         height: 130vh;
