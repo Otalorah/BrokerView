@@ -20,8 +20,14 @@ const { type } = Astro.props;
             left: 0;
             z-index: 1000;
 
-            &::after{border-radius: 0;}
-            &::before{border-radius: 0;}
+            &::after {
+                border-radius: 0;
+                animation: none;
+            }
+            &::before {
+                border-radius: 0;
+                animation: none;
+            }
         }
 
         &.form-login {
@@ -32,7 +38,7 @@ const { type } = Astro.props;
             max-width: 400px;
             top: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 100;
         }
 
         &.form-signin {
@@ -41,7 +47,7 @@ const { type } = Astro.props;
             height: 750px;
             top: 0;
             left: 0;
-            z-index: 1000;
+            z-index: 100;
         }
         &.money {
             position: relative;
@@ -49,41 +55,77 @@ const { type } = Astro.props;
             width: 50%;
             height: 100px;
         }
+    }
+    body.red {
+        .background {
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red),
+                    var(--red),
+                    var(--red),
+                    var(--red),
+                    var(--red)
+                );
+                animation: rotating 20s linear infinite;
+            }
 
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            background: repeating-conic-gradient(
-                from var(--a),
-                #0f0,
-                #ff0,
-                #0ff,
-                #f0f,
-                #0ff
-            );
-            animation: rotating 20s linear infinite;
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            background: repeating-conic-gradient(
-                from var(--a),
-                #0f0,
-                #ff0,
-                #0ff,
-                #f0f,
-                #0ff
-            );
-            animation: rotating 20s linear infinite;
-            filter: blur(5px);
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red-light),
+                    var(--red),
+                    var(--red-light),
+                    var(--red)
+                );
+                animation: rotating 20s linear infinite;
+                filter: blur(5px);
+            }
         }
     }
+    body.green {
+        .background {
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green),
+                    var(--green),
+                    var(--green),
+                    var(--green),
+                    var(--green)
+                );
+                animation: rotating 20s linear infinite;
+            }
 
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-light),
+                    var(--green),
+                    var(--green-light),
+                    var(--green)
+                );
+                animation: rotating 20s linear infinite;
+                filter: blur(5px);
+            }
+        }
+    }
     @media (666px < width) {
         .background {
             &.form-signin {

@@ -31,7 +31,7 @@
         margin: 0;
         margin-bottom: 0.4rem;
         font-size: 0.82rem;
-        color: var(--error-color);
+        color: var(--red-light);
     }
 
     &.forget-password {
@@ -51,29 +51,28 @@
 }
 .form__group-wrong {
     .form__label {
-        color: var(--error-color);
+        color: var(--red-light);
     }
     .form__input {
-        border: 2px solid var(--error-color);
+        border: 2px solid var(--red-light);
     }
 
     .form__group-input {
         .status_icon {
-            color: var(--error-color);
             opacity: 1;
         }
     }
 }
 .form__group-correct {
     .form__label {
-        color: var(--check-color);
+        color: var(--green-light);
     }
     .form__input {
-        border: 2px solid var(--check-color);
+        border: 2px solid var(--green-light);
     }
     .form__group-input {
         .status_icon {
-            color: var(--check-color);
+            color: var(--green-light);
             opacity: 1;
         }
     }

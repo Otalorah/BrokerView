@@ -1,11 +1,13 @@
 ---
 import BtnTheme from "@components/BtnTheme.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
+import BrokerLogo from "@components/BrokerLogo.astro";
 ---
 
 <BackgroundColors type="navBar">
     <nav class="navBar">
         <div class="navBar__container">
+            <BrokerLogo />
             <BtnTheme />
         </div>
     </nav>
@@ -17,18 +19,19 @@ import BackgroundColors from "@components/BackgroundColors.astro";
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 50;
         width: 100%;
         height: 53px;
-        margin-bottom: 0.1rem;
+        margin-bottom: 0.2rem;
+        border-bottom: 1px solid var(--green-light);
         background-color: var(--primary-color);
 
         .navBar__container {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
             align-items: center;
             position: relative;
             margin: auto;
+            z-index: 300;
             width: 100%;
             max-width: 1000px;
             height: 40px;

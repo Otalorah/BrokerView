@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro'
+---
+<div>
+    <Icon type="BrokerLogo"/>
+    <h3>BrokerView</h3>
+</div>
+<style>
+    div{
+        display: flex;
+        align-items: center;
+        user-select: none;
+        height: 100%;
+        gap: .5rem;
+    }
+    h3{
+        margin:0;
+        color: var(--secondary-color-text);
+    }
+    html.light{
+        h3{
+            color: var(--primary-color-text);
+        }
+    }
+</style>

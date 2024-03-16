@@ -34,6 +34,16 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
         color: #efefef;
         background-color: var(--primary-color);
     }
+    body.red {
+        form {
+            border: 1px solid var(--red-light);
+        }
+    }
+    body.green {
+        form {
+            border: 1px solid var(--green-light);
+        }
+    }
     @media (666px < width) {
         .form {
             &.form-signin {

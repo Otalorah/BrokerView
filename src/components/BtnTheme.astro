@@ -1,9 +1,10 @@
 ---
-import IconForm from "./IconForm.astro";
+import IconForm from "./Icon.astro";
 ---
+
 <div id="btnTheme__box">
     <button id="btnTheme">
-        <IconForm type="moon" id="theme"/>
+        <IconForm type="moon" id="theme" />
     </button>
 </div>
 <style>
@@ -11,6 +12,8 @@ import IconForm from "./IconForm.astro";
         position: relative;
         display: flex;
         align-items: center;
+        user-select: none;
+        cursor: pointer;
         width: 50px;
         height: 30px;
         border-radius: 70px;
@@ -20,6 +23,7 @@ import IconForm from "./IconForm.astro";
         #btnTheme {
             display: block;
             position: absolute;
+            cursor: pointer;
             width: 25px;
             height: 28.5px;
             border-radius: 70px;
@@ -62,7 +66,9 @@ import IconForm from "./IconForm.astro";
         document.documentElement.classList.remove("light");
     } else {
         document.documentElement.classList.add("light");
-        document.getElementById('theme').setAttribute("src",'src/icons/sun.svg')
+        document
+            .getElementById("theme")
+            .setAttribute("src", "src/icons/sun.svg");
     }
 
     window.localStorage.setItem("theme", theme);
@@ -73,12 +79,16 @@ import IconForm from "./IconForm.astro";
 
         const isLight = element.classList.contains("light");
 
-        if (isLight){
-            document.getElementById('theme').setAttribute("src",'src/icons/sun.svg')
-            localStorage.setItem("theme","light");
-        }else{
-            document.getElementById('theme').setAttribute("src",'src/icons/moon.svg')
-            localStorage.setItem("theme","dark");
+        if (isLight) {
+            document
+                .getElementById("theme")
+                .setAttribute("src", "src/icons/sun.svg");
+            localStorage.setItem("theme", "light");
+        } else {
+            document
+                .getElementById("theme")
+                .setAttribute("src", "src/icons/moon.svg");
+            localStorage.setItem("theme", "dark");
         }
     };
 

@@ -6,6 +6,7 @@ let iconClass;
 if (type == "no-view") iconClass = "password_icon"
 else if (type == "error") iconClass = "status_icon"
 else if (type == "moon") iconClass = "theme_icon"
+else if (type == "BrokerLogo") iconClass = "BrokerView_Logo"
 
 ---
 
@@ -33,6 +34,10 @@ else if (type == "moon") iconClass = "theme_icon"
         &.theme_icon{
             top: 4px;
             right: 2.5px;
+        }
+        &.BrokerView_Logo{
+            position: relative;
+            right: 0;
         }
     }
 </style>

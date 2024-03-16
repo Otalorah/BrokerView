@@ -6,8 +6,10 @@
     --secondary-color: #efefef;
     --primary-color-text: #fefefe;
     --secondary-color-text: #010101;
-    --error-color: #ff0000;
-    --check-color: #00ff00;
+    --green-light:#29ff00;
+    --green:#1b8800;
+    --red-light: #ff0000;
+    --red: #88001b;
 }
 @property --a {
     syntax: "<angle>";
