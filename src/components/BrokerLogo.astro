@@ -1,8 +1,15 @@
 ---
-import Icon from './Icon.astro'
+import '@fontsource/audiowide';
 ---
+
 <div>
-    <Icon type="BrokerLogo"/>
+    <img
+    class=`icon`
+    src=`src/icons/BrokerLogo.webp`
+    alt="icono"
+    width="28"
+    height="28"
+/>
     <h3>BrokerView</h3>
 </div>
 <style>
@@ -10,12 +17,12 @@ import Icon from './Icon.astro'
         display: flex;
         align-items: center;
         user-select: none;
-        height: 100%;
-        gap: .5rem;
+        margin-left: .5rem;
     }
     h3{
         margin:0;
         color: var(--secondary-color-text);
+        font-family: 'Audiowide', system-ui;
     }
     html.light{
         h3{

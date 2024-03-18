@@ -1,0 +1,24 @@
+<section id="menu-mobile">
+
+</section>
+
+<style>
+    #menu-mobile{
+        position: absolute;
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        z-index: 200;
+        opacity: .7;
+        background-color: var(--primary-color);
+
+        &.appear{
+            display: block;
+        }
+    }
+    @media (width > 666px) {
+        #menu-mobile{
+            &.appear{display: none;}
+        }
+    }
+</style>

@@ -1,21 +1,54 @@
+---
+const timeNow = new Date().getHours();
+
+const hourMorning = 6;
+const hourAfternoon = 12;
+const hourNight = 18;
+
+let text;
+
+if (timeNow < hourAfternoon && timeNow >= hourMorning) text = "Buenos dias";
+else if (timeNow >= hourAfternoon && timeNow < hourNight)
+    text = "Buenas tardes";
+else text = "Buenas noches";
+---
+
 <section class="titles">
-    <h5>Domigo, 18 de Marzo</h5>
-    <h2> Hola Usuario</h2>
+    <h5>{text}</h5>
+    <h2 id="money">$ 1.000.000 COP</h2>
+    <p>Saldo actual</p>
 </section>
 <style>
-    .titles{
+    .titles {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        margin-top: 1rem;
         color: var(--primary-color-text);
 
-        h2,h5{
-            text-align: center;
+        h2,
+        h5,
+        p {
             margin: 0;
         }
-        h2{
+        #money {
+            text-align: center;
             font-size: 2rem;
         }
+        h5 {
+            font-weight: 100;
+            font-size: 1rem;
+            letter-spacing: 7px;
+        }
+        p {
+            text-align: end;
+            font-size: 0.75rem;
+        }
     }
-
+    html.light {
+        h2,
+        h5,
+        p {
+            color: var(--secondary-color-text);
+        }
+    }
 </style>

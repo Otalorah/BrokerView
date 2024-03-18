@@ -2,12 +2,16 @@
 import BtnTheme from "@components/BtnTheme.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 import BrokerLogo from "@components/BrokerLogo.astro";
+import HamburgerMenu from "@components/HamburgerMenu.astro";
 ---
 
 <BackgroundColors type="navBar">
     <nav class="navBar">
         <div class="navBar__container">
-            <BrokerLogo />
+            <div>
+                <HamburgerMenu />
+                <BrokerLogo />
+            </div>
             <BtnTheme />
         </div>
     </nav>
@@ -22,7 +26,6 @@ import BrokerLogo from "@components/BrokerLogo.astro";
         width: 100%;
         height: 53px;
         margin-bottom: 0.2rem;
-        border-bottom: 1px solid var(--green-light);
         background-color: var(--primary-color);
 
         .navBar__container {
@@ -36,6 +39,14 @@ import BrokerLogo from "@components/BrokerLogo.astro";
             max-width: 1000px;
             height: 40px;
             padding: 10px;
+
+            div{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: auto;
+            }
         }
     }
 </style>

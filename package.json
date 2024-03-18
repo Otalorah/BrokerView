@@ -10,6 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/audiowide": "^5.0.19",
+    "@fontsource/russo-one": "^5.0.19",
     "astro": "^4.5.0"
   },
   "devDependencies": {

@@ -1,0 +1,73 @@
+<div class="hamburger_icon">
+    <input id="hamburger" type="checkbox" name="" />
+
+    <span id="top"></span>
+    <span id="middle"></span>
+    <span id="bottom"></span>
+</div>
+
+<style>
+    .hamburger_icon {
+        position: relative;
+
+        input[type="checkbox"] {
+            position: relative;
+            cursor: pointer;
+            z-index: 20;
+            opacity: 0;
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+        input[type="checkbox"]:checked ~ #top {
+            rotate: 45deg;
+            top: 8px;
+        }
+        input[type="checkbox"]:checked ~ #middle {
+            opacity: 0;
+        }
+        input[type="checkbox"]:checked ~ #bottom {
+            rotate: -45deg;
+            top: 8px;
+        }
+        span {
+            position: absolute;
+            width: 20px;
+            height: 3px;
+            transition: 0.4s ease;
+            background-color: var(--primary-color);
+        }
+
+        #top {
+            top: 0;
+        }
+        #middle {
+            top: 8px;
+        }
+        #bottom {
+            top: 16px;
+        }
+    }
+    html.light {
+        .hamburger_icon {
+            span {
+                background-color: var(--secondary-color);
+            }
+        }
+    }
+    @media (width > 666px) {
+        .hamburger_icon {
+            input {
+                display: none;
+            }
+            span {
+                display: none;
+            }
+        }
+    }
+</style>
+<script>
+    document.getElementById("hamburger").addEventListener("click", () => {
+        document.getElementById("menu-mobile").classList.toggle("appear");
+    });
+</script>
