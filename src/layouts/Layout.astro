@@ -1,9 +1,10 @@
 ---
-import Navbar from "src/sections/Navbar.astro";
-import MenuMobile from "src/sections/MenuMobile.astro";
-import Footer from "src/sections/Footer.astro";
+import Navbar from "@sections/Navbar.astro";
+import MenuMobile from "@sections/MenuMobile.astro";
+import MenuDesktop from "@sections/MenuDesktop.astro";
+import Footer from "@sections/Footer.astro";
 
-import '../styles/global.css'
+import '@styles/global.css'
 import '@fontsource/russo-one';
 
 interface Props {
@@ -12,16 +13,16 @@ interface Props {
 
 const { title } = Astro.props;
 
-const colorTheme = ["red","green"];
-const randomIndex = Math.floor(Math.random() * colorTheme.length);
-const color = colorTheme[randomIndex]
+const optionsTheme = ["red","green"];
+const randomIndex = Math.floor(Math.random() * optionsTheme.length);
+const color = optionsTheme[randomIndex]
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="BrokerView es una plataforma para visualizar datos por medio de graficas y recursos visuales para los usuarios." />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/BrokerLogo.webp" />
 		<meta name="generator" content={Astro.generator} />
@@ -30,6 +31,7 @@ const color = colorTheme[randomIndex]
 	<body id="body" class={color}>
 		<Navbar />
 		<MenuMobile />
+		<MenuDesktop />
 		<slot />
 		<Footer />
 	</body>

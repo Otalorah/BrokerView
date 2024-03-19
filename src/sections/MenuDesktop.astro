@@ -1,0 +1,30 @@
+---
+import ChartSVG from "@components/svg/ChartSVG.astro";
+import HouseSVG from "@components/svg/HouseSVG.astro";
+import PiggySVG from "@components/svg/PiggySVG.astro";
+import UserSVG from "@components/svg/UserSVG.astro";
+
+import "@styles/link-pages-svg.css";
+---
+<aside>
+    <HouseSVG />
+    <ChartSVG />
+    <PiggySVG />
+    <UserSVG />
+</aside>
+<style>
+    aside{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 200px;
+        gap: 1rem;
+        padding-left: .5rem;
+    }
+    @media (width < 666px) {
+        aside{
+            display: none;
+        }
+    }
+</style>

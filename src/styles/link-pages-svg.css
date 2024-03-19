@@ -1,0 +1,35 @@
+.link-page {
+    position: relative;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    gap: 1rem;
+    background-color: var(--primary-color);
+}
+h4 {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--primary-color-text);
+}
+body.red {
+    svg {
+        fill: var(--red-light);
+    }
+}
+body.green {
+    svg {
+        fill: var(--green-light);
+    }
+}
+html.light {
+    .link-page{
+        background-color: var(--secondary-color);
+    }
+    h4 {
+        color: var(--secondary-color-text);
+    }
+}

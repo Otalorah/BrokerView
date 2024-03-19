@@ -15,8 +15,8 @@ import IconForm from "./IconForm.astro";
         justify-self: end;
         user-select: none;
         cursor: pointer;
-        width: 25px;
-        height: 28.5px;
+        width: 50px;
+        height: 30px;
         border-radius: 70px;
         background: linear-gradient(to right, #000, #434343);
         border: 1px solid #434343;
@@ -27,6 +27,7 @@ import IconForm from "./IconForm.astro";
             width: 25px;
             height: 28.5px;
             padding: 0;
+            left: 0;
             border-radius: 70px;
             border: 1px solid #434343;
             background-color: #434343;
@@ -42,22 +43,9 @@ import IconForm from "./IconForm.astro";
             );
 
             #btnTheme {
+                left: 23px;
                 border: 1px solid var(--secondary-color);
                 background-color: var(--secondary-color);
-            }
-        }
-    }
-    @media (width > 666px) {
-        #btnTheme__box {
-            width: 50px;
-            height: 30px;
-        }
-        #btnTheme{
-            left: 0
-        }
-        html.light {
-            #btnTheme {
-                left: 23px;
             }
         }
     }
