@@ -1,0 +1,73 @@
+<footer>
+    <p>&copy; 2024 BrokerView. Todos los derechos reservados.</p>
+    <div id="background_footer"></div>
+</footer>
+<style>
+    footer {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 40px;
+        margin-top: 3rem;
+        top: 100%;
+
+        p {
+            text-align: center;
+            font-size: 1rem;
+            margin: 0;
+            color: var(--primary-color-text);
+        }
+
+        div {
+            width: 100vw;
+            height: 15px;
+        }
+    }
+    body.red {
+        #background_footer {
+            background: linear-gradient(
+                to top,
+                var(--red) 10%,
+                var(--primary-color),
+                transparent
+            );
+        }
+    }
+    body.green {
+        #background_footer {
+            background: linear-gradient(
+                to top,
+                var(--green) 10%,
+                var(--primary-color),
+                transparent
+            );
+        }
+    }
+    html.light {
+        p {
+            color: var(--secondary-color-text);
+        }
+
+        body.red {
+            #background_footer {
+                background: linear-gradient(
+                    to top,
+                    var(--red-light),
+                    var(--secondary-color) 50%,
+                    transparent 40%
+                );
+            }
+        }
+        body.green {
+            #background_footer {
+                background: linear-gradient(
+                    to top,
+                    var(--green),
+                    var(--green-light) 10%,
+                    var(--secondary-color),
+                    transparent
+                );
+            }
+        }
+    }
+</style>

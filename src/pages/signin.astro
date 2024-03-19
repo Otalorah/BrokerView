@@ -1,22 +1,38 @@
 ---
-import TextLink from "@components/TextLink.astro";
-import Form from "@components/Form.astro";
+import TextLink from "src/sections/TextLink.astro";
+import Form from "src/sections/Form.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="BrokerView | Registro">
-    <h1 class="title">Registrarse</h1>
+    <section>
+        <h1 class="title">Registrarse</h1>
 
-    <Form type="signin" />
+        <Form type="signin" />
 
-    <TextLink href="../" text="¿Ya tienes una cuenta?" textN="Iniciar sesión" />
+        <TextLink
+            href="../"
+            text="¿Ya tienes una cuenta?"
+            textN="Iniciar sesión"
+        />
+    </section>
 </Layout>
 <style>
     body {
-        height: 130vh;
+        min-height: 100vh;
+    }
+    section {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 1700vh;
+        width: 100vw;
     }
     @media (666px < width) {
         body {
+            height: 100vh;
+        }
+        section {
             height: 100vh;
         }
     }

@@ -1,6 +1,8 @@
 ---
-import Navbar from "@components/Navbar.astro";
-import MenuMobile from "@components/MenuMobile.astro";
+import Navbar from "src/sections/Navbar.astro";
+import MenuMobile from "src/sections/MenuMobile.astro";
+import Footer from "src/sections/Footer.astro";
+
 import '../styles/global.css'
 import '@fontsource/russo-one';
 
@@ -29,5 +31,6 @@ const color = colorTheme[randomIndex]
 		<Navbar />
 		<MenuMobile />
 		<slot />
+		<Footer />
 	</body>
 </html>
