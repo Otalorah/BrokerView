@@ -14,12 +14,6 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
     </form>
 </BackgroundColors>
 <style>
-    html.light {
-        .form {
-            color: #222;
-            background-color: #efefef;
-        }
-    }
     .form {
         position: relative;
         display: grid;
@@ -42,6 +36,12 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
     body.green {
         form {
             border: 1px solid var(--green-light);
+        }
+    }
+    html.light {
+        .form {
+            color: #222;
+            background-color: #efefef;
         }
     }
     @media (666px < width) {

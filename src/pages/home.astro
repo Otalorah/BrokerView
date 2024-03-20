@@ -1,12 +1,17 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import TitlesWelcome from "@components/TitlesWelcome.astro";
+import MenuMobile from "@sections/MenuMobile.astro";
 ---
 
 <Layout title="BrokerView | Inicio">
-    <main>
-        <TitlesWelcome />
-    </main>
+    <div>
+        <MenuMobile />
+        <main>
+            <TitlesWelcome />
+        </main>
+    </div>
+    
 </Layout>
 
 <style>

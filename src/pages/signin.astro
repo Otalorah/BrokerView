@@ -4,36 +4,26 @@ import Form from "src/sections/Form.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="BrokerView | Registro">
-    <section>
+<Layout title="BrokerView | Registro" hamburger="not">
+    <main>
         <h1 class="title">Registrarse</h1>
 
         <Form type="signin" />
 
         <TextLink
             href="../"
-            text="¿Ya tienes una cuenta?"
+            text="¿Ya tiene una cuenta?"
             textN="Iniciar sesión"
         />
-    </section>
+    </mai>
 </Layout>
 <style>
-    body {
-        min-height: 100vh;
-    }
-    section {
+    main {
+        position: relative;
         display: flex;
         align-items: center;
         flex-direction: column;
-        height: 1700vh;
-        width: 100vw;
-    }
-    @media (666px < width) {
-        body {
-            height: 100vh;
-        }
-        section {
-            height: 100vh;
-        }
+        min-height: 100vh;
+        width: 100%;
     }
 </style>

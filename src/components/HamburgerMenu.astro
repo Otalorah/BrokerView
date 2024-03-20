@@ -1,3 +1,7 @@
+---
+
+---
+
 <div class="hamburger_icon">
     <input id="hamburger" type="checkbox" name="" />
 
@@ -9,43 +13,48 @@
 <style>
     .hamburger_icon {
         position: relative;
+        height: auto;
+        height: 100%;
+        width: 20px;
 
         input[type="checkbox"] {
-            position: relative;
+            position: absolute;
+            top: 10px;
             cursor: pointer;
             z-index: 20;
-            opacity: 0;
             width: 20px;
             height: 20px;
             margin: 0;
+            opacity: 0;
         }
         input[type="checkbox"]:checked ~ #top {
             rotate: 45deg;
-            top: 8px;
+            top: 18.5px;
         }
         input[type="checkbox"]:checked ~ #middle {
             opacity: 0;
         }
         input[type="checkbox"]:checked ~ #bottom {
             rotate: -45deg;
-            top: 8px;
+            top: 18.5px;
         }
         span {
             position: absolute;
             width: 20px;
             height: 3px;
+            left: 0;
             transition: 0.4s ease;
             background-color: var(--primary-color);
         }
 
         #top {
-            top: 0;
+            top: 10px;
         }
         #middle {
-            top: 8px;
+            top: 18.5px;
         }
         #bottom {
-            top: 16px;
+            top: 27px;
         }
     }
     html.light {
@@ -56,8 +65,10 @@
         }
     }
 </style>
-<script>
+<script is:inline>
     document.getElementById("hamburger").addEventListener("click", () => {
-        document.getElementById("menu-mobile").classList.toggle("appear");
+        document
+            .getElementById("background__menu-mobile")
+            .classList.toggle("appear");
     });
 </script>
