@@ -75,7 +75,6 @@ footer {
     gap: 1px;
     height: 22.5px;
     margin-top: 2rem;
-    margin-left: 0;
     
     aside ~ &{
         margin-left: var(--margin-close);
