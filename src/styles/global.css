@@ -41,12 +41,13 @@ body {
     min-width: 290px;
     margin-top: 55px;
     background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
 
 }
 h1 {
     font-weight: 100;
     letter-spacing: 5px;
-    color: var(--text-color-dark);
+    color: inherit;
 }
 main {
     display: flex;
@@ -64,8 +65,6 @@ main {
 html.light {
     #body {
         background-color: var(--bg-color-light);
-    }
-    h1 {
         color: var(--text-color-light);
     }
 }
@@ -76,9 +75,12 @@ footer {
     gap: 1px;
     height: 22.5px;
     margin-top: 2rem;
-    margin-left: var(--margin-close);
+    
+    aside ~ &{
+        margin-left: var(--margin-close);
+    }
 
-    .expanded ~ & {
+    aside.expanded ~ & {
         margin-left: var(--margin-open);
     }
 
@@ -86,7 +88,6 @@ footer {
         text-align: center;
         letter-spacing: 1px;
         font-size: .7rem;
-        color: var(--primary-color-text);
     }
 
     #background_footer {
