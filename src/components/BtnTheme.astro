@@ -2,54 +2,111 @@
 import IconForm from "./IconForm.astro";
 ---
 
-<div id="btnTheme__box">
+<div id="btnTheme__box" transition:persist>
     <button id="btnTheme">
         <IconForm type="moon" id="theme" />
     </button>
 </div>
 <style>
     #btnTheme__box {
+        --background-btnTheme: #434343;
+
         position: relative;
         display: flex;
         align-items: center;
-        justify-self: end;
         user-select: none;
         cursor: pointer;
         width: 50px;
         height: 30px;
         border-radius: 70px;
-        background: linear-gradient(to right, #000, #434343);
-        border: 1px solid #434343;
+        background-image: linear-gradient(
+            to right,
+            #000,
+            var(--background-btnTheme)
+        );
+        border: 1px solid var(--background-btnTheme);
 
         #btnTheme {
             position: absolute;
             cursor: pointer;
             width: 25px;
             height: 28.5px;
-            padding: 0;
             left: 0;
             border-radius: 70px;
-            border: 1px solid #434343;
-            background-color: #434343;
+            border: 1px solid var(--background-btnTheme);
+            background-color: var(--background-btnTheme);
         }
     }
     html.light {
         #btnTheme__box {
-            border: 1px solid var(--secondary-color);
-            background: linear-gradient(
+            border: 1px solid var(--bg-color-light);
+            background-image: linear-gradient(
                 to left,
                 #ababab,
-                var(--secondary-color)
+                var(--bg-color-light)
             );
 
             #btnTheme {
                 left: 23px;
-                border: 1px solid var(--secondary-color);
-                background-color: var(--secondary-color);
+                border: 1px solid var(--bg-color-light);
+                background-color: var(--bg-color-light);
             }
         }
     }
 </style>
+<script>
+        const handleToggleClick = () => {
+            const element = document.documentElement;
+            element.classList.toggle("light");
+
+            const isLight = element.classList.contains("light");
+
+            if (isLight) {
+                document
+                    .getElementById("theme")
+                    .setAttribute("src", "src/icons/sun.svg");
+                localStorage.setItem("theme", "light");
+            } else {
+                document
+                    .getElementById("theme")
+                    .setAttribute("src", "src/icons/moon.svg");
+                localStorage.setItem("theme", "dark");
+            }
+        };
+
+        document
+            .getElementById("btnTheme__box")
+            .addEventListener("click", handleToggleClick);
+</script>
+
+<script>
+    document.addEventListener("astro:after-swap", () => {
+        const theme = (() => {
+            if (
+                typeof localStorage !== "undefined" &&
+                localStorage.getItem("theme")
+            ) {
+                return localStorage.getItem("theme");
+            }
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                return "dark";
+            }
+            return "dark";
+        })();
+
+        if (theme === "dark") {
+            document.documentElement.classList.remove("light");
+        } else {
+            document.documentElement.classList.add("light");
+            document
+                .getElementById("theme")
+                .setAttribute("src", "src/icons/sun.svg");
+        }
+
+        window.localStorage.setItem("theme", theme);
+    });
+</script>
+
 <script is:inline>
     const theme = (() => {
         if (
@@ -74,27 +131,4 @@ import IconForm from "./IconForm.astro";
     }
 
     window.localStorage.setItem("theme", theme);
-
-    const handleToggleClick = () => {
-        const element = document.documentElement;
-        element.classList.toggle("light");
-
-        const isLight = element.classList.contains("light");
-
-        if (isLight) {
-            document
-                .getElementById("theme")
-                .setAttribute("src", "src/icons/sun.svg");
-            localStorage.setItem("theme", "light");
-        } else {
-            document
-                .getElementById("theme")
-                .setAttribute("src", "src/icons/moon.svg");
-            localStorage.setItem("theme", "dark");
-        }
-    };
-
-    document
-        .getElementById("btnTheme__box")
-        .addEventListener("click", handleToggleClick);
 </script>

@@ -1,8 +1,4 @@
----
-
----
-
-<div class="hamburger_icon">
+<div class="hamburger_icon" transition:persist>
     <input id="hamburger" type="checkbox" name="" />
 
     <span id="top"></span>
@@ -12,19 +8,19 @@
 
 <style>
     .hamburger_icon {
-        position: relative;
-        height: auto;
-        height: 100%;
-        width: 20px;
+        position: absolute;
+        height: 40px;
+        width: 23px;
+        left: 10px;
+        z-index: 260;
 
         input[type="checkbox"] {
             position: absolute;
             top: 10px;
             cursor: pointer;
-            z-index: 20;
-            width: 20px;
+            z-index: 1;
+            width: 23px;
             height: 20px;
-            margin: 0;
             opacity: 0;
         }
         input[type="checkbox"]:checked ~ #top {
@@ -40,11 +36,14 @@
         }
         span {
             position: absolute;
-            width: 20px;
+            width: 23px;
             height: 3px;
             left: 0;
-            transition: 0.4s ease;
-            background-color: var(--primary-color);
+            transition:
+                top 0.4s ease,
+                rotate 0.4s ease,
+                opacity 0.4s ease;
+            background-color: var(--bg-color-dark);
         }
 
         #top {
@@ -60,15 +59,20 @@
     html.light {
         .hamburger_icon {
             span {
-                background-color: var(--secondary-color);
+                background-color: var(--bg-color-light);
             }
         }
     }
 </style>
-<script is:inline>
+<script>
+    let newWidth = window.innerWidth;
     document.getElementById("hamburger").addEventListener("click", () => {
-        document
-            .getElementById("background__menu-mobile")
-            .classList.toggle("appear");
+        if (newWidth < 666) {
+            document
+                .getElementById("background__menu-mobile")
+                .classList.toggle("appear");
+        } else {
+            document.getElementById("menu-mobile").classList.toggle("expanded");
+        }
     });
 </script>

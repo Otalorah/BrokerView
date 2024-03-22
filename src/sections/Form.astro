@@ -9,8 +9,8 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
 ---
 
 <BackgroundColors type={typeForm}>
-    <form class=`form ${typeForm}`>
-        {type == "signin" ? <FormSignin /> : <FormLogin />}
+    <form class=`form ${typeForm}` id={typeForm}>
+        {type == "signin" ? <FormSignin data-astro-reload /> : <FormLogin />}
     </form>
 </BackgroundColors>
 <style>
@@ -26,7 +26,7 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
         height: calc(100% - 5px);
         z-index: 50;
         color: #efefef;
-        background-color: var(--primary-color);
+        background-color: var(--bg-color-dark);
     }
     body.red {
         form {
@@ -40,11 +40,11 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
     }
     html.light {
         .form {
-            color: #222;
-            background-color: #efefef;
+            color: var(--text-color-light);
+            background-color: var(--bg-color-light);
         }
     }
-    @media (666px < width) {
+    @media screen and (666px < width) {
         .form {
             &.form-signin {
                 grid-template-columns: 1fr 1fr;
@@ -59,20 +59,22 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
     }
 </style>
 <script>
-    const showPassword = (icon, inputPassword) => {
-        if (inputPassword.type === "password") {
-            inputPassword.type = "text";
-            icon.setAttribute("src", "src/icons/view.svg");
-        } else {
-            inputPassword.type = "password";
-            icon.setAttribute("src", "src/icons/no-view.svg");
-        }
-    };
-    const $passwordIcons = document.querySelectorAll(".password_icon");
+    document.addEventListener("astro:page-load", () => {
+        const showPassword = (icon, inputPassword) => {
+            if (inputPassword.type === "password") {
+                inputPassword.type = "text";
+                icon.setAttribute("src", "src/icons/view.svg");
+            } else {
+                inputPassword.type = "password";
+                icon.setAttribute("src", "src/icons/no-view.svg");
+            }
+        };
+        const $passwordIcons = document.querySelectorAll(".password_icon");
 
-    $passwordIcons.forEach((icon) => {
-        icon.addEventListener("click", () => {
-            showPassword(icon, icon.previousElementSibling);
+        $passwordIcons.forEach((icon) => {
+            icon.addEventListener("click", () => {
+                showPassword(icon, icon.previousElementSibling);
+            });
         });
     });
 </script>

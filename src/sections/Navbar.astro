@@ -5,34 +5,32 @@ import BrokerLogo from "@components/BrokerLogo.astro";
 import HamburgerMenu from "@components/HamburgerMenu.astro";
 
 interface Props {
-	hamburger: string;
+    hamburger: string;
 }
 
-const {hamburger} = Astro.props
-
+const { hamburger } = Astro.props;
 ---
 
 <BackgroundColors type="navBar">
+
+    {!hamburger && <HamburgerMenu />}
+
     <nav class="navBar">
-        <div>
-            {!hamburger  && <HamburgerMenu/>}
-            <BrokerLogo />
-        </div>
+        <BrokerLogo />
         <BtnTheme />
     </nav>
 </BackgroundColors>
 
 <style>
     .navBar {
-        position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        max-width: 1000px;
+        max-width: 1350px;
         height: 40px;
         padding: 0 10px;
-        z-index: 300;
+        z-index: 250;
 
         & > div {
             position: relative;

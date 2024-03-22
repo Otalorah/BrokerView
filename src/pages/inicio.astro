@@ -1,11 +1,19 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import TitlesWelcome from "@components/TitlesWelcome.astro";
 import MenuMobile from "@sections/MenuMobile.astro";
 ---
 
 <Layout title="BrokerView | Inicio" hamburger="">
     <MenuMobile />
     <main>
-        <h1>Broker</h1>
+        <TitlesWelcome />
     </main>
 </Layout>
+
+<style>
+    h1,
+    h3 {
+        text-align: center;
+    }
+</style>

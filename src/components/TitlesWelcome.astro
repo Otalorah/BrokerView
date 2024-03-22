@@ -1,7 +1,7 @@
 ---
 const timeNow = new Date().getHours();
 
-const hourMorning = 6;
+const hourMorning = 0;
 const hourAfternoon = 12;
 const hourNight = 18;
 
@@ -23,13 +23,8 @@ else text = "Buenas noches";
         display: flex;
         flex-direction: column;
         margin-top: 1rem;
-        color: var(--primary-color-text);
+        color: var(--text-color-dark);
 
-        h2,
-        h5,
-        p {
-            margin: 0;
-        }
         #money {
             text-align: center;
             font-size: 2rem;
@@ -48,7 +43,7 @@ else text = "Buenas noches";
         h2,
         h5,
         p {
-            color: var(--secondary-color-text);
+            color: var(--text-color-light);
         }
     }
 </style>

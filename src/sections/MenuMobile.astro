@@ -7,12 +7,14 @@ import UserSVG from "@components/svg/UserSVG.astro";
 import "@styles/link-pages-svg.css";
 ---
 
-<div id="background__menu-mobile"></div>
-<section id="menu-mobile">
-    <HouseSVG />
-    <ChartSVG />
-    <PiggySVG />
-    <UserSVG />
+<div id="background__menu-mobile" transition:persist></div>
+<section id="menu-mobile" transition:persist>
+    <ul>
+        <HouseSVG />
+        <ChartSVG />
+        <PiggySVG />
+        <UserSVG />
+    </ul>
 </section>
 
 <style>
@@ -44,6 +46,12 @@ import "@styles/link-pages-svg.css";
         width: 50%;
         z-index: 210;
         background-color: #232323dd;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
     }
     body.red {
         #menu-mobile {
@@ -67,9 +75,41 @@ import "@styles/link-pages-svg.css";
             &.appear {
                 display: none;
             }
-            &.appear ~ #menu-mobile {
+            &.expanded ~ #menu-mobile {
+                display: flex;
+            }
+        }
+        #menu-mobile {
+            display: flex;
+            width: fit-content;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 1rem;
+            overflow: hidden;
+
+            svg ~ p {
                 display: none;
+            }
+
+            &.expanded {
+                width: 200px;
+
+                svg ~ p {
+                    display: block;
+                }
             }
         }
     }
 </style>
+<script>
+    let newWidth = window.innerWidth;
+    if (newWidth < 666) {
+        const link = document.querySelectorAll(".link-page");
+
+        link.forEach((link) => {
+            link.addEventListener("click", () => {
+                window.location.href = `/${link.id}`;
+            });
+        });
+    }
+</script>

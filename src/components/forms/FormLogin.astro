@@ -20,7 +20,7 @@ import "src/styles/forms.css";
 			id="password"
 			required
 		/>
-		<IconForm type="no-view"/>
+		<IconForm type="no-view" />
 	</div>
 	<p class="form__text forget-password">
 		<a class="text__link" href="/signin">¿Has olvidado tu contraseña?</a>
@@ -29,18 +29,25 @@ import "src/styles/forms.css";
 
 <BtnColor text="INGRESAR" />
 
-<script is:inline>
-	const $form = document.querySelector(".form"),
-		$user = document.getElementById("user"),
-		$password = document.getElementById("password");
+<script>
+	if (window.location.pathname == "/"){
+		document.addEventListener("astro:page-load", () => {
+		const $form = document.querySelector(".form-login"),
+			$user = document.getElementById("user"),
+			$password = document.getElementById("password");
 
-	$form.addEventListener("submit", (e) => {
-		e.preventDefault();
+		$form.addEventListener("submit", (e) => {
+			e.preventDefault();
 
-		const objectData = {
-			username: $user.value,
-			password: $password.value,
-		};
-		console.log(objectData);
+			const objectData = {
+				username: $user.value,
+				password: $password.value,
+			};
+			console.log(objectData);
+		});
 	});
+	}
+	else{
+
+	}
 </script>

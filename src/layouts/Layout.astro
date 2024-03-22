@@ -2,6 +2,8 @@
 import Navbar from "@sections/Navbar.astro";
 import Footer from "@sections/Footer.astro";
 
+import { ViewTransitions } from "astro:transitions";
+
 import "@styles/global.css";
 import "@fontsource/russo-one";
 
@@ -28,6 +30,7 @@ const color = optionsTheme[randomIndex];
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/BrokerLogo.webp" />
 		<meta name="generator" content={Astro.generator} />
+		<ViewTransitions/>
 		<title>{title}</title>
 	</head>
 	<body id="body" class={color}>

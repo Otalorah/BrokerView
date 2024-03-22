@@ -29,150 +29,173 @@ import "src/styles/forms.css";
 	textError="Las contraseñas no coinciden"
 />
 <BtnColor text="CONFIRMAR" />
-<script is:inline>
-	const expressions = {
-		user: /^[a-zA-Z0-9\_\-]{4,16}$/,
-		name: /^[a-zA-ZÀ-ÿ ]{3,}( [a-zA-ZÀ-ÿ ]{3,})?$/,
-		lastname: /^[a-zA-ZÀ-ÿ]{3,}$/,
-		password: /^[\wÀ-ÿ\W]{6,}$/,
-		especial: /[°!"#$&()=@\?¡%&\+\/\{\}\*\[\]]/,
-		email: /^[a-zA-Z0-9\._%+-]{3,}@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/,
-	};
-
-	const fields = {
-		user: false,
-		name: false,
-		lastname: false,
-		lastname2: false,
-		password: false,
-		email: false,
-	};
-
-	if (window.matchMedia("(min-width: 666px)").matches) {
-		document.getElementById("label-lastname").innerText = "Apellidos";
-		expressions.lastname = /^[a-zA-ZÀ-ÿ]{3,} [a-zA-ZÀ-ÿ]{3,}$/;
-		fields.lastname2 = true
-	}
-
-	// - - - - - - - - - - - - - - - - - - - - - - - Funtions Validations - - - - - - - - - - - - - - - - - - -
-
-	const validateForm = (e) => {
-		switch (e.target.name) {
-			case "user":
-				validateField(expressions.user, e.target, "user");
-				break;
-			case "name":
-				validateField(expressions.name, e.target, "name");
-				break;
-			case "lastname":
-				validateField(expressions.lastname, e.target, "lastname");
-				break;
-			case "lastname2":
-				validateField(expressions.lastname, e.target, "lastname2");
-				break;
-			case "email":
-				validateField(expressions.email, e.target, "email");
-				break;
-			case "password":
-				(() => {
-					const $groupPassword =
-							document.getElementById(`group__password`),
-						$textError = document.querySelector(".form__error");
-
-					if (
-						expressions.password.test(e.target.value) &
-						expressions.especial.test(e.target.value)
-					) {
-						$groupPassword.classList.remove("form__group-wrong");
-						$groupPassword.classList.add("form__group-correct");
-						$textError.style.display = "none";
-					} else {
-						$groupPassword.classList.add("form__group-wrong");
-						$groupPassword.classList.remove("form__group-correct");
-						$textError.style.display = "block";
-					}
-				})();
-				validatePassword2();
-				break;
-			case "password2":
-				validatePassword2();
-				break;
-		}
-	};
-
-	const validateField = (expression, input, field) => {
-		const $groupInput = document.getElementById(`group__${field}`);
-		const $svg = document.getElementById(`${field}_svg`);
-
-		if (expression.test(input.value)) {
-			$groupInput.classList.remove("form__group-wrong");
-			$groupInput.classList.add("form__group-correct");
-			$svg.setAttribute("src", "src/icons/check.svg");
-			fields[field] = true;
-		} else {
-			$groupInput.classList.add("form__group-wrong");
-			$groupInput.classList.remove("form__group-correct");
-			$svg.setAttribute("src", "src/icons/error.svg");
-			fields[field] = false;
-		}
-	};
-
-	const validatePassword2 = () => {
-		const $inputPassword1 = document.getElementById("password"),
-			$inputPassword2 = document.getElementById("password2"),
-			$groupPassword2 = document.getElementById(`group__password2`),
-			$textError = document.querySelectorAll(".form__error")[1];
-
-		if ($inputPassword1.value !== $inputPassword2.value) {
-			$groupPassword2.classList.add("form__group-wrong");
-			$groupPassword2.classList.remove("form__group-correct");
-			$textError.style.display = "block";
-			fields["password"] = false;
-		} else {
-			$groupPassword2.classList.remove("form__group-wrong");
-			$groupPassword2.classList.add("form__group-correct");
-			$textError.style.display = "none";
-			fields["password"] = true;
-		}
-	};
-
-	const $inputs = document.querySelectorAll(".form__input");
-
-	$inputs.forEach((input) => {
-		input.addEventListener("keyup", validateForm);
-		input.addEventListener("blur", validateForm);
-	});
-
-	// - - - - - - - - - - - - - - - - - - - - - Send data - - - - - - - - - - - - - - - -
-	const $form = document.querySelector(".form");
-
-	const $user = document.getElementById("user"),
-		$name = document.getElementById("name"),
-		$lastname = document.getElementById("lastname"),
-		$lastname2 = document.getElementById("lastname2"),
-		$email = document.getElementById("email"),
-		$password = document.getElementById("password");
-
-	$form.addEventListener("submit", (e) => {
-		e.preventDefault();
-
-		let formComplete =
-			fields.name &
-			fields.lastname &
-			fields.lastname2 &
-			fields.user &
-			fields.password &
-			fields.email;
-
-		if (formComplete) {
-			const objectData = {
-				username: $user.value,
-				name: $name.value,
-				lastname: $lastname.value + " " + $lastname2.value,
-				email: $email.value,
-				password: $password.value,
+<script>
+	if (window.location.pathname == "/signin") {
+		document.addEventListener("astro:page-load", () => {
+			const expressions = {
+				user: /^[a-zA-Z0-9\_\-]{4,16}$/,
+				name: /^[a-zA-ZÀ-ÿ ]{3,}( [a-zA-ZÀ-ÿ ]{3,})?$/,
+				lastname: /^[a-zA-ZÀ-ÿ]{3,}$/,
+				password: /^[\wÀ-ÿ\W]{6,}$/,
+				especial: /[°!"#$&()=@\?¡%&\+\/\{\}\*\[\]]/,
+				email: /^[a-zA-Z0-9\._%+-]{3,}@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/,
 			};
-			console.log(objectData);
-		}
-	});
+
+			const fields = {
+				user: false,
+				name: false,
+				lastname: false,
+				lastname2: false,
+				password: false,
+				email: false,
+			};
+
+			if (window.matchMedia("(min-width: 666px)").matches) {
+				document.getElementById("label-lastname").innerText =
+					"Apellidos";
+				expressions.lastname = /^[a-zA-ZÀ-ÿ]{3,} [a-zA-ZÀ-ÿ]{3,}$/;
+				fields.lastname2 = true;
+			}
+
+			// - - - - - - - - - - - - - - - - - - - - - - - Funtions Validations - - - - - - - - - - - - - - - - - - -
+
+			const validateForm = (e) => {
+				switch (e.target.name) {
+					case "user":
+						validateField(expressions.user, e.target, "user");
+						break;
+					case "name":
+						validateField(expressions.name, e.target, "name");
+						break;
+					case "lastname":
+						validateField(
+							expressions.lastname,
+							e.target,
+							"lastname",
+						);
+						break;
+					case "lastname2":
+						validateField(
+							expressions.lastname,
+							e.target,
+							"lastname2",
+						);
+						break;
+					case "email":
+						validateField(expressions.email, e.target, "email");
+						break;
+					case "password":
+						(() => {
+							const $groupPassword =
+									document.getElementById(`group__password`),
+								$textError =
+									document.querySelector(".form__error");
+
+							if (
+								expressions.password.test(e.target.value) &
+								expressions.especial.test(e.target.value)
+							) {
+								$groupPassword.classList.remove(
+									"form__group-wrong",
+								);
+								$groupPassword.classList.add(
+									"form__group-correct",
+								);
+								$textError.style.display = "none";
+							} else {
+								$groupPassword.classList.add(
+									"form__group-wrong",
+								);
+								$groupPassword.classList.remove(
+									"form__group-correct",
+								);
+								$textError.style.display = "block";
+							}
+						})();
+						validatePassword2();
+						break;
+					case "password2":
+						validatePassword2();
+						break;
+				}
+			};
+
+			const validateField = (expression, input, field) => {
+				const $groupInput = document.getElementById(`group__${field}`);
+				const $svg = document.getElementById(`${field}_svg`);
+
+				if (expression.test(input.value)) {
+					$groupInput.classList.remove("form__group-wrong");
+					$groupInput.classList.add("form__group-correct");
+					$svg.setAttribute("src", "src/icons/check.svg");
+					fields[field] = true;
+				} else {
+					$groupInput.classList.add("form__group-wrong");
+					$groupInput.classList.remove("form__group-correct");
+					$svg.setAttribute("src", "src/icons/error.svg");
+					fields[field] = false;
+				}
+			};
+
+			const validatePassword2 = () => {
+				const $inputPassword1 = document.getElementById("password"),
+					$inputPassword2 = document.getElementById("password2"),
+					$groupPassword2 =
+						document.getElementById(`group__password2`),
+					$textError = document.querySelectorAll(".form__error")[1];
+
+				if ($inputPassword1.value !== $inputPassword2.value) {
+					$groupPassword2.classList.add("form__group-wrong");
+					$groupPassword2.classList.remove("form__group-correct");
+					$textError.style.display = "block";
+					fields["password"] = false;
+				} else {
+					$groupPassword2.classList.remove("form__group-wrong");
+					$groupPassword2.classList.add("form__group-correct");
+					$textError.style.display = "none";
+					fields["password"] = true;
+				}
+			};
+
+			const $inputs = document.querySelectorAll(".form__input");
+
+			$inputs.forEach((input) => {
+				input.addEventListener("keyup", validateForm);
+				input.addEventListener("blur", validateForm);
+			});
+
+			// - - - - - - - - - - - - - - - - - - - - - Send data - - - - - - - - - - - - - - - -
+			const $form = document.getElementById("form-signin");
+
+			const $user = document.getElementById("user"),
+				$name = document.getElementById("name"),
+				$lastname = document.getElementById("lastname"),
+				$lastname2 = document.getElementById("lastname2"),
+				$email = document.getElementById("email"),
+				$password = document.getElementById("password");
+
+			$form.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				let formComplete =
+					fields.name &
+					fields.lastname &
+					fields.lastname2 &
+					fields.user &
+					fields.password &
+					fields.email;
+
+				if (formComplete) {
+					const objectData = {
+						username: $user.value,
+						name: $name.value,
+						lastname: $lastname.value + " " + $lastname2.value,
+						email: $email.value,
+						password: $password.value,
+					};
+					console.log(objectData);
+				}
+			});
+		});
+	}
 </script>

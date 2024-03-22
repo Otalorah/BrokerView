@@ -8,47 +8,6 @@ const { text } = Astro.props;
 </div>
 
 <style>
-    html.light {
-        .background__btn {
-            background-color: var(--primary-color);
-
-            .backfill__btn {
-                background-color: var(--secondary-color);
-            }
-            .btn {
-                background: var(--secondary-color);
-                color: var(--secondary-color-text);
-            }
-        }
-    }
-    body.red{
-        .background__btn{
-            &:hover{
-              border: 3px solid var(--red);
-            }
-            &:hover .backfill__btn{
-                background: repeating-conic-gradient(
-                from var(--a),
-                var(--red-light),
-                var(--red)
-            );
-            }
-        }
-    }
-    body.green{
-        .background__btn{
-            &:hover{
-              border: 3px solid var(--green);
-            }
-            &:hover .backfill__btn{
-                background: repeating-conic-gradient(
-                from var(--a),
-                var(--green-light),
-                var(--green)
-            );
-            }
-        }
-    }
     .background__btn {
         position: relative;
         display: flex;
@@ -60,21 +19,20 @@ const { text } = Astro.props;
         width: 90%;
         max-width: 400px;
         height: 40px;
-        background: var(--secondary-color);
+        background-color: var(--bg-color-light);
 
         &:hover {
-            background: var(--secondary-color);
+            background-color: var(--bg-color-light);
         }
 
         &:hover .backfill__btn {
             display: block;
             height: 30px;
-
         }
 
         &:hover .btn {
             background-clip: text;
-            color: var(--primary-color-text);
+            color: var(--text-color-dark);
         }
 
         .backfill__btn {
@@ -82,7 +40,7 @@ const { text } = Astro.props;
             height: 36px;
             border-radius: 4px;
             width: calc(100% - 4px);
-            background-color: var(--primary-color);
+            background-color: var(--bg-color-dark);
         }
 
         .btn {
@@ -94,8 +52,49 @@ const { text } = Astro.props;
             z-index: 20;
             height: 36px;
             width: calc(100% - 4px);
-            color: var(--primary-color-text);
-            background: var(--primary-color);
+            color: var(--text-color-dark);
+            background-color: var(--bg-color-dark);
+        }
+    }
+    html.light {
+        .background__btn {
+            background-color: var(--bg-color-dark);
+
+            .backfill__btn {
+                background-color: var(--bg-color-light);
+            }
+            .btn {
+                background-color: var(--bg-color-light);
+                color: var(--text-color-light);
+            }
+        }
+    }
+    body.red {
+        .background__btn {
+            &:hover {
+                border: 3px solid var(--red);
+            }
+            &:hover .backfill__btn {
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red-light),
+                    var(--red)
+                );
+            }
+        }
+    }
+    body.green {
+        .background__btn {
+            &:hover {
+                border: 3px solid var(--green);
+            }
+            &:hover .backfill__btn {
+                background: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-light),
+                    var(--green)
+                );
+            }
         }
     }
 </style>

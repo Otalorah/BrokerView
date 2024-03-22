@@ -1,26 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import MenuMobile from "@sections/MenuMobile.astro";
 ---
 
-<Layout title="BrokerView | Inicio">
+<Layout title="BrokerView | Inicio " hamburger="">
+    <MenuMobile />
     <main>
         <h1>Cuenta</h1>
     </main>
 </Layout>
-
-<style>
-    main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        width: 100%;
-        margin: 0;
-    }
-
-    h1,
-    h3 {
-        margin: 0;
-        text-align: center;
-    }
-</style>

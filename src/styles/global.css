@@ -2,10 +2,10 @@
     box-sizing: border-box;
 }
 :root{
-    --primary-color: #232323;
-    --secondary-color: #efefef;
-    --primary-color-text: #fefefe;
-    --secondary-color-text: #010101;
+    --bg-color-dark: #232323;
+    --bg-color-light: #efefef;
+    --text-color-dark: #fefefe;
+    --text-color-light: #010101;
     --green-light:#29ff00;
     --green:#1b8800;
     --red-light: #ff0000;
@@ -24,30 +24,105 @@
         --a: 360deg;
     }
 }
+h1,h2,h3,h4,h5,ul,body,main,div,input,label,form,nav,p,button{
+    margin: 0;
+    padding: 0;
+}
 body {
+    --margin-close: 43px;
+    --margin-open: 200px;
+
     font-family: 'Russo One', sans-serif;
     display: flex;
     flex-direction: column;
-    position: relative;
     min-height: 100svh;
     width: 100%;
+    max-width: 1350px;
     min-width: 290px;
-    margin: 0;
     margin-top: 55px;
-    padding: 0;
-    background: var(--primary-color);
+    background-color: var(--bg-color-dark);
+
 }
 h1 {
     font-weight: 100;
     letter-spacing: 5px;
-    color: var(--primary-color-text);
+    color: var(--text-color-dark);
 }
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-left: var(--margin-close);
+
+    .expanded ~ & {
+        margin-left: var(--margin-open);
+    }
+}
+
 /* Theme mode styles */
 html.light {
     #body {
-        background-color: var(--secondary-color);
+        background-color: var(--bg-color-light);
     }
     h1 {
+        color: var(--text-color-light);
+    }
+}
+/* - - - - - - - - - - - - - - - Footer styles - - - - - - - - - - - - - - - - */
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    height: 22.5px;
+    margin-top: 2rem;
+    margin-left: var(--margin-close);
+
+    .expanded ~ & {
+        margin-left: var(--margin-open);
+    }
+
+    p {
+        text-align: center;
+        letter-spacing: 1px;
+        font-size: .7rem;
+        color: var(--primary-color-text);
+    }
+
+    #background_footer {
+        width: 100%;
+        height: 7.5px;
+    }
+}
+body.red {
+    #background_footer {
+        background: linear-gradient(
+            to top,
+            var(--red-light) 10%,
+            transparent
+        );
+    }
+}
+body.green {
+    #background_footer {
+        background: linear-gradient(
+            to top,
+            var(--green-light) 10%,
+            transparent
+        );
+    }
+}
+html.light {
+    p {
         color: var(--secondary-color-text);
     }
+}
+@media screen and (width < 666px) {
+    main{
+        margin-left: 0;
+    }
+    footer{
+        margin-left: 0;
+    }
+    
 }

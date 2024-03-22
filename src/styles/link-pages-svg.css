@@ -1,20 +1,26 @@
-.link-page {
-    position: relative;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    cursor: pointer;
+.link-page{
+    list-style: none;
     text-decoration: none;
-    width: 100%;
-    gap: 1rem;
-    background-color: var(--primary-color);
+    background-color: var(--bg-color-dark);
+
+    a{
+        position: relative;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        gap: 1rem;
+    }
+    p {
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        color: var(--text-color-dark);
+    }
 }
-p {
-    margin: 0;
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    color: var(--primary-color-text);
-}
+
+
 body.red {
     svg {
         fill: var(--red-light);
@@ -27,9 +33,16 @@ body.green {
 }
 html.light {
     .link-page{
-        background-color: var(--secondary-color);
+        background-color: var(---bg-color-light);
+        
+        p{
+         color: var(--text-color-light);
+        }
     }
-    h4 {
-        color: var(--secondary-color-text);
+
+}
+@media (width > 666px){
+    p{
+        overflow: hidden;
     }
 }
