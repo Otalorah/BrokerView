@@ -9,10 +9,10 @@ import "@fontsource/russo-one";
 
 interface Props {
 	title: string;
-	hamburger: string | null;
+	isForm: boolean | undefined;
 }
 
-const { title, hamburger } = Astro.props;
+const { title, isForm } = Astro.props;
 
 const optionsTheme = ["red", "green"];
 const randomIndex = Math.floor(Math.random() * optionsTheme.length);
@@ -34,8 +34,8 @@ const color = optionsTheme[randomIndex];
 		<title>{title}</title>
 	</head>
 	<body class={color}>
-		<Navbar hamburger={hamburger}/>
+		<Navbar isForm={isForm}/>
 		<slot />
-		<Footer />
+		{isForm && <Footer />}
 	</body>
 </html>

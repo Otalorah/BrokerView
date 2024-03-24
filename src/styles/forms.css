@@ -22,9 +22,7 @@
             outline: none;
         }
     }
-    html.light{
-        .form__input{background-color: rgba(200, 200, 200, 100);}
-    }
+    
     .form__error {
         display: none;
         cursor: default;
@@ -69,3 +67,4 @@
         }
     }
 }
+html.light{.form__input{background-color: #b8b8b8;}}

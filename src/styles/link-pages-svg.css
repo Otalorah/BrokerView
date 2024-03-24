@@ -1,7 +1,6 @@
 .link-page{
     list-style: none;
     text-decoration: none;
-    background-color: var(--bg-color-dark);
 
     a{
         position: relative;
@@ -38,11 +37,5 @@ html.light {
         p{
          color: var(--text-color-light);
         }
-    }
-
-}
-@media (width > 666px){
-    p{
-        overflow: hidden;
     }
 }

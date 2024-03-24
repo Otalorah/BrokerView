@@ -7,8 +7,8 @@ import UserSVG from "@components/svg/UserSVG.astro";
 import "@styles/link-pages-svg.css";
 ---
 
-<div id="background__menu-mobile" transition:persist></div>
-<aside id="menu-mobile" transition:persist>
+<div id="background__menu-toggle"></div>
+<aside id="menu-toggle" transition:persist>
     <ul>
         <HouseSVG />
         <ChartSVG />
@@ -18,7 +18,7 @@ import "@styles/link-pages-svg.css";
 </aside>
 
 <style>
-    #background__menu-mobile {
+    #background__menu-toggle {
         position: fixed;
         display: none;
         width: 100%;
@@ -29,13 +29,14 @@ import "@styles/link-pages-svg.css";
         &.appear {
             display: flex;
         }
-        &.appear ~ #menu-mobile {
+        &.appear ~ #menu-toggle {
             display: flex;
         }
     }
-    #menu-mobile {
+    #menu-toggle {
         display: none;
         position: fixed;
+
         justify-content: start;
         align-items: start;
         flex-direction: column;
@@ -45,7 +46,7 @@ import "@styles/link-pages-svg.css";
         height: 100vh;
         width: 50%;
         z-index: 210;
-        background-color: #232323dd;
+        background-color: #121212dd;
 
         ul {
             display: flex;
@@ -54,38 +55,40 @@ import "@styles/link-pages-svg.css";
         }
     }
     body.red {
-        #menu-mobile {
+        #menu-toggle {
             box-shadow: 1px 0px 5px var(--red);
             border-right: 1px solid var(--red);
         }
     }
     body.green {
-        #menu-mobile {
+        #menu-toggle {
             box-shadow: 1px 0px 5px var(--green);
             border-right: 1px solid var(--green);
         }
     }
     html.light {
-        #menu-mobile {
-            background-color: #efefefdd;
+        #menu-toggle {
+            background-color: #dfdfdfdd;
         }
     }
     @media (width > 666px) {
-        #background__menu-mobile {
+        #background__menu-toggle {
             &.appear {
                 display: none;
             }
-            &.expanded ~ #menu-mobile {
+            &.expanded ~ #menu-toggle {
                 display: flex;
             }
         }
-        #menu-mobile {
+        #menu-toggle {
+            grid-area: aside;
+
+            top: 55.5px;
+
             display: flex;
-            width: fit-content;
+            width: 44px;
             padding-left: 10px;
-            padding-right: 10px;
             padding-top: 1rem;
-            overflow: hidden;
 
             svg ~ p {
                 display: none;
@@ -93,7 +96,6 @@ import "@styles/link-pages-svg.css";
 
             &.expanded {
                 width: 200px;
-
                 svg ~ p {
                     display: block;
                 }
@@ -101,7 +103,7 @@ import "@styles/link-pages-svg.css";
         }
     }
 </style>
-<script>
+<script is:inline>
     let newWidth = window.innerWidth;
     if (newWidth < 666) {
         const link = document.querySelectorAll(".link-page");

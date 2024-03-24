@@ -9,8 +9,6 @@ import IconForm from "./IconForm.astro";
 </div>
 <style>
     #btnTheme__box {
-        --background-btnTheme: #434343;
-
         position: relative;
         display: flex;
         align-items: center;
@@ -19,12 +17,8 @@ import IconForm from "./IconForm.astro";
         width: 50px;
         height: 30px;
         border-radius: 70px;
-        background-image: linear-gradient(
-            to right,
-            #000,
-            var(--background-btnTheme)
-        );
-        border: 1px solid var(--background-btnTheme);
+        background-image: linear-gradient(to right, #000, #333);
+        border: 1px solid var(--bg-color-dark);
 
         #btnTheme {
             position: absolute;
@@ -33,8 +27,8 @@ import IconForm from "./IconForm.astro";
             height: 28.5px;
             left: 0;
             border-radius: 70px;
-            border: 1px solid var(--background-btnTheme);
-            background-color: var(--background-btnTheme);
+            border: 1px solid var(--bg-color-dark);
+            background-color: var(--bg-color-dark);
         }
     }
     html.light {
@@ -55,28 +49,28 @@ import IconForm from "./IconForm.astro";
     }
 </style>
 <script>
-        const handleToggleClick = () => {
-            const element = document.documentElement;
-            element.classList.toggle("light");
+    const handleToggleClick = () => {
+        const element = document.documentElement;
+        element.classList.toggle("light");
 
-            const isLight = element.classList.contains("light");
+        const isLight = element.classList.contains("light");
 
-            if (isLight) {
-                document
-                    .getElementById("theme")
-                    .setAttribute("src", "src/icons/sun.svg");
-                localStorage.setItem("theme", "light");
-            } else {
-                document
-                    .getElementById("theme")
-                    .setAttribute("src", "src/icons/moon.svg");
-                localStorage.setItem("theme", "dark");
-            }
-        };
+        if (isLight) {
+            document
+                .getElementById("theme")
+                .setAttribute("src", "src/icons/sun.svg");
+            localStorage.setItem("theme", "light");
+        } else {
+            document
+                .getElementById("theme")
+                .setAttribute("src", "src/icons/moon.svg");
+            localStorage.setItem("theme", "dark");
+        }
+    };
 
-        document
-            .getElementById("btnTheme__box")
-            .addEventListener("click", handleToggleClick);
+    document
+        .getElementById("btnTheme__box")
+        .addEventListener("click", handleToggleClick);
 </script>
 
 <script>

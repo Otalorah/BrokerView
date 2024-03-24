@@ -1,0 +1,19 @@
+#content {
+    display: grid;
+    grid-template-areas: "aside main main";
+    grid-template-columns: 44px repeat(2, 1fr);
+
+    position: relative;
+
+    &:has(.expanded) {
+        grid-template-columns: 200px repeat(2, 1fr);
+    }
+
+    #menu-toggle {
+        grid-area: aside;
+    }
+
+    main {
+        grid-area: main;
+    }
+}

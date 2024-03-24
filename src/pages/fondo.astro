@@ -1,11 +1,15 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import MenuMobile from "@sections/MenuMobile.astro";
+import MenuToggle from "@sections/MenuToggle.astro";
+
+import "@styles/main-content.css";
 ---
 
-<Layout title="BrokerView | Inicio" hamburger="">
-    <MenuMobile />
-    <main>
-        <h1>Fondo</h1>
-    </main>
+<Layout title="BrokerView | Fondo" isForm={false}>
+    <div id="content">
+        <MenuToggle />
+        <main>
+            <h1>Fondo</h1>
+        </main>
+    </div>
 </Layout>
