@@ -16,16 +16,156 @@ import "src/styles/forms.css";
 <InputSignin id="email" type="email" text="Correo:" />
 
 <InputSignin
-	id="password"
-	type="password"
-	text="Contraseña:"
-	textError="Más de 6 caracteres, y un carácter especial"
+    id="password"
+    type="password"
+    text="Contraseña:"
+    textError="Más de 6 caracteres, y un carácter especial"
 />
 
 <InputSignin
-	id="password2"
-	type="password"
-	text="Confirmar contraseña:"
-	textError="Las contraseñas no coinciden"
+    id="password2"
+    type="password"
+    text="Confirmar contraseña:"
+    textError="Las contraseñas no coinciden"
 />
 <BtnColor text="CONFIRMAR" />
+<script is:inline>
+    const expressions = {
+        user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
+        name: /^[a-zA-ZÀ-ÿ]{3,}( [a-zA-ZÀ-ÿ]{3,})? ?$/,
+        lastname: /^[a-zA-ZÀ-ÿ]{3,} ?$/,
+        password: /^[\wÀ-ÿ\W]{6,}$/,
+        especial: /[°!"#$&()=@\?¡%&\+\/\{\}\*\[\]]/,
+        email: /^[a-zA-Z0-9\._%+-]{3,}@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/,
+    };
+
+    const fields = {
+        user: false,
+        name: false,
+        lastname: false,
+        lastname2: false,
+        password: false,
+        email: false,
+    };
+    // MediaQuery for desktop
+    if (window.innerWidth > 666) {
+        document.getElementById("label-lastname").innerText = "Apellidos";
+        document.getElementById("group__lastname2").remove();
+        expressions.lastname = /^[a-zA-ZÀ-ÿ]{3,} [a-zA-ZÀ-ÿ]{3,} ?$/;
+        fields.lastname2 = true;
+    }
+
+    // - - - - - - - - - - - - - - - - - - - - - - - Funtions Validations - - - - - - - - - - - - - - - - - - -
+
+    const validateForm = (e) => {
+        switch (e.target.name) {
+            case "user":
+                validateField(expressions.user, e.target, "user");
+                break;
+            case "name":
+                validateField(expressions.name, e.target, "name");
+                break;
+            case "lastname":
+                validateField(expressions.lastname, e.target, "lastname");
+                break;
+            case "lastname2":
+                validateField(expressions.lastname, e.target, "lastname2");
+                break;
+            case "email":
+                validateField(expressions.email, e.target, "email");
+                break;
+            case "password":
+                (() => {
+                    const $groupPassword =
+                            document.getElementById(`group__password`),
+                        $textError = document.querySelector(".form__error");
+
+                    if (
+                        expressions.password.test(e.target.value) &
+                        expressions.especial.test(e.target.value)
+                    ) {
+                        $groupPassword.classList.remove("form__group-wrong");
+                        $groupPassword.classList.add("form__group-correct");
+                        if (window.innerWidth > 666)
+                            $textError.style.opacity = "0";
+                        else $textError.style.display = "none";
+                    } else {
+                        $groupPassword.classList.add("form__group-wrong");
+                        $groupPassword.classList.remove("form__group-correct");
+                        if (window.innerWidth > 666)
+                            $textError.style.opacity = "1";
+                        else $textError.style.display = "block";
+                    }
+                })();
+                validatePassword2();
+                break;
+            case "password2":
+                validatePassword2();
+                break;
+        }
+    };
+
+    const validateField = (expression, input, field) => {
+        const $groupInput = document.getElementById(`group__${field}`);
+        const $svg = document.getElementById(`${field}_svg`);
+
+        if (expression.test(input.value)) {
+            $groupInput.classList.remove("form__group-wrong");
+            $groupInput.classList.add("form__group-correct");
+            $svg.setAttribute("src", "src/icons/check.svg");
+            fields[field] = true;
+        } else {
+            $groupInput.classList.add("form__group-wrong");
+            $groupInput.classList.remove("form__group-correct");
+            $svg.setAttribute("src", "src/icons/error.svg");
+            fields[field] = false;
+        }
+    };
+
+    const validatePassword2 = () => {
+        const $inputPassword1 = document.getElementById("password"),
+            $inputPassword2 = document.getElementById("password2"),
+            $groupPassword2 = document.getElementById(`group__password2`),
+            $textError = document.querySelectorAll(".form__error")[1];
+
+        if ($inputPassword1.value !== $inputPassword2.value) {
+            $groupPassword2.classList.add("form__group-wrong");
+            $groupPassword2.classList.remove("form__group-correct");
+            if (window.innerWidth > 666) $textError.style.opacity = "1";
+            else $textError.style.display = "block";
+            fields["password"] = false;
+        } else {
+            $groupPassword2.classList.remove("form__group-wrong");
+            $groupPassword2.classList.add("form__group-correct");
+            if (window.innerWidth > 666) $textError.style.opacity = "0";
+            else $textError.style.display = "none";
+            fields["password"] = true;
+        }
+    };
+
+    const $inputs = document.querySelectorAll(".form__input");
+
+    $inputs.forEach((input) => {
+        input.addEventListener("keyup", validateForm);
+        input.addEventListener("blur", validateForm);
+    });
+
+    // - - -- - - - - - - - - - - - - - - - - - SEND DATA FORM LOGIN - - - - - - - - - - - - - - - - - - - - - - -
+    document.getElementById("form-signin").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let formComplete =
+            fields.name &
+            fields.lastname &
+            fields.lastname2 &
+            fields.user &
+            fields.password &
+            fields.email;
+
+        if (formComplete) {
+            const data = Object.fromEntries(new FormData(e.target));
+
+            console.log(data);
+        }
+    });
+</script>

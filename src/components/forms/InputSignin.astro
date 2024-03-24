@@ -8,7 +8,7 @@ const idLastname = id == "lastname" && 'label-lastname'
 <div class="form__group" id={`group__${id}`}>
     <label class="form__label" for={id} id={idLastname}>{text}</label>
     <div class="form__group-input">
-        <input type={type} class="form__input" name={id} {id} />
+        <input type={type} class="form__input" name={id} {id} required/>
         {
             type == "password" ? (
                 <IconForm type="no-view" />
@@ -17,5 +17,5 @@ const idLastname = id == "lastname" && 'label-lastname'
             )
         }
     </div>
-    {type == "password" && <p class="form__text form__error">{textError}</p>}
+    {type == "password" && <p class="form__error">{textError}</p>}
 </div>

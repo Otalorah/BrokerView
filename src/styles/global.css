@@ -1,6 +1,3 @@
-* {
-    box-sizing: border-box;
-}
 :root{
     --bg-color-dark: #232323;
     --bg-color-light: #efefef;
@@ -24,9 +21,10 @@
         --a: 360deg;
     }
 }
-h1,h2,h3,h4,h5,ul,body,main,div,input,label,form,nav,p,button{
+h1,h2,h3,h4,h5,ul,body,main,div,input,label,form,nav,header,p,button{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body {
     --margin-close: 43px;
@@ -35,6 +33,7 @@ body {
     font-family: 'Russo One', sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     min-height: 100svh;
     width: 100%;
     max-width: 1350px;
@@ -51,66 +50,31 @@ h1 {
 }
 main {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin-left: var(--margin-close);
+    height: auto;
+
+    aside ~ & {
+        margin-left: var(--margin-close);
+    }
 
     .expanded ~ & {
         margin-left: var(--margin-open);
     }
 }
-
+@media screen and (width < 666px) {
+    main {
+        aside ~ & {
+            margin-left: 0;
+        }
+    }
+}
 /* Theme mode styles */
 html.light {
-    #body {
+    body {
         background-color: var(--bg-color-light);
         color: var(--text-color-light);
-    }
-}
-/* - - - - - - - - - - - - - - - Footer styles - - - - - - - - - - - - - - - - */
-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    height: 22.5px;
-    margin-top: 2rem;
-    
-    aside ~ &{
-        margin-left: var(--margin-close);
-    }
-
-    aside.expanded ~ & {
-        margin-left: var(--margin-open);
-    }
-
-    p {
-        text-align: center;
-        letter-spacing: 1px;
-        font-size: .7rem;
-    }
-
-    #background_footer {
-        width: 100%;
-        height: 7.5px;
-    }
-}
-body.red {
-    #background_footer {
-        background: linear-gradient(
-            to top,
-            var(--red-light) 10%,
-            transparent
-        );
-    }
-}
-body.green {
-    #background_footer {
-        background: linear-gradient(
-            to top,
-            var(--green-light) 10%,
-            transparent
-        );
     }
 }
 html.light {

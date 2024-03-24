@@ -7,7 +7,13 @@ import "src/styles/forms.css";
 
 <div class="form__group">
 	<label class="form__label" for="user-login">Usuario:</label>
-	<input class="form__input" type="text" id="user-login" name="user" required />
+	<input
+		class="form__input"
+		type="text"
+		id="user-login"
+		name="user"
+		required
+	/>
 </div>
 
 <div class="form__group">
@@ -22,9 +28,33 @@ import "src/styles/forms.css";
 		/>
 		<IconForm type="no-view" />
 	</div>
-	<p class="form__text forget-password">
-		<a class="text__link" href="/signin">¿Has olvidado tu contraseña?</a>
+	<p>
+		<a href="/signin">¿Has olvidado tu contraseña?</a>
 	</p>
 </div>
 
-<BtnColor text="INGRESAR" />
+<div class="form__group">
+	<BtnColor text="INGRESAR" />
+</div>
+<style>
+	p {
+		margin-top: 0.5rem;
+		font-size: 0.8rem;
+		text-align: end;
+
+		a {
+			text-decoration: none;
+			color: inherit;
+			letter-spacing: 1px;
+		}
+	}
+</style>
+<script is:inline>
+	document.querySelector(".form-login").addEventListener("submit", (e) => {
+		e.preventDefault();
+
+		const data = Object.fromEntries(new FormData(e.target));
+		
+		console.log(data);
+	});
+</script>

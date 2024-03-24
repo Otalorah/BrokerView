@@ -14,11 +14,10 @@ const { text } = Astro.props;
         justify-content: center;
         align-items: center;
         border-radius: 4px;
-        margin: auto;
-        margin-top: 5px;
         width: 90%;
         max-width: 400px;
         height: 40px;
+        margin: auto;
         background-color: var(--bg-color-light);
 
         &:hover {
@@ -27,7 +26,6 @@ const { text } = Astro.props;
 
         &:hover .backfill__btn {
             display: block;
-            height: 30px;
         }
 
         &:hover .btn {
@@ -37,18 +35,19 @@ const { text } = Astro.props;
 
         .backfill__btn {
             display: none;
-            height: 36px;
+            height: 30px;
             border-radius: 4px;
             width: calc(100% - 4px);
             background-color: var(--bg-color-dark);
         }
 
         .btn {
+            display: block;
+            position: absolute;
             border: none;
             cursor: pointer;
-            position: absolute;
-            font-weight: bold;
-            display: block;
+            font-family: inherit;
+            letter-spacing: 1.5px;
             z-index: 20;
             height: 36px;
             width: calc(100% - 4px);

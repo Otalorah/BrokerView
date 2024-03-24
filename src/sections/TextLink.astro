@@ -8,7 +8,7 @@ interface Props {
 const { text, textN, href } = Astro.props;
 ---
 
-<a class="text__link" href={href}>{text} <strong>{textN}</strong></a>
+<a class="text__link" data-astro-reload href={href}>{text} <strong>{textN}</strong></a>
 <style>
     .text__link {
         text-decoration: none;

@@ -1,60 +1,56 @@
-.form__label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.form__group-input {
+.form__group{
     position: relative;
     display: flex;
-    align-items: center;
-    margin: 0;
-}
+    flex-direction: column;
+    justify-content: space-between;
 
-.form__input {
-    border: none;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-
-    &:focus {
-        outline: none;
+    .form__label{
+        margin: .5rem 0;
     }
-}
 
-.form__text {
-    text-align: center;
-    margin: 0.05rem;
+    .form__group-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .form__input {
+        border: none;
+        width: 100%;
+        padding: 8px;
 
-    &.form__error {
+        &:focus {
+            outline: none;
+        }
+    }
+    html.light{
+        .form__input{background-color: rgba(200, 200, 200, 100);}
+    }
+    .form__error {
         display: none;
-        margin: 0;
-        margin-bottom: 0.4rem;
-        font-size: 0.82rem;
+        cursor: default;
+        text-align: center;
+        letter-spacing: 1px;
+        margin-top: 0.4rem; 
+        font-size: 0.7rem;
         color: var(--red-light);
     }
-
-    &.forget-password {
-        text-align: end;
-        margin: 0;
-    }
-
-    .text__link {
-        text-decoration: none;
-        font-size: 0.8rem;
-        margin: .5rem auto;
-        color: inherit;
+}
+@media screen and (666px < width){
+    .form__group{
+        .form__error{
+            display: block;
+            opacity: 0;
+        }
     }
 }
 .form__group-wrong {
     .form__label {
         color: var(--red-light);
     }
-    .form__input {
-        border: 2px solid var(--red-light);
-    }
-
     .form__group-input {
+        .form__input {
+            border: 2px solid var(--red-light);
+        }
         .status_icon {
             opacity: 1;
         }
@@ -64,16 +60,12 @@
     .form__label {
         color: var(--green-light);
     }
-    .form__input {
-        border: 2px solid var(--green-light);
-    }
     .form__group-input {
+        .form__input {
+            border: 2px solid var(--green-light);
+        }
         .status_icon {
-            color: var(--green-light);
             opacity: 1;
         }
     }
-}
-html.light{
-    .form__input{background-color: rgba(200, 200, 200, 100);}
 }
