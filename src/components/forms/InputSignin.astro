@@ -1,4 +1,5 @@
 ---
+import IconPassword from "@components/IconPassword.astro";
 import IconForm from "../IconForm.astro";
 
 const { id, type, text, textError } = Astro.props;
@@ -11,7 +12,7 @@ const idLastname = id == "lastname" && 'label-lastname'
         <input type={type} class="form__input" name={id} {id} required/>
         {
             type == "password" ? (
-                <IconForm type="no-view" />
+                <IconPassword />
             ) : (
                 <IconForm type="error" id={id + "_svg"}/>
             )

@@ -65,9 +65,9 @@
     }
 </style>
 <script is:inline>
-    let newWidth = window.innerWidth;
+    let screenWidth = window.innerWidth;
     document.getElementById("hamburger").addEventListener("click", () => {
-        if (newWidth < 666) {
+        if (screenWidth < 666) {
             document
                 .getElementById("background__menu-toggle")
                 .classList.toggle("appear");

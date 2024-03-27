@@ -1,15 +1,20 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@sections/MenuToggle.astro";
+import DataAccount from "@components/DataAccount.astro";
 
 import "@styles/main-content.css";
 ---
 
 <Layout title="BrokerView | Cuenta" isForm={false}>
-    <div id="content">
-        <MenuToggle />
-        <main>
-            <h1>Cuenta</h1>
-        </main>
-    </div>
+    <MenuToggle />
+    <main>
+        <h1>Cuenta</h1>
+        <DataAccount />
+    </main>
 </Layout>
+<style>
+    h1 {
+        margin: 1.5rem;
+    }
+</style>

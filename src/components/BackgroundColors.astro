@@ -9,10 +9,27 @@ const { type } = Astro.props;
 
 
 <style>
+    @property --a {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+    @keyframes rotating {
+        0% {
+            --a: 0deg;
+        }
+        100% {
+            --a: 360deg;
+        }
+    }
+
     .background {
         display: flex;
         justify-content: center;
         align-items: center;
+
+        position: relative;
+        width: 95%;
 
         &.navBar {
             position: fixed;
@@ -36,34 +53,37 @@ const { type } = Astro.props;
         }
 
         &.form-login {
-            position: relative;
-            width: 95%;
             max-width: 400px;
             z-index: 50;
             padding: 3px;
         }
 
         &.form-signin {
-            position: relative;
-            width: 95%;
             max-width: 650px;
             z-index: 50;
             padding: 3px;
         }
-        &.money {
-            position: relative;
-            margin-top: 2rem;
-            width: 50%;
-            height: 100px;
+
+        &::before{
+            content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                animation: rotating 20s linear infinite;
+        }
+        &::after{
+            content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 8px;
+                animation: rotating 20s linear infinite;
+                filter: blur(5px);
         }
     }
     body.red {
         .background {
             &::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
+                
                 background: repeating-conic-gradient(
                     from var(--a),
                     var(--red),
@@ -72,14 +92,9 @@ const { type } = Astro.props;
                     var(--red),
                     var(--red)
                 );
-                animation: rotating 20s linear infinite;
             }
 
             &::after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
                 background: repeating-conic-gradient(
                     from var(--a),
                     var(--red-light),
@@ -87,18 +102,12 @@ const { type } = Astro.props;
                     var(--red-light),
                     var(--red)
                 );
-                animation: rotating 20s linear infinite;
-                filter: blur(5px);
             }
         }
     }
     body.green {
         .background {
             &::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
                 background: repeating-conic-gradient(
                     from var(--a),
                     var(--green),
@@ -107,14 +116,9 @@ const { type } = Astro.props;
                     var(--green),
                     var(--green)
                 );
-                animation: rotating 20s linear infinite;
             }
 
             &::after {
-                content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
                 background: repeating-conic-gradient(
                     from var(--a),
                     var(--green-light),
@@ -122,8 +126,6 @@ const { type } = Astro.props;
                     var(--green-light),
                     var(--green)
                 );
-                animation: rotating 20s linear infinite;
-                filter: blur(5px);
             }
         }
     }

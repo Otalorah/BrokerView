@@ -8,29 +8,16 @@
     --red-light: #ff0000;
     --red: #88001b;
 }
-@property --a {
-    syntax: "<angle>";
-    inherits: false;
-    initial-value: 0deg;
-}
-@keyframes rotating {
-    0% {
-        --a: 0deg;
-    }
-    100% {
-        --a: 360deg;
-    }
-}
-h1,h2,h3,h4,h5,ul,body,main,div,input,label,form,nav,header,p,button,aside{
+h1,h2,h3,h4,h5,ul,body,main,div,input,label,form,nav,header,p
+,button,aside{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body {
-    --margin-close: 43px;
-    --margin-open: 200px;
 
     font-family: 'Russo One', sans-serif;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -38,12 +25,13 @@ body {
     width: 100%;
     max-width: 1350px;
     min-width: 290px;
+    
     margin-top: 55px;
     background-color: var(--bg-color-dark);
     color: var(--text-color-dark);
 
-    /* if The page isn´t in the forms */
-    &:has(#content){
+    /* Si el bodi no está en los form */
+    &:has(#menu-toggle){
         min-height: auto;
     }
 }
@@ -59,31 +47,10 @@ main {
     justify-content: center;
     height: auto;
 }
-@media screen and (width < 666px) {
-    main {
-        aside ~ & {
-            margin-left: 0;
-        }
-    }
-}
 /* Theme mode styles */
 html.light {
     body {
         background-color: var(--bg-color-light);
         color: var(--text-color-light);
     }
-}
-html.light {
-    p {
-        color: var(--secondary-color-text);
-    }
-}
-@media screen and (width < 666px) {
-    main{
-        margin-left: 0;
-    }
-    footer{
-        margin-left: 0;
-    }
-    
 }

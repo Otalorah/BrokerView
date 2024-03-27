@@ -26,29 +26,25 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
         z-index: 50;
         color: var(--text-color-dark);
         background-color: var(--bg-color-dark);
-    }
-    body.red {
-        form {
+
+        body.red & {
             border: 1px solid var(--red-light);
         }
-    }
-    body.green {
-        form {
+        body.green & {
             border: 1px solid var(--green-light);
         }
-    }
-    html.light {
-        .form {
+        html.light & {
             color: var(--text-color-light);
             background-color: var(--bg-color-light);
         }
     }
+
     @media screen and (666px < width) {
         .form {
             &.form-signin {
                 grid-template-columns: 1fr 1fr;
 
-                #group__lastname2{
+                #group__lastname2 {
                     display: none;
                 }
 
@@ -59,22 +55,3 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
         }
     }
 </style>
-<script>
-    // Show text in input passwords
-    const showPassword = (icon, inputPassword) => {
-        if (inputPassword.type === "password") {
-            inputPassword.type = "text";
-            icon.setAttribute("src", "src/icons/view.svg");
-        } else {
-            inputPassword.type = "password";
-            icon.setAttribute("src", "src/icons/no-view.svg");
-        }
-    };
-    const $passwordIcons = document.querySelectorAll(".password_icon");
-
-    $passwordIcons.forEach((icon) => {
-        icon.addEventListener("click", () => {
-            showPassword(icon, icon.previousElementSibling);
-        });
-    });
-</script>

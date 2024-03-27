@@ -1,19 +1,17 @@
-#content {
-    display: grid;
-    grid-template-areas: "aside main main";
-    grid-template-columns: 44px repeat(2, 1fr);
+main{
+    --margin-close: 43px;
+    --margin-open: 200px;
 
-    position: relative;
+    margin-left: var(--margin-close);
 
-    &:has(.expanded) {
-        grid-template-columns: 200px repeat(2, 1fr);
+    .expanded ~ & {
+        margin-left: var(--margin-open);
     }
-
-    #menu-toggle {
-        grid-area: aside;
-    }
-
+}
+@media screen and (width < 666px) {
     main {
-        grid-area: main;
+        aside ~ & {
+            margin-left: 0;
+        }
     }
 }

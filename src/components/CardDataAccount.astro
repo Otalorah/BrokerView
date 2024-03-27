@@ -1,0 +1,86 @@
+---
+import IconPassword from "@components/IconPassword.astro";
+
+interface Props {
+    key: string;
+    value: string;
+}
+
+const { key, value } = Astro.props;
+
+const isPassword = key == "Contraseña" ? true : false;
+---
+
+<div>
+    <h5>{key}</h5>
+    <hr />
+    {
+        isPassword ? (
+            <span>
+                <input type="password" value={value} />
+                <IconPassword/>
+            </span>
+        ) : (
+            <p>{value}</p>
+        )
+    }
+</spa>
+
+<style>
+    div {
+        position: relative;
+
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px;
+        background-color: #454545;
+
+        html.light & {
+            background-color: #b8b8b8;
+        }
+
+        h5 {
+            color: #989898;
+
+            html.light & {
+                color: #454545;
+            }
+        }
+
+        hr {
+            height: 1px;
+            margin-top: 1px;
+
+            background-color: #989898;
+            box-shadow: none;
+        }
+
+        p {
+            color: var(--text-color-dark);
+
+            html.light & {
+                color: var(--text-color-light);
+            }
+        }
+
+        & > span {
+            position: relative;
+            display: block;
+
+            input {
+                height: 19px;
+
+                font-family: "Russo One";
+                border: none;
+                color: inherit;
+                font-size: 1rem;
+
+                background-color: transparent;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+</style>

@@ -1,6 +1,6 @@
 ---
-import BtnColor from "../BtnColor.astro";
-import IconForm from "../IconForm.astro";
+import BtnColor from "@components/BtnColor.astro";
+import IconPassword from "@components/IconPassword.astro";
 
 import "src/styles/forms.css";
 ---
@@ -26,7 +26,7 @@ import "src/styles/forms.css";
 			id="password-login"
 			required
 		/>
-		<IconForm type="no-view" />
+		<IconPassword />
 	</div>
 	<p>
 		<a href="/signin">¿Has olvidado tu contraseña?</a>
@@ -54,7 +54,7 @@ import "src/styles/forms.css";
 		e.preventDefault();
 
 		const data = Object.fromEntries(new FormData(e.target));
-		
+
 		console.log(data);
 	});
 </script>
