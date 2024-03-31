@@ -39,11 +39,7 @@ const { type } = Astro.props;
             z-index: 100;
             inset: 0;
 
-            &::after {
-                border-radius: 0;
-                animation: none;
-            }
-            &::before {
+            &::after,&::before {
                 border-radius: 0;
                 animation: none;
             }
@@ -70,28 +66,6 @@ const { type } = Astro.props;
             inset: 0;
             border-radius: 8px;
             animation: rotating 20s linear infinite;
-
-            body.red &{
-                background-image: repeating-conic-gradient(
-                    from var(--a),
-                    var(--red),
-                    var(--red),
-                    var(--red),
-                    var(--red),
-                    var(--red)
-                );
-            }
-
-            body.green &{
-                background-image: repeating-conic-gradient(
-                    from var(--a),
-                    var(--green),
-                    var(--green),
-                    var(--green),
-                    var(--green),
-                    var(--green)
-                );
-            }
         }
 
         &::after{
@@ -101,8 +75,22 @@ const { type } = Astro.props;
             border-radius: 8px;
             animation: rotating 20s linear infinite;
             filter: blur(5px);
+        }
+    }
 
-            body.red &{
+    body.red{
+        .background{
+            &::before{
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red),
+                    var(--red),
+                    var(--red),
+                    var(--red),
+                    var(--red)
+                );
+            }
+            &::after{
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--red-600),
@@ -111,13 +99,26 @@ const { type } = Astro.props;
                     var(--red)
                 );
             }
-
-            body.green &{
+        }
+    }
+    body.green{
+        .background{
+            &::before{
                 background-image: repeating-conic-gradient(
                     from var(--a),
-                    var(--green-600),
                     var(--green),
-                    var(--green-600),
+                    var(--green),
+                    var(--green),
+                    var(--green),
+                    var(--green)
+                );
+            }
+            &::after{
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-500),
+                    var(--green),
+                    var(--green-500),
                     var(--green)
                 );
             }

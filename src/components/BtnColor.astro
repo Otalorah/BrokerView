@@ -1,90 +1,75 @@
 ---
-const { text } = Astro.props;
+const { text, type } = Astro.props;
 ---
 
-<div class="background__btn">
-    <span class="backfill__btn"></span>
-    <button class="btn" id="submit" type="submit">{text}</button>
-</div>
+<button class=`btn ${type}` id="submit" type="submit">{text}</button>
 
 <style>
-    .background__btn {
+    button.btn {
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 4px;
-        height: 40px;
+        font-family: inherit;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+
+        width: 90%;
         margin: auto;
-        background-color: var(--bg-color-light);
+        border-radius: 4px;
 
-        &:hover {
-            background-color: var(--bg-color-light);
+        background-color: transparent;
 
-            body.red & {
-                border: 3px solid var(--red);
-            }
-            body.green & {
-                border: 3px solid var(--green);
-            }
+        body.red & {
+            border: 2px solid var(--red-800);
+            color: var(--red-700);
+        }
+        body.green & {
+            border: 2px solid var(--green-600);
+            color: var(--green-500);
+        }
+        html.light > body.red & {
+            border: 2px solid var(--red);
+            color: var(--red);
+        }
+        html.light > body.green & {
+            border: 2px solid var(--green);
+            color: var(--green);
         }
 
-        &:hover .backfill__btn {
-            display: block;
+        &.form {
+            max-width: 400px;
+            height: 40px;
+        }
+        &.change_password {
+            position: relative;
+            max-width: 100px;
+            height: 25px;
+            margin: 0;
+        }
 
+        &:hover {
+            body.red &,
+            body.green & {
+                color: var(--text-color-dark);
+            }
+
+            html.light > body.red &,
+            html.light > body.green & {
+                color: var(--text-color-dark);
+            }
             body.red & {
                 background-image: repeating-conic-gradient(
                     from var(--a),
-                    var(--red-600),
+                    var(--red-800),
                     var(--red)
                 );
             }
             body.green & {
+                color: var(--text-color-dark);
+
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--green-600),
                     var(--green)
                 );
-            }
-        }
-
-        &:hover .btn {
-            background-clip: text;
-            color: var(--text-color-dark);
-        }
-
-        html.light & {
-            background-color: var(--bg-color-dark);
-        }
-
-        .backfill__btn {
-            display: none;
-            height: 30px;
-            border-radius: 4px;
-            width: calc(100% - 4px);
-            background-color: var(--bg-color-dark);
-
-            html.light & {
-                background-color: var(--bg-color-light);
-            }
-        }
-
-        .btn {
-            display: block;
-            position: absolute;
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            letter-spacing: 1.5px;
-            z-index: 20;
-            height: 36px;
-            width: calc(100% - 4px);
-            color: var(--text-color-dark);
-            background-color: var(--bg-color-dark);
-
-            html.light & {
-                background-color: var(--bg-color-light);
-                color: var(--text-color-light);
             }
         }
     }

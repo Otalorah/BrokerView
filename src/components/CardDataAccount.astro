@@ -1,5 +1,5 @@
 ---
-import IconPassword from "@components/IconPassword.astro";
+import BtnColor from "@components/BtnColor.astro";
 
 interface Props {
     key: string;
@@ -17,8 +17,8 @@ const isPassword = key == "Contraseña" ? true : false;
     {
         isPassword ? (
             <span>
-                <input type="password" value={value} />
-                <IconPassword/>
+                <input type="password" value={value} readonly>
+                <BtnColor text="Cambiar" type="change_password"/>
             </span>
         ) : (
             <p>{value}</p>
@@ -65,16 +65,17 @@ const isPassword = key == "Contraseña" ? true : false;
 
         & > span {
             position: relative;
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
             input {
                 height: 19px;
 
-                font-family: "Russo One";
                 border: none;
                 color: inherit;
-                font-size: 1rem;
-
+                cursor: default;
+                font-size: 1.5rem;
                 background-color: transparent;
 
                 &:focus{

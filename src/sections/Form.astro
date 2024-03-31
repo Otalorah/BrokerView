@@ -19,11 +19,13 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
         display: grid;
         grid-template-columns: 1fr;
         grid-auto-rows: auto;
+
         padding: 20px;
         gap: 20px;
         border-radius: 8px;
         width: 100%;
         z-index: 50;
+
         color: var(--text-color-dark);
         background-color: var(--bg-color-dark);
 
@@ -48,7 +50,7 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
                     display: none;
                 }
 
-                .background__btn {
+                & .form__group:nth-child(7) {
                     grid-column: span 2;
                 }
             }

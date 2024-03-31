@@ -8,30 +8,36 @@ interface Props {
 const { text, textN, href } = Astro.props;
 ---
 
-<a class="text__link" data-astro-reload href={href}>{text} <strong>{textN}</strong></a>
+<a class="text__link" data-astro-reload href={href}
+    >{text} <strong>{textN}</strong></a
+>
 <style>
     .text__link {
         text-decoration: none;
         margin: 1.5rem auto;
         font-size: 1rem;
         color: var(--text-color-dark);
-    }
-    strong {
-        font-weight: 100;
-    }
-    body.red {
-        strong {
-            color: var(--red-light);
-        }
-    }
-    body.green {
-        strong {
-            color: var(--green);
-        }
-    }
-    html.light {
-        .text__link {
+
+        html.light & {
             color: var(--text-color-light);
+        }
+
+        strong {
+            font-weight: 100;
+
+            body.red &{
+                color: var(--red-700);
+            }
+            body.green &{
+                color: var(--green-600);
+            }
+
+            html.light > body.red & {
+                color: var(--red);
+            }
+            html.light > body.green & {
+                color: var(--green);
+            }
         }
     }
 </style>

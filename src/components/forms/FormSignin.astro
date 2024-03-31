@@ -1,6 +1,6 @@
 ---
-import BtnColor from "../BtnColor.astro";
-import InputSignin from "./InputSignin.astro";
+import BtnColor from "@components/BtnColor.astro";
+import InputSignin from "@components/forms/InputSignin.astro";
 
 import "src/styles/forms.css";
 ---
@@ -28,19 +28,11 @@ import "src/styles/forms.css";
     text="Confirmar contraseña:"
     textError="Las contraseñas no coinciden"
 />
-<div class="form__group-btn">
-    <BtnColor text="INGRESAR" />
+<div class="form__group">
+    <BtnColor text="INGRESAR" type="form" />
 </div>
 
-<style>
-    .form__group {
-        &.btn {
-            width: 90%;
-            max-width: 400px;
-        }
-    }
-</style>
-<script>
+<script is:inline>
     const expressions = {
         user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
         name: /^[a-zA-ZÀ-ÿ]{3,}( [a-zA-ZÀ-ÿ]{3,})? ?$/,
@@ -98,10 +90,8 @@ import "src/styles/forms.css";
         }
     };
 
-    const $groupPassword = document.getElementById(
-            `group__password`,
-        ) as HTMLElement,
-        $textError = document.querySelector(".form__error") as HTMLElement;
+    const $groupPassword = document.getElementById(`group__password`),
+        $textError = document.querySelector(".form__error");
 
     function validatePassword(value) {
         if (
@@ -143,18 +133,10 @@ import "src/styles/forms.css";
         }
     }
 
-    const $inputPassword1 = document.getElementById(
-            "password",
-        ) as HTMLInputElement,
-        $inputPassword2 = document.getElementById(
-            "password2",
-        ) as HTMLInputElement,
-        $groupPassword2 = document.getElementById(
-            `group__password2`,
-        ) as HTMLElement,
-        $textError2 = document.querySelectorAll(
-            ".form__error",
-        )[1] as HTMLElement;
+    const $inputPassword1 = document.getElementById("password"),
+        $inputPassword2 = document.getElementById("password2"),
+        $groupPassword2 = document.getElementById(`group__password2`),
+        $textError2 = document.querySelectorAll(".form__error")[1];
 
     function validatePassword2() {
         if ($inputPassword1.value !== $inputPassword2.value) {
@@ -196,7 +178,7 @@ import "src/styles/forms.css";
             fields.email;
 
         if (formComplete) {
-            const data = Object.fromEntries(new FormData(this));
+            const data = Object.fromEntries(new FormData(e.target));
 
             console.log(data);
         }

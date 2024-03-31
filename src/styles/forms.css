@@ -30,7 +30,7 @@
         letter-spacing: 1px;
         margin-top: 0.4rem; 
         font-size: 0.7rem;
-        color: var(--red-light);
+        color: var(--red-600);
     }
 }
 @media screen and (666px < width){
@@ -43,11 +43,11 @@
 }
 .form__group-wrong {
     .form__label {
-        color: var(--red-light);
+        color: var(--red-600);
     }
     .form__group-input {
         .form__input {
-            border: 2px solid var(--red-light);
+            border: 2px solid var(--red-600);
         }
         .status_icon {
             opacity: 1;
@@ -56,15 +56,15 @@
 }
 .form__group-correct {
     .form__label {
-        color: var(--green-light);
+        color: var(--green-600);
     }
     .form__group-input {
         .form__input {
-            border: 2px solid var(--green-light);
+            border: 2px solid var(--green-600);
         }
         .status_icon {
             opacity: 1;
         }
     }
 }
-html.light{.form__input{background-color: #b8b8b8;}}
+html.light{.form__input{background-color: #c9c9c9;}}

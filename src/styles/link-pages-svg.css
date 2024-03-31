@@ -19,16 +19,20 @@
     }
 }
 
-
 body.red {
-    svg {
-        fill: var(--red-light);
-    }
+    .link-page{
+        svg {
+            fill: var(--red-600);
+        }
+    }   
 }
 body.green {
-    svg {
-        fill: var(--green-light);
-    }
+    .link-page{
+        svg {
+            fill: var(--green-600);
+        }
+    }   
+    
 }
 html.light {
     .link-page{
