@@ -66,25 +66,13 @@ const { type } = Astro.props;
 
         &::before{
             content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
-                animation: rotating 20s linear infinite;
-        }
-        &::after{
-            content: "";
-                position: absolute;
-                inset: 0;
-                border-radius: 8px;
-                animation: rotating 20s linear infinite;
-                filter: blur(5px);
-        }
-    }
-    body.red {
-        .background {
-            &::before {
-                
-                background: repeating-conic-gradient(
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            animation: rotating 20s linear infinite;
+
+            body.red &{
+                background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--red),
                     var(--red),
@@ -94,21 +82,8 @@ const { type } = Astro.props;
                 );
             }
 
-            &::after {
-                background: repeating-conic-gradient(
-                    from var(--a),
-                    var(--red-light),
-                    var(--red),
-                    var(--red-light),
-                    var(--red)
-                );
-            }
-        }
-    }
-    body.green {
-        .background {
-            &::before {
-                background: repeating-conic-gradient(
+            body.green &{
+                background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--green),
                     var(--green),
@@ -117,13 +92,32 @@ const { type } = Astro.props;
                     var(--green)
                 );
             }
+        }
 
-            &::after {
-                background: repeating-conic-gradient(
+        &::after{
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            animation: rotating 20s linear infinite;
+            filter: blur(5px);
+
+            body.red &{
+                background-image: repeating-conic-gradient(
                     from var(--a),
-                    var(--green-light),
+                    var(--red-600),
+                    var(--red),
+                    var(--red-600),
+                    var(--red)
+                );
+            }
+
+            body.green &{
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-600),
                     var(--green),
-                    var(--green-light),
+                    var(--green-600),
                     var(--green)
                 );
             }

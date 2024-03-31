@@ -14,23 +14,47 @@ const { text } = Astro.props;
         justify-content: center;
         align-items: center;
         border-radius: 4px;
-        width: 90%;
-        max-width: 400px;
         height: 40px;
         margin: auto;
         background-color: var(--bg-color-light);
 
         &:hover {
             background-color: var(--bg-color-light);
+
+            body.red & {
+                border: 3px solid var(--red);
+            }
+            body.green & {
+                border: 3px solid var(--green);
+            }
         }
 
         &:hover .backfill__btn {
             display: block;
+
+            body.red & {
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red-600),
+                    var(--red)
+                );
+            }
+            body.green & {
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-600),
+                    var(--green)
+                );
+            }
         }
 
         &:hover .btn {
             background-clip: text;
             color: var(--text-color-dark);
+        }
+
+        html.light & {
+            background-color: var(--bg-color-dark);
         }
 
         .backfill__btn {
@@ -39,6 +63,10 @@ const { text } = Astro.props;
             border-radius: 4px;
             width: calc(100% - 4px);
             background-color: var(--bg-color-dark);
+
+            html.light & {
+                background-color: var(--bg-color-light);
+            }
         }
 
         .btn {
@@ -53,46 +81,10 @@ const { text } = Astro.props;
             width: calc(100% - 4px);
             color: var(--text-color-dark);
             background-color: var(--bg-color-dark);
-        }
-    }
-    html.light {
-        .background__btn {
-            background-color: var(--bg-color-dark);
 
-            .backfill__btn {
-                background-color: var(--bg-color-light);
-            }
-            .btn {
+            html.light & {
                 background-color: var(--bg-color-light);
                 color: var(--text-color-light);
-            }
-        }
-    }
-    body.red {
-        .background__btn {
-            &:hover {
-                border: 3px solid var(--red);
-            }
-            &:hover .backfill__btn {
-                background: repeating-conic-gradient(
-                    from var(--a),
-                    var(--red-light),
-                    var(--red)
-                );
-            }
-        }
-    }
-    body.green {
-        .background__btn {
-            &:hover {
-                border: 3px solid var(--green);
-            }
-            &:hover .backfill__btn {
-                background: repeating-conic-gradient(
-                    from var(--a),
-                    var(--green-light),
-                    var(--green)
-                );
             }
         }
     }

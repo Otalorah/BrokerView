@@ -28,14 +28,25 @@ import "src/styles/forms.css";
     text="Confirmar contraseña:"
     textError="Las contraseñas no coinciden"
 />
-<BtnColor text="CONFIRMAR" />
-<script is:inline>
+<div class="form__group-btn">
+    <BtnColor text="INGRESAR" />
+</div>
+
+<style>
+    .form__group {
+        &.btn {
+            width: 90%;
+            max-width: 400px;
+        }
+    }
+</style>
+<script>
     const expressions = {
         user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
         name: /^[a-zA-ZÀ-ÿ]{3,}( [a-zA-ZÀ-ÿ]{3,})? ?$/,
         lastname: /^[a-zA-ZÀ-ÿ]{3,} ?$/,
         password: /^[\wÀ-ÿ\W]{6,}$/,
-        especial: /[°!"#$&()=@\?¡%&\+\/\{\}\*\[\]]/,
+        characterEspecial: /[°!"#$&()=@\?¡%&\+\/\{\}\*\[\]]/,
         email: /^[a-zA-Z0-9\._%+-]{3,}@[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/,
     };
 
@@ -47,8 +58,11 @@ import "src/styles/forms.css";
         password: false,
         email: false,
     };
+
     // MediaQuery for desktop
-    if (window.innerWidth > 666) {
+    const desktopDevice = window.innerWidth > 666;
+
+    if (desktopDevice) {
         document.getElementById("label-lastname").innerText = "Apellidos";
         document.getElementById("group__lastname2").remove();
         expressions.lastname = /^[a-zA-ZÀ-ÿ]{3,} [a-zA-ZÀ-ÿ]{3,} ?$/;
@@ -75,28 +89,7 @@ import "src/styles/forms.css";
                 validateField(expressions.email, e.target, "email");
                 break;
             case "password":
-                (() => {
-                    const $groupPassword =
-                            document.getElementById(`group__password`),
-                        $textError = document.querySelector(".form__error");
-
-                    if (
-                        expressions.password.test(e.target.value) &
-                        expressions.especial.test(e.target.value)
-                    ) {
-                        $groupPassword.classList.remove("form__group-wrong");
-                        $groupPassword.classList.add("form__group-correct");
-                        if (window.innerWidth > 666)
-                            $textError.style.opacity = "0";
-                        else $textError.style.display = "none";
-                    } else {
-                        $groupPassword.classList.add("form__group-wrong");
-                        $groupPassword.classList.remove("form__group-correct");
-                        if (window.innerWidth > 666)
-                            $textError.style.opacity = "1";
-                        else $textError.style.display = "block";
-                    }
-                })();
+                validatePassword(e.target.value);
                 validatePassword2();
                 break;
             case "password2":
@@ -105,43 +98,83 @@ import "src/styles/forms.css";
         }
     };
 
-    const validateField = (expression, input, field) => {
+    const $groupPassword = document.getElementById(
+            `group__password`,
+        ) as HTMLElement,
+        $textError = document.querySelector(".form__error") as HTMLElement;
+
+    function validatePassword(value) {
+        if (
+            expressions.password.test(value) &&
+            expressions.characterEspecial.test(value)
+        ) {
+            $groupPassword.classList.remove("form__group-wrong");
+            $groupPassword.classList.add("form__group-correct");
+
+            if (desktopDevice) $textError.style.opacity = "0";
+            else $textError.style.display = "none";
+        } else {
+            $groupPassword.classList.add("form__group-wrong");
+            $groupPassword.classList.remove("form__group-correct");
+
+            if (desktopDevice) $textError.style.opacity = "1";
+            else $textError.style.display = "block";
+        }
+    }
+
+    function validateField(expression, input, field) {
         const $groupInput = document.getElementById(`group__${field}`);
         const $svg = document.getElementById(`${field}_svg`);
 
         if (expression.test(input.value)) {
             $groupInput.classList.remove("form__group-wrong");
             $groupInput.classList.add("form__group-correct");
+
             $svg.setAttribute("src", "src/icons/check.svg");
+
             fields[field] = true;
         } else {
             $groupInput.classList.add("form__group-wrong");
             $groupInput.classList.remove("form__group-correct");
+
             $svg.setAttribute("src", "src/icons/error.svg");
+
             fields[field] = false;
         }
-    };
+    }
 
-    const validatePassword2 = () => {
-        const $inputPassword1 = document.getElementById("password"),
-            $inputPassword2 = document.getElementById("password2"),
-            $groupPassword2 = document.getElementById(`group__password2`),
-            $textError = document.querySelectorAll(".form__error")[1];
+    const $inputPassword1 = document.getElementById(
+            "password",
+        ) as HTMLInputElement,
+        $inputPassword2 = document.getElementById(
+            "password2",
+        ) as HTMLInputElement,
+        $groupPassword2 = document.getElementById(
+            `group__password2`,
+        ) as HTMLElement,
+        $textError2 = document.querySelectorAll(
+            ".form__error",
+        )[1] as HTMLElement;
 
+    function validatePassword2() {
         if ($inputPassword1.value !== $inputPassword2.value) {
             $groupPassword2.classList.add("form__group-wrong");
             $groupPassword2.classList.remove("form__group-correct");
-            if (window.innerWidth > 666) $textError.style.opacity = "1";
-            else $textError.style.display = "block";
+
+            if (desktopDevice) $textError2.style.opacity = "1";
+            else $textError2.style.display = "block";
+
             fields["password"] = false;
         } else {
             $groupPassword2.classList.remove("form__group-wrong");
             $groupPassword2.classList.add("form__group-correct");
-            if (window.innerWidth > 666) $textError.style.opacity = "0";
-            else $textError.style.display = "none";
+
+            if (desktopDevice) $textError2.style.opacity = "0";
+            else $textError2.style.display = "none";
+
             fields["password"] = true;
         }
-    };
+    }
 
     const $inputs = document.querySelectorAll(".form__input");
 
@@ -155,15 +188,15 @@ import "src/styles/forms.css";
         e.preventDefault();
 
         let formComplete =
-            fields.name &
-            fields.lastname &
-            fields.lastname2 &
-            fields.user &
-            fields.password &
+            fields.name &&
+            fields.lastname &&
+            fields.lastname2 &&
+            fields.user &&
+            fields.password &&
             fields.email;
 
         if (formComplete) {
-            const data = Object.fromEntries(new FormData(e.target));
+            const data = Object.fromEntries(new FormData(this));
 
             console.log(data);
         }
