@@ -5,7 +5,7 @@ import InputSignin from "@components/forms/InputSignin.astro";
 import "src/styles/forms.css";
 ---
 
-<InputSignin id="user" type="text" text="Usuario:" />
+<InputSignin id="username" type="text" text="Usuario:" />
 
 <InputSignin id="lastname" type="text" text="1° Apellido:" />
 
@@ -33,6 +33,16 @@ import "src/styles/forms.css";
 </div>
 
 <script is:inline>
+    // MediaQuery for desktop
+
+    if (window.innerWidth > 666) {
+        document.getElementById("label-lastname").innerText = "Apellidos";
+        document.getElementById("group__lastname2").remove();
+    }
+</script>
+<script is:inline type="module">
+    import { Create_user } from "./src/scripts/sendDataSignin";
+
     const expressions = {
         user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
         name: /^[a-zA-ZÀ-ÿ]{3,}( [a-zA-ZÀ-ÿ]{3,})? ?$/,
@@ -43,11 +53,12 @@ import "src/styles/forms.css";
     };
 
     const fields = {
-        user: false,
+        username: false,
         name: false,
         lastname: false,
         lastname2: false,
         password: false,
+        password2: false,
         email: false,
     };
 
@@ -55,18 +66,15 @@ import "src/styles/forms.css";
     const desktopDevice = window.innerWidth > 666;
 
     if (desktopDevice) {
-        document.getElementById("label-lastname").innerText = "Apellidos";
-        document.getElementById("group__lastname2").remove();
         expressions.lastname = /^[a-zA-ZÀ-ÿ]{3,} [a-zA-ZÀ-ÿ]{3,} ?$/;
         fields.lastname2 = true;
     }
-
     // - - - - - - - - - - - - - - - - - - - - - - - Funtions Validations - - - - - - - - - - - - - - - - - - -
 
     const validateForm = (e) => {
         switch (e.target.name) {
-            case "user":
-                validateField(expressions.user, e.target, "user");
+            case "username":
+                validateField(expressions.user, e.target, "username");
                 break;
             case "name":
                 validateField(expressions.name, e.target, "name");
@@ -100,12 +108,14 @@ import "src/styles/forms.css";
         ) {
             $groupPassword.classList.remove("form__group-wrong");
             $groupPassword.classList.add("form__group-correct");
+            fields["password"] = true;
 
             if (desktopDevice) $textError.style.opacity = "0";
             else $textError.style.display = "none";
         } else {
             $groupPassword.classList.add("form__group-wrong");
             $groupPassword.classList.remove("form__group-correct");
+            fields["password"] = false;
 
             if (desktopDevice) $textError.style.opacity = "1";
             else $textError.style.display = "block";
@@ -146,7 +156,7 @@ import "src/styles/forms.css";
             if (desktopDevice) $textError2.style.opacity = "1";
             else $textError2.style.display = "block";
 
-            fields["password"] = false;
+            fields["password2"] = false;
         } else {
             $groupPassword2.classList.remove("form__group-wrong");
             $groupPassword2.classList.add("form__group-correct");
@@ -154,7 +164,7 @@ import "src/styles/forms.css";
             if (desktopDevice) $textError2.style.opacity = "0";
             else $textError2.style.display = "none";
 
-            fields["password"] = true;
+            fields["password2"] = true;
         }
     }
 
@@ -165,7 +175,7 @@ import "src/styles/forms.css";
         input.addEventListener("blur", validateForm);
     });
 
-    // - - -- - - - - - - - - - - - - - - - - - SEND DATA FORM LOGIN - - - - - - - - - - - - - - - - - - - - - - -
+    // - - -- - - - - - - - - - - - - - - - - - SEND DATA FORM SIGNIN - - - - - - - - - - - - - - - - - - - - - - -
     document.getElementById("form-signin").addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -173,14 +183,15 @@ import "src/styles/forms.css";
             fields.name &&
             fields.lastname &&
             fields.lastname2 &&
-            fields.user &&
+            fields.username &&
             fields.password &&
+            fields.password2 &&
             fields.email;
 
         if (formComplete) {
             const data = Object.fromEntries(new FormData(e.target));
 
-            console.log(data);
+            Create_user(data);
         }
     });
 </script>
