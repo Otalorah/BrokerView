@@ -11,7 +11,7 @@ import "src/styles/forms.css";
 		class="form__input"
 		type="text"
 		id="user-login"
-		name="user"
+		name="username"
 		required
 	/>
 </div>
@@ -34,7 +34,7 @@ import "src/styles/forms.css";
 </div>
 
 <div class="form__group">
-	<BtnColor text="INGRESAR" type="form"/>
+	<BtnColor text="INGRESAR" type="form" />
 </div>
 <style>
 	p {
@@ -49,12 +49,14 @@ import "src/styles/forms.css";
 		}
 	}
 </style>
-<script is:inline>
-	document.querySelector(".form-login").addEventListener("submit", (e) => {
+<script is:inline type="module">
+	import { Login } from "./src/scripts/usersAPI";
+
+	document.getElementById("form-login").addEventListener("submit", (e) => {
 		e.preventDefault();
 
-		const data = Object.fromEntries(new FormData(e.target));
+		const data = new FormData(e.target);
 
-		console.log(data);
+		Login(data);
 	});
 </script>

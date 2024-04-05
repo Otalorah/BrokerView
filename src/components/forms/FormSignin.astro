@@ -41,7 +41,7 @@ import "src/styles/forms.css";
     }
 </script>
 <script is:inline type="module">
-    import { Create_user } from "./src/scripts/sendDataSignin";
+    import { Create } from "./src/scripts/usersAPI";
 
     const expressions = {
         user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
@@ -191,7 +191,9 @@ import "src/styles/forms.css";
         if (formComplete) {
             const data = Object.fromEntries(new FormData(e.target));
 
-            Create_user(data);
+            delete data.password2;
+
+            Create(data);
         }
     });
 </script>
