@@ -5,15 +5,15 @@ import BrokerLogo from "@components/BrokerLogo.astro";
 import HamburgerMenu from "@components/HamburgerMenu.astro";
 
 interface Props {
-    isForm: boolean;
+    hasFooter: boolean;
 }
 
-const { isForm } = Astro.props;
+const { hasFooter } = Astro.props;
 ---
 
 <BackgroundColors type="navBar">
 
-    {!isForm && <HamburgerMenu />}
+    {!hasFooter && <HamburgerMenu />}
 
     <nav class="navBar">
         <BrokerLogo />

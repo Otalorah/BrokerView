@@ -1,0 +1,29 @@
+---
+import Layout from "@layouts/Layout.astro";
+import BtnColor from "@components/BtnColor.astro";
+---
+
+<Layout title="No se encontro la página" hasFooter={true}>
+    <main>
+        <h1>No se encontró la pagina</h1>
+        <a href="/" aria-label="Volver a la pagina principal">
+            <BtnColor text="Volver al inicio" type="form" />
+        </a>
+    </main>
+</Layout>
+<style>
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        height: 100vh;
+        gap: 2rem;
+
+        a {
+            height: auto;
+            width: 400px;
+        }
+    }
+</style>
