@@ -4,6 +4,9 @@ import MenuToggle from "@sections/MenuToggle.astro";
 import DataAccount from "@components/DataAccount.astro";
 
 import "@styles/main-content.css";
+
+const token = Astro.cookies.get('jwt').value
+
 ---
 
 <Layout title="BrokerView | Cuenta" isForm={false}>

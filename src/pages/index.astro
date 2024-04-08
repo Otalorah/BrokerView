@@ -2,6 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import Form from "@sections/Form.astro";
 import TextLink from "@sections/TextLink.astro";
+
+export const prerender = true;
 ---
 
 <Layout title="BrokerView" isForm={true}>
@@ -10,7 +12,7 @@ import TextLink from "@sections/TextLink.astro";
 
 		<Form type="login" />
 		<TextLink
-			href="./signin"
+			href="/signin"
 			text="¿No tiene una cuenta?"
 			textN="Crear cuenta"
 		/>
@@ -22,8 +24,3 @@ import TextLink from "@sections/TextLink.astro";
 		margin-bottom: 2rem;
 	}
 </style>
-<script>
-	if (document.cookie) {
-		document.location.assign("/inicio");
-	}
-</script>

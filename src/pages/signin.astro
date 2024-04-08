@@ -2,6 +2,8 @@
 import TextLink from "src/sections/TextLink.astro";
 import Form from "src/sections/Form.astro";
 import Layout from "@layouts/Layout.astro";
+
+export const prerender = true;
 ---
 
 <Layout title="BrokerView | Registro" isForm={true}>
@@ -11,7 +13,7 @@ import Layout from "@layouts/Layout.astro";
         <Form type="signin" />
 
         <TextLink
-            href="../"
+            href="/"
             text="¿Ya tiene una cuenta?"
             textN="Iniciar sesión"
         />

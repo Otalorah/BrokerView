@@ -4,6 +4,9 @@ import TitlesWelcome from "@components/TitlesWelcome.astro";
 import MenuToggle from "@sections/MenuToggle.astro";
 
 import "@styles/main-content.css";
+
+const token = Astro.cookies.get('jwt').value
+
 ---
 
 <Layout title="BrokerView | Inicio" isForm={false}>

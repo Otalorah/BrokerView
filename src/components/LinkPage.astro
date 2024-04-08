@@ -1,0 +1,27 @@
+---
+import "@styles/link-pages-svg.css";
+
+const { page } = Astro.props;
+
+const href = page.toLowerCase();
+---
+
+<li class="link-page" id={href}>
+    <a href={href} aria-label=`Ir a ${page}`>
+        <slot />
+        <p>{page}</p>
+    </a>
+</li>
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const path = window.location.pathname;
+        const page = path.slice(1);
+
+        document.querySelectorAll(".link-page").forEach((li) => {
+            li.classList.remove("selected");
+            if (li.id == page) {
+                li.classList.add("selected");
+            }
+        });
+    });
+</script>

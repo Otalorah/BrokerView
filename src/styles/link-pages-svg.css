@@ -1,6 +1,35 @@
 .link-page{
+    position: relative;
     list-style: none;
     text-decoration: none;
+
+    padding: 5px;
+    padding-right: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+    &.selected{
+        &::after,
+        &::before{
+            content: '';
+            background-color: transparent;
+            position: absolute;
+            right: 0;
+            width: 10px;
+            height: 10px;
+        }
+
+        &::before{
+            top: -10px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 2px 2px 0 2px inherit;
+        }
+        &::after{
+            bottom: -10px;
+            border-top-right-radius: 50px;
+            box-shadow: 2px -2px 0 2px inherit;
+        }
+    }
 
     a{
         position: relative;
@@ -17,10 +46,30 @@
         letter-spacing: 2px;
         color: var(--text-color-dark);
     }
+    svg{
+        fill: var(--bg-color-dark)
+    }
 }
-
 body.red {
     .link-page{
+        &.selected {
+            background-color: var(--red-700);
+        
+            &::before{
+                box-shadow: 2px 2px 0 2px var(--red-700);
+            }
+            &::after{   
+                box-shadow: 2px -2px 0 2px var(--red-700);
+            }
+
+            svg {
+                fill: var(--bg-color-dark)
+            }
+        
+            p {
+                color: var(--bg-color-dark);
+            }
+        }
         svg {
             fill: var(--red-600);
         }
@@ -28,18 +77,48 @@ body.red {
 }
 body.green {
     .link-page{
+        &.selected {
+            background-color: var(--green-600);
+        
+            &::before{
+                box-shadow: 2px 2px 0 2px var(--green-600);
+            }
+            &::after{   
+                box-shadow: 2px -2px 0 2px var(--green-600);
+            }
+            svg {
+                fill: var(--bg-color-dark)
+            }
+        
+            p {
+                color: var(--bg-color-dark);
+            }
+        }
         svg {
             fill: var(--green-600);
         }
     }   
     
 }
+
 html.light {
+    body.red .link-page.selected svg,
+    body.green .link-page.selected svg 
+    {
+        fill: var(--bg-color-light);
+    }
+    
+    body.red .link-page.selected p,
+    body.green .link-page.selected p 
+    {
+        color: var(--bg-color-light);
+    }
+
     .link-page{
         background-color: var(---bg-color-light);
-        
+
         p{
-         color: var(--text-color-light);
+            color: var(--text-color-light);
         }
     }
 }

@@ -3,6 +3,9 @@ import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@sections/MenuToggle.astro";
 
 import "@styles/main-content.css";
+
+const token = Astro.cookies.get('jwt').value
+
 ---
 
 <Layout title="BrokerView | Fondo" isForm={false}>

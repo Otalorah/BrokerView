@@ -1,19 +1,57 @@
 ---
-import ChartSVG from "@components/svg/ChartSVG.astro";
-import HouseSVG from "@components/svg/HouseSVG.astro";
-import PiggySVG from "@components/svg/PiggySVG.astro";
-import UserSVG from "@components/svg/UserSVG.astro";
-
-import "@styles/link-pages-svg.css";
+import LinkPage from "@components/LinkPage.astro";
 ---
 
 <div id="background__menu-toggle"></div>
 <aside id="menu-toggle" transition:persist>
     <ul>
-        <HouseSVG />
-        <ChartSVG />
-        <PiggySVG />
-        <UserSVG />
+        <LinkPage page="Inicio">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+                width="23"
+                height="23"
+                ><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                    d="M576 256c0 18-15 32-32 32h-32v184c0 22-18 40-40 40h-80c-22 0-40-18-40-40v-88c0-18-14-32-32-32h-64c-18 0-32 14-32 32v88c0 22-18 40-40 40h-80c-22 0-40-18-40-40V288H32c-18 0-32-14-32-32 0-9 3-17 10-24L266 8c7-7 15-8 22-8s15 2 21 7l256 225c8 7 12 15 11 24z"
+                ></path>
+            </svg>
+        </LinkPage>
+        <LinkPage page="Broker">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                width="23"
+                height="23"
+                ><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                    d="M160 80c0-26 22-48 48-48h32c27 0 48 22 48 48v352c0 27-21 48-48 48h-32c-26 0-48-21-48-48V80zM0 272c0-26 22-48 48-48h32c27 0 48 22 48 48v160c0 27-21 48-48 48H48c-26 0-48-21-48-48V272zM368 96h32c27 0 48 22 48 48v288c0 27-21 48-48 48h-32c-26 0-48-21-48-48V144c0-26 22-48 48-48z"
+                ></path></svg
+            >
+        </LinkPage>
+        <LinkPage page="Fondo">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+                width="23"
+                height="23"
+                ><path
+                    d="M400 96v1l-16-1H256c-16 0-32 2-48 6v-6a96 96 0 0 1 192 0zm-16 32a178 178 0 0 1 23 2c18-21 44-34 73-34h12c10 0 18 10 15 20l-14 55c16 15 29 33 38 53h13c18 0 32 14 32 32v96c0 18-14 32-32 32h-32c-9 12-20 23-32 32v64c0 18-14 32-32 32h-32c-18 0-32-14-32-32v-32H256v32c0 18-14 32-32 32h-32c-18 0-32-14-32-32v-64c-35-26-59-66-63-112H68a68 68 0 1 1 0-136h4a24 24 0 1 1 0 48h-4c-11 0-20 9-20 20s9 20 20 20h31a160 160 0 0 1 157-128h128zm64 136a24 24 0 1 0-48 0 24 24 0 1 0 48 0z"
+                ></path></svg
+            >
+        </LinkPage>
+        <LinkPage page="Cuenta">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                width="23"
+                height="23"
+                ><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                <path
+                    d="M224 256a128 128 0 1 0 0-256 128 128 0 1 0 0 256zm-46 48C80 304 0 384 0 482c0 17 13 30 30 30h388c17 0 30-13 30-30 0-98-80-178-178-178h-92z"
+                ></path></svg
+            >
+        </LinkPage>
     </ul>
 </aside>
 
@@ -38,7 +76,6 @@ import "@styles/link-pages-svg.css";
         position: fixed;
 
         justify-content: start;
-        align-items: start;
         flex-direction: column;
         gap: 2rem;
         padding-top: 2rem;
@@ -56,14 +93,14 @@ import "@styles/link-pages-svg.css";
     }
     body.red {
         #menu-toggle {
-            box-shadow: 1px 0px 5px var(--red);
-            border-right: 1px solid var(--red);
+            box-shadow: 1px 0px 5px var(--red-700);
+            border-right: 5px solid var(--red-700);
         }
     }
     body.green {
         #menu-toggle {
-            box-shadow: 1px 0px 5px var(--green);
-            border-right: 1px solid var(--green);
+            box-shadow: 1px 0px 5px var(--green-600);
+            border-right: 5px solid var(--green-600);
         }
     }
     html.light {
@@ -81,13 +118,11 @@ import "@styles/link-pages-svg.css";
             }
         }
         #menu-toggle {
-            grid-area: aside;
-
             top: 55.5px;
 
             display: flex;
-            width: 44px;
-            padding-left: 10px;
+            width: 50px;
+            padding-left: 5px;
             padding-top: 1rem;
 
             svg ~ p {
@@ -96,14 +131,16 @@ import "@styles/link-pages-svg.css";
 
             &.expanded {
                 width: 200px;
+
                 svg ~ p {
                     display: block;
                 }
+                
             }
         }
     }
 </style>
-<script is:inline>
+<script>
     let newWidth = window.innerWidth;
     if (newWidth < 666) {
         const link = document.querySelectorAll(".link-page");

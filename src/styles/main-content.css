@@ -1,5 +1,5 @@
 main{
-    --margin-close: 43px;
+    --margin-close: 49px;
     --margin-open: 200px;
 
     margin-left: var(--margin-close);

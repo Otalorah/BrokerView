@@ -47,14 +47,3 @@ else text = "Buenas noches";
         }
     }
 </style>
-<script>
-    import {getUser} from 'src/scripts/usersAPI'
-
-    const cookie = document.cookie;
-    const token = cookie.split("=")[1];
-
-    const data = await getUser(token);
-
-    console.log(data)
-    
-</script>
