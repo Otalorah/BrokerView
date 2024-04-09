@@ -5,8 +5,9 @@ import MenuToggle from "@sections/MenuToggle.astro";
 
 import "@styles/main-content.css";
 
-const token = Astro.cookies.get('jwt').value
-
+if (Astro.cookies.get("isLogin").value != "true") {
+    return Astro.redirect("/");
+}
 ---
 
 <Layout title="BrokerView | Inicio" hasFooter={false}>

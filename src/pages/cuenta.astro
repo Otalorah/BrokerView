@@ -5,15 +5,29 @@ import DataAccount from "@components/DataAccount.astro";
 
 import "@styles/main-content.css";
 
-const token = Astro.cookies.get('jwt').value
+// import { GetUser } from "src/scripts/usersAPI";
 
+// if (Astro.cookies.get("isLogin").value != "true") {
+//     return Astro.redirect("/");
+// }
+
+const token = Astro.cookies.get("jwt").value;
+// const user = await GetUser(token);
+
+
+// if (user.detail == 'No autorizado'){
+//     Astro.cookies.set("isLogin",'false');
+//     return Astro.redirect('/')
+// }
+
+let user = {"username":"juan","name":"manuel"}
 ---
 
 <Layout title="BrokerView | Cuenta" hasFooter={false}>
     <MenuToggle />
     <main>
         <h1>Cuenta</h1>
-        <DataAccount />
+        <DataAccount user={user} />
     </main>
 </Layout>
 <style>

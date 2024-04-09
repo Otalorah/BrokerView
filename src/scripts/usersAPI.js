@@ -1,9 +1,12 @@
-function createCookie(data) {
+function createCookieJWT(data) {
     const token = data.token.access_token;
     document.cookie = "jwt=" + token;
 }
+function createCookieLogin() {
+    document.cookie = "isLogin=true";
+}
 
-export async function Create(data) {
+export async function CreateUser(data) {
 
     const bodyContent = JSON.stringify(data);
 
@@ -18,14 +21,15 @@ export async function Create(data) {
         })
 
         const data = await res.json()
-        createCookie(data)
+        createCookieJWT(data)
+        createCookieLogin()
         window.location.href = data.redirect
 
     } catch (e) {
         console.log(e)
     }
 }
-export async function Login(data) {
+export async function LoginUser(data) {
 
     const bodyContent = new URLSearchParams(data).toString();
 
@@ -39,21 +43,21 @@ export async function Login(data) {
         });
 
         const data = await res.json()
-        createCookie(data)
+        createCookieJWT(data)
+        createCookieLogin()
         window.location.href = data.redirect
 
     } catch (e) {
         console.log(e)
     }
 }
-export async function getUser(token){
-    const res = await fetch("http://127.0.0.1:8000/user", {
+export async function GetUser(token) {
+    return new Promise((resolve, reject) => {
+        fetch("http://127.0.0.1:8000/user", {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-    const data = await res.json();
-    
-    return data
+                Authorization: `Bearer ${token}`
+            }
+        }).then(response => { return response.json() }).then(data => resolve(data)).catch(e => reject(e))
+    })
 }

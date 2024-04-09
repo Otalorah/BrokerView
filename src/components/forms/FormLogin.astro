@@ -50,13 +50,13 @@ import "src/styles/forms.css";
 	}
 </style>
 <script is:inline type="module">
-	import { Login } from "./src/scripts/usersAPI";
+	import { LoginUser } from "./src/scripts/usersAPI";
 
 	document.getElementById("form-login").addEventListener("submit", (e) => {
 		e.preventDefault();
 
 		const data = new FormData(e.target);
 
-		Login(data);
+		LoginUser(data);
 	});
 </script>

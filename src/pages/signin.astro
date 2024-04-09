@@ -3,7 +3,9 @@ import TextLink from "src/sections/TextLink.astro";
 import Form from "src/sections/Form.astro";
 import Layout from "@layouts/Layout.astro";
 
-export const prerender = true;
+if (Astro.cookies.get("isLogin").value == "true") {
+    return Astro.redirect("/inicio");
+}
 ---
 
 <Layout title="BrokerView | Registro" hasFooter={true}>

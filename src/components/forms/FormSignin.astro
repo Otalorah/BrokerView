@@ -41,7 +41,7 @@ import "src/styles/forms.css";
     }
 </script>
 <script is:inline type="module">
-    import { Create } from "./src/scripts/usersAPI";
+    import { CreateUser } from "./src/scripts/usersAPI";
 
     const expressions = {
         user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
@@ -193,7 +193,7 @@ import "src/styles/forms.css";
 
             delete data.password2;
 
-            Create(data);
+            CreateUser(data);
         }
     });
 </script>
