@@ -4,14 +4,22 @@ import "@styles/link-pages-svg.css";
 const { page } = Astro.props;
 
 const href = page.toLowerCase();
+const isLogout = page == 'logout';
 ---
-
-<li class="link-page" id={href}>
+{
+    isLogout ? 
+    <li class="link-page" id={href}>
+        <slot />
+        <p>Cerrar sesión</p>
+    </li>
+    :
+    (<li class="link-page" id={href}>
     <a href={href} aria-label=`Ir a ${page}`>
         <slot />
         <p>{page}</p>
-    </a>
-</li>
+    </a> 
+    </li>)
+}
 <script>
     document.addEventListener("astro:page-load", () => {
         const path = window.location.pathname;
@@ -24,4 +32,7 @@ const href = page.toLowerCase();
             }
         });
     });
+    document.getElementById('logout').addEventListener('click',()=>{
+        document.getElementById('menu-toggle').classList.toggle('modal-open');
+    })
 </script>

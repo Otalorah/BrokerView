@@ -5,9 +5,9 @@ import BtnColor from "@components/BtnColor.astro";
 
 <Layout title="No se encontro la página" hasFooter={true}>
     <main>
-        <h1>No se encontró la pagina</h1>
-        <a href="/" aria-label="Volver a la pagina principal">
-            <BtnColor text="Volver al inicio" type="form" />
+        <h1>No se encontró la página</h1>
+        <a href="/" aria-label="Volver a la anterior pagina">
+            <BtnColor text="Volver" type="no-found" />
         </a>
     </main>
 </Layout>
@@ -21,7 +21,16 @@ import BtnColor from "@components/BtnColor.astro";
         height: 100vh;
         gap: 2rem;
 
+        h1{
+            text-align: center;
+            text-wrap: pretty;
+        }
+
         a {
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+
             height: auto;
             width: 400px;
         }

@@ -8,6 +8,18 @@
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 
+    &#logout{
+        display: flex;
+        align-items: center;
+        
+        cursor: pointer;
+        gap: .5rem;
+
+        p{
+            font-size: 1rem;
+        }
+    }
+
     &.selected{
         &::after,
         &::before{

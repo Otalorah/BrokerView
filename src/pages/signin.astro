@@ -3,7 +3,7 @@ import TextLink from "src/sections/TextLink.astro";
 import Form from "src/sections/Form.astro";
 import Layout from "@layouts/Layout.astro";
 
-if (Astro.cookies.get("isLogin").value == "true") {
+if (Astro.cookies.get("jwt")) {
     return Astro.redirect("/inicio");
 }
 ---

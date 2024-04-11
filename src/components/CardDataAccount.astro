@@ -8,7 +8,7 @@ interface Props {
 
 const { key, value } = Astro.props;
 
-const isPassword = key == "Contraseña" ? true : false;
+const isPassword = key == "Contraseña";
 ---
 
 <div>
@@ -17,14 +17,13 @@ const isPassword = key == "Contraseña" ? true : false;
     {
         isPassword ? (
             <span>
-                <input type="password" value={value} readonly>
-                <BtnColor text="Cambiar" type="change_password"/>
+                <input type="password" value={value} readonly />
+                <BtnColor text="Cambiar" type="change_password" />
             </span>
-        ) : (
-            <p>{value}</p>
-        )
+        ) : <p>{value}</p>
     }
-</spa>
+
+</div>
 
 <style>
     div {
@@ -71,6 +70,7 @@ const isPassword = key == "Contraseña" ? true : false;
 
             input {
                 height: 19px;
+                width: min-content;
 
                 border: none;
                 color: inherit;
@@ -78,10 +78,15 @@ const isPassword = key == "Contraseña" ? true : false;
                 font-size: 1.5rem;
                 background-color: transparent;
 
-                &:focus{
+                &:focus {
                     outline: none;
                 }
             }
         }
     }
 </style>
+<script>
+    document.querySelector(".change_password").addEventListener("click", () => {
+        console.log("hola");
+    });
+</script>

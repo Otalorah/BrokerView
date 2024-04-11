@@ -1,0 +1,116 @@
+---
+import BackgroundColors from "@components/BackgroundColors.astro";
+---
+
+<div class="background-modal">
+    <BackgroundColors type="modal-logout">
+        <span>
+            <h4>Confirmar</h4>
+            <div>
+                <button class="no">NO</button>
+                <button class="yes">SI</button>
+            </div>
+        </span>
+    </BackgroundColors>
+</div>
+<style>
+    .background-modal {
+        position: absolute;
+        top: -55px;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        height: calc(100dvh + 55px);
+        width: 100%;
+        z-index: 175;
+
+        background-color: #10101088;
+
+        .modal-open ~ & {
+            display: flex;
+        }
+
+        span {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+
+            width: 100%;
+            height: 225px;
+            border-radius: 8px;
+            z-index: 1;
+
+            background-color: var(--bg-color-dark);
+
+            html.light & {
+                background-color: var(--bg-color-light);
+            }
+
+            h4 {
+                font-size: 2rem;
+            }
+            div {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+                width: 100%;
+                height: 60px;
+
+                button {
+                    width: 100px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 8px;
+
+                    user-select: none;
+                    font-family: inherit;
+
+                    background-color: var(--bg-color-dark);
+
+                    html.light & {
+                        background-color: var(--bg-color-light);
+                    }
+
+                    &:hover {
+                        color: var(--text-color-dark);
+                    }
+                }
+                .yes {
+                    color: var(--green-500);
+                    border: 2px solid var(--green-500);
+
+                    &:hover {
+                        background-color: var(--green-800);
+                        border: 2px solid var(--green-800);
+                    }
+                }
+                .no {
+                    color: var(--red-600);
+                    border: 2px solid var(--red-600);
+
+                    &:hover {
+                        background-color: var(--red-800);
+                    }
+                }
+            }
+        }
+    }
+</style>
+<script>
+    document.addEventListener("astro:page-load", () => {
+        document.querySelector(".no").addEventListener("click", () => {
+            document
+                .getElementById("menu-toggle")
+                .classList.toggle("modal-open");
+        });
+        document.querySelector(".yes").addEventListener("click", () => {
+            document.cookie = "jwt=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
+            window.location.href = "/";
+        });
+    });
+</script>

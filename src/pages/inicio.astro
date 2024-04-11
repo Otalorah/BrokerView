@@ -5,7 +5,7 @@ import MenuToggle from "@sections/MenuToggle.astro";
 
 import "@styles/main-content.css";
 
-if (Astro.cookies.get("isLogin").value != "true") {
+if (!Astro.cookies.get("jwt")) {
     return Astro.redirect("/");
 }
 ---

@@ -38,6 +38,11 @@ const { text, type } = Astro.props;
             max-width: 400px;
             height: 40px;
         }
+        &.no-found{
+            margin: auto;
+            max-width: 400px;
+            height: 40px;
+        }
         &.change_password {
             position: relative;
             max-width: 100px;
@@ -63,8 +68,6 @@ const { text, type } = Astro.props;
                 );
             }
             body.green & {
-                color: var(--text-color-dark);
-
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--green-600),
