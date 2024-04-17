@@ -7,11 +7,17 @@ import "@styles/main-content.css";
 if (!Astro.cookies.get("jwt")) {
     return Astro.redirect("/");
 }
+
+import { GetToken } from "src/scripts/usersAPI";
+
+const token = Astro.cookies.get("jwt").value;
+const response = await GetToken(token);
+const hasFondo = response.fondo;
 ---
 
 <Layout title="BrokerView | Fondo" hasFooter={false}>
     <MenuToggle />
     <main>
-        <h1>Fondo</h1>
+        {hasFondo ? <h1>Fondo</h1> : <h1>Su cuenta no tiene este recurso</h1>}
     </main>
 </Layout>
