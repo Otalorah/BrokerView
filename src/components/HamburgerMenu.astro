@@ -22,18 +22,22 @@
             width: 23px;
             height: 20px;
             opacity: 0;
+
+            &.hamburger-active {
+                & ~ #top {
+                    rotate: 45deg;
+                    top: 18.5px;
+                }
+                & ~ #middle {
+                    opacity: 0;
+                }
+                & ~ #bottom {
+                    rotate: -45deg;
+                    top: 18.5px;
+                }
+            }
         }
-        input[type="checkbox"]:checked ~ #top {
-            rotate: 45deg;
-            top: 18.5px;
-        }
-        input[type="checkbox"]:checked ~ #middle {
-            opacity: 0;
-        }
-        input[type="checkbox"]:checked ~ #bottom {
-            rotate: -45deg;
-            top: 18.5px;
-        }
+
         span {
             position: absolute;
             width: 23px;
@@ -66,13 +70,24 @@
 </style>
 <script is:inline>
     let screenWidth = window.innerWidth;
-    document.getElementById("hamburger").addEventListener("click", () => {
+    const $hamburger = document.getElementById("hamburger");
+
+    $hamburger.addEventListener("click", () => {
+        $hamburger.classList.toggle("hamburger-active");
         if (screenWidth < 666) {
             document
                 .getElementById("background__menu-toggle")
                 .classList.toggle("appear");
         } else {
             document.getElementById("menu-toggle").classList.toggle("expanded");
+        }
+    });
+    
+    document.addEventListener("astro:page-load", () => {
+        if (screenWidth < 666) {
+            document
+                .getElementById("hamburger")
+                .classList.remove("hamburger-active");
         }
     });
 </script>

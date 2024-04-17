@@ -3,7 +3,7 @@ main{
     --margin-open: 200px;
 
     margin-left: var(--margin-close);
-    transition: margin-left .3s ease;
+    transition: margin-left .15s ease;
 
     .expanded ~ & {
         margin-left: var(--margin-open);
