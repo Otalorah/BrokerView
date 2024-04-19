@@ -27,10 +27,35 @@
         display: none;
         cursor: default;
         text-align: center;
-        letter-spacing: 1px;
+        letter-spacing: .5px;
         margin-top: 0.4rem; 
         font-size: 0.7rem;
         color: var(--red-600);
+    }
+}
+.form__error-send {
+    display: none;
+
+    text-align: center;
+    font-size: .9rem;
+    color: var(--red-600);
+
+    &.active{
+        display: block;
+    }
+
+    body.red &{
+        color: var(--red-700);
+    }
+    body.green &{
+        color: var(--green-600);
+    }
+
+    html.light > body.red & {
+        color: var(--red);
+    }
+    html.light > body.green & {
+        color: var(--green);
     }
 }
 @media screen and (666px < width){

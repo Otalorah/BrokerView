@@ -8,7 +8,7 @@ export async function CreateUser(data) {
     const bodyContent = JSON.stringify(data);
 
     try {
-
+        document.querySelector('.btn').id = 'disable';
         const res = await fetch("http://127.0.0.1:8000/user/create", {
             method: "POST",
             headers: {
@@ -19,7 +19,7 @@ export async function CreateUser(data) {
 
         const data = await res.json()
         if (data.detail) {
-            console.log(data)
+            document.querySelector('.form__error-send').style.display = 'block'
         } else {
             createCookieJWT(data)
             window.location.href = data.redirect
@@ -27,6 +27,8 @@ export async function CreateUser(data) {
 
     } catch (e) {
         console.log(e)
+    } finally {
+        document.querySelector('.btn').removeAttribute('id');
     }
 }
 export async function LoginUser(data) {
@@ -34,6 +36,7 @@ export async function LoginUser(data) {
     const bodyContent = new URLSearchParams(data).toString();
 
     try {
+        document.querySelector('.btn').id = 'disable';
         const res = await fetch("http://127.0.0.1:8000/user/login", {
             method: "POST",
             headers: {
@@ -44,7 +47,9 @@ export async function LoginUser(data) {
 
         const data = await res.json()
         if (data.detail) {
-            console.log(data)
+            const $error = document.querySelector('.form__error-send');
+            $error.innerHTML = data.detail;
+            $error.style.display = 'block';
         } else {
             createCookieJWT(data)
             window.location.href = data.redirect
@@ -53,6 +58,8 @@ export async function LoginUser(data) {
 
     } catch (e) {
         console.log(e)
+    } finally {
+        document.querySelector('.btn').removeAttribute('id');
     }
 }
 export async function GetUser(token) {

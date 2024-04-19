@@ -1,10 +1,25 @@
 ---
 const { text, type } = Astro.props;
+
+const isForm = type == 'form'
 ---
 
-<button class=`btn ${type}`>{text}</button>
+{isForm ? <button class=`btn ${type}`>
+            {text}
+            <span></span>
+          </button> 
+: <button class=`btn ${type}`>{text}</button>}
 
 <style>
+     @keyframes rota {
+        from{
+            transform: rotate(0deg);
+        }
+        to{
+            transform: rotate(360deg);
+        }
+    }
+
     button.btn {
         position: relative;
         font-family: inherit;
@@ -38,6 +53,11 @@ const { text, type } = Astro.props;
             max-width: 400px;
             height: 40px;
         }
+        &#disable{
+            color: transparent;
+            pointer-events: none;
+        }
+
         &.no-found{
             margin: auto;
             max-width: 400px;
@@ -75,5 +95,47 @@ const { text, type } = Astro.props;
                 );
             }
         }
-    }
+
+        span{
+            display: none;
+
+            position: absolute;
+            top: 5px;
+            left: calc(50% - 13px); 
+
+            width: 20px;
+            height: 20px;
+
+            border-radius: 25px;
+            animation: rota 2.5s linear infinite;
+
+            #disable &{
+                display: block;
+            }
+
+            body.red &{
+                border: 3px solid var(--red);
+            }
+            body.green &{
+                border: 3px solid var(--green);
+            }
+
+            &::before{
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -3px;
+ 
+                width: 10px;
+                height: 8px;
+                transform: rotate(-45deg);
+
+                background-color: var(--bg-color-dark);
+
+                
+        }
+        html.light &::before{
+                    background-color: var(--bg-color-light);
+                }
+    }}
 </style>
