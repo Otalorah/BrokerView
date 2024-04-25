@@ -1,0 +1,12 @@
+<h1>Fondo</h1>
+<button id="button">Ver data</button>
+
+<script>
+    import { GetDataFund } from "src/scripts/fundAPI";
+
+    document.getElementById("button").addEventListener("click", async () => {
+        const token = document.cookie.slice(4);
+        const response = await GetDataFund(token);
+        console.log(response);
+    });
+</script>

@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@sections/MenuToggle.astro";
+import BrokerData from "@components/BrokerData.astro";
 
 import "@styles/main-content.css";
 
@@ -18,6 +19,6 @@ const hasBroker = response.broker;
 <Layout title="BrokerView | Broker" hasFooter={false}>
     <MenuToggle />
     <main>
-        {hasBroker ? <h1>Broker</h1> : <h1>Su cuenta no tiene este recurso</h1>}
+        {hasBroker ? <BrokerData /> : <h1>Su cuenta no tiene este recurso</h1>}
     </main>
 </Layout>

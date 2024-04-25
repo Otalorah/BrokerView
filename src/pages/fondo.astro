@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@sections/MenuToggle.astro";
+import FundData from "@components/FundData.astro";
 
 import "@styles/main-content.css";
 
@@ -12,12 +13,12 @@ import { GetToken } from "src/scripts/usersAPI";
 
 const token = Astro.cookies.get("jwt").value;
 const response = await GetToken(token);
-const hasFondo = response.fondo;
+const hasFondo = response.fund;
 ---
 
 <Layout title="BrokerView | Fondo" hasFooter={false}>
     <MenuToggle />
     <main>
-        {hasFondo ? <h1>Fondo</h1> : <h1>Su cuenta no tiene este recurso</h1>}
+        {hasFondo ? <FundData /> : <h1>Su cuenta no tiene este recurso</h1>}
     </main>
 </Layout>

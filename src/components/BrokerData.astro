@@ -1,0 +1,12 @@
+<h1>Broker</h1>
+<button id="brokr">Ver data</button>
+
+<script>
+    import { GetDataBroker } from "src/scripts/brokerAPI";
+
+    document.getElementById("brokr").addEventListener("click", async () => {
+        const token = document.cookie.slice(4);
+        const response = await GetDataBroker(token);
+        console.log(response);
+    });
+</script>

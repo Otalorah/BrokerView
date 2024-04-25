@@ -2,11 +2,11 @@
 import CardDataAccount from "@components/CardDataAccount.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 
-// import { GetUser } from "src/scripts/usersAPI";
+import { GetUser } from "src/scripts/usersAPI";
 
-// const token = Astro.cookies.get("jwt").value;
-// const user = await GetUser(token);
-const user = {"username":"","name":"","lastname":"","email":""}
+const token = Astro.cookies.get("jwt").value;
+const user = await GetUser(token);
+// const user = {"username":"","name":"","lastname":"","email":""}
 ---
 
 <BackgroundColors type="data-account">
