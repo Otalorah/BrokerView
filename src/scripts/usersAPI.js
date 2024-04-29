@@ -9,7 +9,7 @@ export async function CreateUser(data) {
 
     try {
         document.querySelector('.btn').id = 'disable';
-        const res = await fetch("http://127.0.0.1:8000/user/create", {
+        const res = await fetch("https://api-brokerview.onrender.com/user/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,7 +37,7 @@ export async function LoginUser(data) {
 
     try {
         document.querySelector('.btn').id = 'disable';
-        const res = await fetch("http://127.0.0.1:8000/user/login", {
+        const res = await fetch("https://api-brokerview.onrender.com/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -64,7 +64,7 @@ export async function LoginUser(data) {
 }
 export async function GetUser(token) {
     return new Promise((resolve, reject) => {
-        fetch("http://127.0.0.1:8000/user", {
+        fetch("https://api-brokerview.onrender.com/user", {
         method: "GET",
         headers: {
                 Authorization: `Bearer ${token}`
@@ -74,7 +74,7 @@ export async function GetUser(token) {
 }
 export async function GetToken(token) {
     return new Promise((resolve, reject) => {
-        fetch("http://127.0.0.1:8000/user/token", {
+        fetch("https://api-brokerview.onrender.com/user/token", {
         method: "GET",
         headers: {
                 Authorization: `Bearer ${token}`

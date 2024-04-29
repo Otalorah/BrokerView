@@ -1,6 +1,6 @@
 export async function GetDataBroker(token) {
     return new Promise((resolve, reject) => {
-        fetch("http://127.0.0.1:8000/broker", {
+        fetch("https://api-brokerview.onrender.com/broker", {
         method: "GET",
         headers: {
                 Authorization: `Bearer ${token}`

@@ -6,7 +6,6 @@ import { GetUser } from "src/scripts/usersAPI";
 
 const token = Astro.cookies.get("jwt").value;
 const user = await GetUser(token);
-// const user = {"username":"","name":"","lastname":"","email":""}
 ---
 
 <BackgroundColors type="data-account">
