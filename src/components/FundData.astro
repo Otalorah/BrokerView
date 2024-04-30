@@ -1,12 +1,71 @@
-<h1>Fondo</h1>
-<button id="button">Ver data</button>
+<astro-heart>
+  <h1>Fondo</h1>
 
+  <div>
+    <canvas id="fund"></canvas>
+  </div>
+</astro-heart>
+<style>
+  astro-heart{
+    width: 100%;
+    height: 70vh;
+  }
+  h1{
+    text-align: center;
+    margin: 1rem;
+  }
+</style>
 <script>
-    import { GetDataFund } from "src/scripts/fundAPI";
+  import Chart from "chart.js/auto";
+  import { GetDataFund } from "@scripts/fundAPI";
 
-    document.getElementById("button").addEventListener("click", async () => {
-        const token = document.cookie.slice(4);
-        const response = await GetDataFund(token);
-        console.log(response);
-    });
+  class AstroHeart extends HTMLElement {
+    constructor() {
+      super();
+
+      const ctx = this.querySelector("#fund") as HTMLCanvasElement;
+
+      let token = document.cookie.slice(4);
+
+      function createChart(data) {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: data.map((element) => element.fecha_corte),
+            datasets: [
+              {
+                label: "Saldo (COP)",
+                data: data.map((element) => {
+                  let str = element.saldo_actual;
+                  str = str.slice(0, -4) + str.slice(-3);
+                  return str;
+                }),
+                borderWidth: 1,
+              },
+              {
+                label: "Aporte (COP)",
+                data: data.map((element) => {
+                  let str = element.aporte;
+                  str = str.slice(0, -4) + str.slice(-3);
+                  return str;
+                }),
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      }
+
+      GetDataFund(token).then((data) => createChart(data));
+    }
+  }
+
+  customElements.define("astro-heart", AstroHeart);
 </script>
