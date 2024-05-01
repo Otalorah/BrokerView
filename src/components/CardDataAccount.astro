@@ -3,26 +3,26 @@ import BtnColor from "@components/BtnColor.astro";
 
 interface Props {
     key: string;
-    value: string;
 }
 
-const { key, value } = Astro.props;
+const { key } = Astro.props;
 
 const isPassword = key == "Contraseña";
 ---
 
-<div>
+<div id={key}>
     <h5>{key}</h5>
     <hr />
     {
         isPassword ? (
             <span>
-                <input type="password" value={value} readonly />
+                <input type="password" value={"Contraseña"} readonly />
                 <BtnColor text="Cambiar" type="change_password" />
             </span>
-        ) : <p>{value}</p>
+        ) : (
+            <p />
+        )
     }
-
 </div>
 
 <style>

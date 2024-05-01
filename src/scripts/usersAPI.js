@@ -31,6 +31,8 @@ export async function CreateUser(data) {
         document.querySelector('.btn').removeAttribute('id');
     }
 }
+
+
 export async function LoginUser(data) {
 
     const bodyContent = new URLSearchParams(data).toString();
@@ -62,21 +64,33 @@ export async function LoginUser(data) {
         document.querySelector('.btn').removeAttribute('id');
     }
 }
-export async function GetUser(token) {
-    return new Promise((resolve, reject) => {
+
+
+export async function GetDataUser(token) {
+    let dataCache = sessionStorage.getItem('dataUser');
+    if (dataCache) {
+        return Promise.resolve(JSON.parse(dataCache));
+    }
+    return await new Promise((resolve, reject) => {
         fetch("https://api-brokerview.onrender.com/user", {
-        method: "GET",
-        headers: {
+            method: "GET",
+            headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => { return response.json() }).then(data => resolve(data)).catch(e => reject(e))
+        }).then(response => response.json())
+            .then(data => {
+                sessionStorage.setItem('dataUser', JSON.stringify(data));
+                resolve(data)
+            }).catch(e => reject(e));
     })
 }
+
+
 export async function GetToken(token) {
     return new Promise((resolve, reject) => {
         fetch("https://api-brokerview.onrender.com/user/token", {
-        method: "GET",
-        headers: {
+            method: "GET",
+            headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then(response => { return response.json() }).then(data => resolve(data)).catch(e => reject(e))

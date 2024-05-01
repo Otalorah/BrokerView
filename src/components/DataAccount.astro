@@ -1,30 +1,32 @@
 ---
 import CardDataAccount from "@components/CardDataAccount.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
-
-import { GetUser } from "src/scripts/usersAPI";
-
-const token = Astro.cookies.get("jwt").value;
-const user = await GetUser(token);
 ---
 
-<BackgroundColors type="data-account">
-    <ul>
-        <li>
-            <h3>Perfil</h3>
-            <CardDataAccount key="Usuario" value={user.username} />
-            <CardDataAccount key="Nombre" value={user.name} />
-            <CardDataAccount key="Apellidos" value={user.lastname} />
-            <CardDataAccount key="Correo" value={user.email} />
-            <CardDataAccount key="Contraseña" value="Contraseña$" />
-        </li>
-        <li>
-            <h3>Configuración</h3>
-            <CardDataAccount key="Moneda" value="USDT" />
-        </li>
-    </ul>
-</BackgroundColors>
+<astro-data-account>
+    <BackgroundColors type="data-account">
+        <ul>
+            <li>
+                <h3>Perfil</h3>
+                <CardDataAccount key="Usuario" />
+                <CardDataAccount key="Nombre" />
+                <CardDataAccount key="Apellidos" />
+                <CardDataAccount key="Correo" />
+                <CardDataAccount key="Contraseña" />
+            </li>
+            <li>
+                <h3>Configuración</h3>
+                <CardDataAccount key="Moneda" />
+            </li>
+        </ul>
+    </BackgroundColors>
+</astro-data-account>
+
 <style>
+    astro-data-account{
+        width: 100%;
+        height: 100%;
+    }
     ul {
         display: flex;
         flex-direction: column;
@@ -69,3 +71,33 @@ const user = await GetUser(token);
         }
     }
 </style>
+<script>
+    import { GetDataUser } from "@scripts/usersAPI";
+
+    class AstroDataAccount extends HTMLElement {
+        constructor() {
+            super();
+            const $user = this.querySelector("#Usuario p"),
+                $name = this.querySelector("#Nombre p"),
+                $lastname = this.querySelector("#Apellidos p"),
+                $email = this.querySelector("#Correo p");
+
+            const elementsHTML = [$user, $name, $lastname, $email];
+
+            function renderDataAccount(data) {
+                const valuesData = Object.values(data) as Object;
+                for (let i = 0; i < elementsHTML.length; i++) {
+                    const element = elementsHTML[i] as HTMLElement;
+                    const value = valuesData[i];
+                    element.textContent = value;
+                }
+            }
+
+            const token = document.cookie.slice(4);
+
+            GetDataUser(token).then((data) => renderDataAccount(data));
+        }
+    }
+
+    customElements.define("astro-data-account", AstroDataAccount);
+</script>

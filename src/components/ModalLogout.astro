@@ -110,6 +110,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
         });
         document.querySelector(".yes").addEventListener("click", () => {
             document.cookie = "jwt=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
+            sessionStorage.clear()
             window.location.href = "/";
         });
     });
