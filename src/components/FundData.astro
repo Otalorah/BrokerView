@@ -6,64 +6,30 @@
   </div>
 </astro-chart>
 <style>
-  astro-heart{
-    width: 100%;
-    height: 70vh;
-  }
-  h1{
-    text-align: center;
-    margin: 1rem;
+  astro-chart {
+    width: 98.5%;
+    height: auto;
+
+    h1 {
+      text-align: center;
+      margin: 1rem;
+    }
+    div {
+      height: 70vh;
+    }
   }
 </style>
 <script>
-  import Chart from "chart.js/auto";
   import { GetDataFund } from "@scripts/fundAPI";
+  import { createChart } from "@scripts/charts";
+  import { getCookieJWT } from "@scripts/utils";
 
   class AstroChart extends HTMLElement {
     constructor() {
       super();
 
-      const ctx = this.querySelector("#fund") as HTMLCanvasElement;
-
-      let token = document.cookie.slice(4);
-
-      function createChart(data) {
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: data.map((element) => element.fecha_corte),
-            datasets: [
-              {
-                label: "Saldo (COP)",
-                data: data.map((element) => {
-                  let str = element.saldo_actual;
-                  str = str.slice(0, -4) + str.slice(-3);
-                  return str;
-                }),
-                borderWidth: 1,
-              },
-              {
-                label: "Aporte (COP)",
-                data: data.map((element) => {
-                  let str = element.aporte;
-                  str = str.slice(0, -4) + str.slice(-3);
-                  return str;
-                }),
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-              },
-            },
-          },
-        });
-      }
-
-      GetDataFund(token).then((data) => createChart(data));
+      const token = getCookieJWT();
+      GetDataFund(token).then((data) => createChart("fund", data));
     }
   }
 

@@ -23,7 +23,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 </astro-data-account>
 
 <style>
-    astro-data-account{
+    astro-data-account {
         width: 100%;
         height: 100%;
     }
@@ -73,6 +73,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 </style>
 <script>
     import { GetDataUser } from "@scripts/usersAPI";
+    import { getCookieJWT } from "@scripts/utils";
 
     class AstroDataAccount extends HTMLElement {
         constructor() {
@@ -93,7 +94,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                 }
             }
 
-            const token = document.cookie.slice(4);
+            const token = getCookieJWT();
 
             GetDataUser(token).then((data) => renderDataAccount(data));
         }
