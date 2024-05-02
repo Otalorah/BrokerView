@@ -5,15 +5,23 @@ import BrokerData from "@components/BrokerData.astro";
 
 import "@styles/main-content.css";
 
-if (!Astro.cookies.get("jwt")) {
+if (!Astro.cookies.has("jwt")) {
     return Astro.redirect("/");
 }
 
-import { GetToken } from "src/scripts/usersAPI";
+import { GetToken } from "@scripts/usersAPI";
 
-const token = Astro.cookies.get("jwt").value;
-const response = await GetToken(token);
-const hasBroker = response.broker;
+let hasBroker;
+
+if (!Astro.cookies.has("dataToken")) {
+    const token = Astro.cookies.get("jwt").value;
+    const response = await GetToken(token);
+    Astro.cookies.set("dataToken", response);
+    hasBroker = response.broker;
+}
+
+const token = Astro.cookies.get("dataToken").value;
+hasBroker = JSON.parse(token).broker;
 ---
 
 <Layout title="BrokerView | Broker" hasFooter={false}>

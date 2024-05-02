@@ -8,7 +8,9 @@ export async function CreateUser(data) {
     const bodyContent = JSON.stringify(data);
 
     try {
+
         document.querySelector('.btn').id = 'disable';
+
         const res = await fetch("https://api-brokerview.onrender.com/user/create", {
             method: "POST",
             headers: {
@@ -18,11 +20,16 @@ export async function CreateUser(data) {
         })
 
         const data = await res.json()
+
         if (data.detail) {
+
             document.querySelector('.form__error-send').style.display = 'block'
+
         } else {
+
             createCookieJWT(data)
             window.location.href = data.redirect
+
         }
 
     } catch (e) {
@@ -33,12 +40,15 @@ export async function CreateUser(data) {
 }
 
 
+
 export async function LoginUser(data) {
 
     const bodyContent = new URLSearchParams(data).toString();
 
     try {
+
         document.querySelector('.btn').id = 'disable';
+
         const res = await fetch("https://api-brokerview.onrender.com/user/login", {
             method: "POST",
             headers: {
@@ -48,15 +58,19 @@ export async function LoginUser(data) {
         });
 
         const data = await res.json()
+
         if (data.detail) {
+
             const $error = document.querySelector('.form__error-send');
             $error.innerHTML = data.detail;
             $error.style.display = 'block';
+
         } else {
+
             createCookieJWT(data)
             window.location.href = data.redirect
-        }
 
+        }
 
     } catch (e) {
         console.log(e)
@@ -66,12 +80,17 @@ export async function LoginUser(data) {
 }
 
 
+
 export async function GetDataUser(token) {
+
     let dataCache = sessionStorage.getItem('dataUser');
+
     if (dataCache) {
         return Promise.resolve(JSON.parse(dataCache));
     }
+
     return await new Promise((resolve, reject) => {
+
         fetch("https://api-brokerview.onrender.com/user", {
             method: "GET",
             headers: {
@@ -86,7 +105,9 @@ export async function GetDataUser(token) {
 }
 
 
+
 export async function GetToken(token) {
+
     return new Promise((resolve, reject) => {
         fetch("https://api-brokerview.onrender.com/user/token", {
             method: "GET",
