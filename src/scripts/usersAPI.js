@@ -1,7 +1,19 @@
-function createCookieJWT(data) {
-    const token = data.access_token.token;
-    document.cookie = "jwt=" + token;
+function verifyResponse(data) {
+    if (data.detail) {
+
+        const $error = document.querySelector('.form__error-send');
+        $error.innerHTML = data.detail;
+        $error.style.display = 'block';
+
+    } else {
+
+        const token = data.access_token.token;
+        document.cookie = "jwt=" + token;;
+        window.location.href = data.redirect;
+
+    }
 }
+
 
 export async function CreateUser(data) {
 
@@ -19,18 +31,9 @@ export async function CreateUser(data) {
             body: bodyContent
         })
 
-        const data = await res.json()
+        const data = await res.json();
 
-        if (data.detail) {
-
-            document.querySelector('.form__error-send').style.display = 'block'
-
-        } else {
-
-            createCookieJWT(data)
-            window.location.href = data.redirect
-
-        }
+        verifyResponse(data);
 
     } catch (e) {
         console.log(e)
@@ -59,18 +62,7 @@ export async function LoginUser(data) {
 
         const data = await res.json()
 
-        if (data.detail) {
-
-            const $error = document.querySelector('.form__error-send');
-            $error.innerHTML = data.detail;
-            $error.style.display = 'block';
-
-        } else {
-
-            createCookieJWT(data)
-            window.location.href = data.redirect
-
-        }
+        verifyResponse(data)
 
     } catch (e) {
         console.log(e)
