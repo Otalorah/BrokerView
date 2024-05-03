@@ -15,13 +15,25 @@ function verifyResponse(data) {
 }
 
 
-export async function CreateUser(data) {
+function renderLoader() {
+    const $loader = document.querySelector("#loader");
+    document.querySelector('.btn').id = 'disable';
+
+    if (document.documentElement.className == "light") {
+        $loader.setAttribute("stroke", "#dfdfdf");
+    } else {
+        $loader.setAttribute("stroke", "#121212");
+    }
+}
+
+
+export async function createUser(data) {
 
     const bodyContent = JSON.stringify(data);
 
     try {
 
-        document.querySelector('.btn').id = 'disable';
+        renderLoader()
 
         const res = await fetch("https://api-brokerview.onrender.com/user/create", {
             method: "POST",
@@ -35,22 +47,21 @@ export async function CreateUser(data) {
 
         verifyResponse(data);
 
-    } catch (e) {
-        console.log(e)
     } finally {
         document.querySelector('.btn').removeAttribute('id');
+        document.querySelector("#loader").setAttribute("stroke", "transparent")
     }
 }
 
 
 
-export async function LoginUser(data) {
+export async function loginUser(data) {
 
     const bodyContent = new URLSearchParams(data).toString();
 
     try {
 
-        document.querySelector('.btn').id = 'disable';
+        renderLoader()
 
         const res = await fetch("https://api-brokerview.onrender.com/user/login", {
             method: "POST",
@@ -64,36 +75,42 @@ export async function LoginUser(data) {
 
         verifyResponse(data)
 
-    } catch (e) {
-        console.log(e)
     } finally {
         document.querySelector('.btn').removeAttribute('id');
+        document.querySelector("#loader").setAttribute("stroke", "transparent");
     }
 }
 
 
 
-export async function GetDataUser(token) {
+export async function getDataUser(token) {
 
-    let dataCache = sessionStorage.getItem('dataUser');
+    const dataCache = sessionStorage.getItem('dataUser');
+
+    const $loader = document.querySelector('#loader-container');
 
     if (dataCache) {
+        $loader.classList.add('disappear');
         return Promise.resolve(JSON.parse(dataCache));
     }
 
-    return await new Promise((resolve, reject) => {
+    try {
+        return await new Promise((resolve, reject) => {
 
-        fetch("https://api-brokerview.onrender.com/user", {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(response => response.json())
-            .then(data => {
-                sessionStorage.setItem('dataUser', JSON.stringify(data));
-                resolve(data)
-            }).catch(e => reject(e));
-    })
+            fetch("https://api-brokerview.onrender.com/user", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(response => response.json())
+                .then(data => {
+                    sessionStorage.setItem('dataUser', JSON.stringify(data));
+                    resolve(data)
+                }).catch(e => reject(e));
+        })
+    } finally {
+        $loader.classList.add('disappear')
+    }
 }
 
 

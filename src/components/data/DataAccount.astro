@@ -1,9 +1,12 @@
 ---
-import CardDataAccount from "@components/CardDataAccount.astro";
+import CardDataAccount from "@components/data/CardDataAccount.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
 
 <astro-data-account>
+    <ContainerLoaderIcon />
+
     <BackgroundColors type="data-account">
         <ul>
             <li>
@@ -72,7 +75,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
     }
 </style>
 <script>
-    import { GetDataUser } from "@scripts/usersAPI";
+    import { getDataUser } from "@scripts/usersAPI";
     import { getCookieJWT } from "@scripts/utils";
 
     class AstroDataAccount extends HTMLElement {
@@ -85,7 +88,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 
             const elementsHTML = [$user, $name, $lastname, $email];
 
-            function renderDataAccount(data) {
+            function renderDataAccount(data: Object) {
                 const valuesData = Object.values(data) as Object;
                 for (let i = 0; i < elementsHTML.length; i++) {
                     const element = elementsHTML[i] as HTMLElement;
@@ -96,7 +99,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 
             const token = getCookieJWT();
 
-            GetDataUser(token).then((data) => renderDataAccount(data));
+            getDataUser(token).then((data) => renderDataAccount(data));
         }
     }
 

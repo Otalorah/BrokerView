@@ -1,4 +1,6 @@
 ---
+import LoaderIcon from "@components/loader/LoaderIcon.astro";
+
 const { text, type } = Astro.props;
 
 const isForm = type == 'form'
@@ -6,20 +8,11 @@ const isForm = type == 'form'
 
 {isForm ? <button class=`btn ${type}`>
             {text}
-            <span></span>
+            <LoaderIcon /> 
           </button> 
 : <button class=`btn ${type}`>{text}</button>}
 
 <style>
-     @keyframes rota {
-        from{
-            transform: rotate(0deg);
-        }
-        to{
-            transform: rotate(360deg);
-        }
-    }
-
     button.btn {
         position: relative;
         font-family: inherit;
@@ -52,10 +45,38 @@ const isForm = type == 'form'
         &.form {
             max-width: 400px;
             height: 40px;
+
+            background-color: var(--bg-color-dark);
+
+            html.light &{
+                background-color: var(--bg-color-light);
+            }
+
+            svg{
+                position: absolute;
+                top: -27.5px;
+                left: calc(50% - 45px);
+
+                width:90px;
+            }
         }
         &#disable{
-            color: transparent;
             pointer-events: none;
+
+            body.red & {
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--red-800),
+                    var(--red)
+                );
+            }
+            body.green & {
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    var(--green-600),
+                    var(--green)
+                );
+            }
         }
 
         &.no-found{
@@ -95,47 +116,5 @@ const isForm = type == 'form'
                 );
             }
         }
-
-        span{
-            display: none;
-
-            position: absolute;
-            top: 5px;
-            left: calc(50% - 13px); 
-
-            width: 20px;
-            height: 20px;
-
-            border-radius: 25px;
-            animation: rota 2.5s linear infinite;
-
-            #disable &{
-                display: block;
-            }
-
-            body.red &{
-                border: 3px solid var(--red);
-            }
-            body.green &{
-                border: 3px solid var(--green);
-            }
-
-            &::before{
-                content: '';
-                position: absolute;
-                top: 0;
-                right: -3px;
- 
-                width: 10px;
-                height: 8px;
-                transform: rotate(-45deg);
-
-                background-color: var(--bg-color-dark);
-
-                
-        }
-        html.light &::before{
-                    background-color: var(--bg-color-light);
-                }
-    }}
+    }
 </style>

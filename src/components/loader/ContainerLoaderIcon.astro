@@ -1,0 +1,58 @@
+---
+import LoaderIcon from "@components/loader/LoaderIcon.astro";
+---
+
+<div id="loader-container">
+    <LoaderIcon />
+</div>
+
+<style>
+    @keyframes disappear {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+    #loader-container {
+        position: absolute;
+        top: 0;
+
+        height: 110%;
+        width: 99%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        z-index: 100;
+        background-color: var(--bg-color-dark);
+
+        html.light & {
+            background-color: var(--bg-color-light);
+        }
+
+        &.disappear {
+            animation: disappear 0.5s ease-in;
+            opacity: 0;
+            z-index: -1;
+            height: 99%;
+        }
+        svg {
+            width: 200px;
+        }
+    }
+</style>
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const $htmlElement = document.documentElement;
+        const $loader = document.querySelector("#loader");
+
+        if ($htmlElement.className == "light") {
+            $loader.setAttribute("stroke", "#000");
+        } else {
+            $loader.setAttribute("stroke", "#fff");
+        }
+    });
+</script>

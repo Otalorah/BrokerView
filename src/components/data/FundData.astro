@@ -1,6 +1,10 @@
+---
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+---
+
 <astro-chart>
   <h1>Fondo</h1>
-
+  <ContainerLoaderIcon />
   <div>
     <canvas id="fund"></canvas>
   </div>
@@ -20,7 +24,7 @@
   }
 </style>
 <script>
-  import { GetDataFund } from "@scripts/fundAPI";
+  import { getDataFund } from "@scripts/fundAPI";
   import { createChart } from "@scripts/charts";
   import { getCookieJWT } from "@scripts/utils";
 
@@ -29,7 +33,7 @@
       super();
 
       const token = getCookieJWT();
-      GetDataFund(token).then((data) => createChart("fund", data));
+      getDataFund(token).then((data: Object) => createChart("fund", data));
     }
   }
 
