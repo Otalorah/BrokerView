@@ -22,7 +22,7 @@ function setFontChart() {
         Chart.defaults.font.size = 9
         return 12
     }
-    if (actualWidth < 472) {
+    else if (actualWidth < 472) {
         Chart.defaults.font.size = 8.4
         return 12
     }
