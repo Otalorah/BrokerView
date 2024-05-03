@@ -4,12 +4,29 @@ const $htmlElement = document.documentElement;
 
 Chart.defaults.borderColor = '#a9a9a977'
 
+
 function setColorCharts() {
     if ($htmlElement.className == 'light') {
         Chart.defaults.color = '#000'
     } else {
         Chart.defaults.color = '#fff'
     }
+}
+
+
+function setFontChart() {
+
+    const actualWidth = window.innerWidth
+
+    if (actualWidth < 613) {
+        Chart.defaults.font.size = 9
+        return 12
+    }
+    if (actualWidth < 472) {
+        Chart.defaults.font.size = 8.4
+        return 12
+    }
+    return 15
 }
 
 
@@ -76,8 +93,16 @@ export function createChart(id, data) {
         plugins: {
             color: {
                 forceOverride: true
+            },
+            legend: {
+                labels: {
+                    font: {
+                        size: setFontChart()
+                    }
+                }
             }
-        }
+        },
+        maintainAspectRatio: false
     };
 
     setColorCharts()
