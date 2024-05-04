@@ -7,8 +7,8 @@ import BackgroundColors from "@components/BackgroundColors.astro";
         <span>
             <h4>Confirmar</h4>
             <div>
-                <button class="no">NO</button>
-                <button class="yes">SI</button>
+                <button class="cancel">Cancelar</button>
+                <button class="accept">Aceptar</button>
             </div>
         </span>
     </BackgroundColors>
@@ -80,7 +80,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                         color: var(--text-color-dark);
                     }
                 }
-                .yes {
+                .accept {
                     color: var(--green-500);
                     border: 2px solid var(--green-500);
 
@@ -89,7 +89,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                         border: 2px solid var(--green-800);
                     }
                 }
-                .no {
+                .cancel {
                     color: var(--red-600);
                     border: 2px solid var(--red-600);
 
@@ -103,15 +103,17 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 </style>
 <script>
     document.addEventListener("astro:page-load", () => {
-        document.querySelector(".no").addEventListener("click", () => {
+        document.querySelector(".cancel").addEventListener("click", () => {
             document
                 .getElementById("menu-toggle")
                 .classList.toggle("modal-open");
         });
-        document.querySelector(".yes").addEventListener("click", () => {
+
+        document.querySelector(".accept").addEventListener("click", () => {
             document.cookie = "jwt=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
-            document.cookie = "dataToken=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
-            sessionStorage.clear()
+            document.cookie =
+                "dataToken=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
+            sessionStorage.clear();
 
             window.location.href = "/";
         });

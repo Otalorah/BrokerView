@@ -13,15 +13,19 @@ const isLogout = page == 'logout';
         <p>Cerrar sesión</p>
     </li>
     :
-    (<li class="link-page" id={href}>
-    <a href={href} aria-label=`Ir a ${page}`>
-        <slot />
-        <p>{page}</p>
-    </a> 
-    </li>)
+    (
+        <li class="link-page" id={href}>
+        <a href={href} aria-label=`Ir a ${page}`>
+            <slot />
+            <p>{page}</p>
+        </a> 
+        </li>
+    )
 }
 <script>
+
     document.addEventListener("astro:page-load", () => {
+
         const path = window.location.pathname;
         const page = path.slice(1);
 
@@ -31,8 +35,11 @@ const isLogout = page == 'logout';
                 li.classList.add("selected");
             }
         });
+
     });
+
     document.getElementById('logout').addEventListener('click',()=>{
         document.getElementById('menu-toggle').classList.toggle('modal-open');
     })
+
 </script>
