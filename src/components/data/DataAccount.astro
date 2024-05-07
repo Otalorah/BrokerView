@@ -4,7 +4,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
 
-<astro-data-account>
+<data-account>
     <ContainerLoaderIcon />
 
     <BackgroundColors type="data-account">
@@ -23,10 +23,10 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
             </li>
         </ul>
     </BackgroundColors>
-</astro-data-account>
+</data-account>
 
 <style>
-    astro-data-account {
+    data-account {
         width: 100%;
         height: 100%;
     }
@@ -78,7 +78,7 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     import { getDataUser } from "@scripts/usersAPI";
     import { getCookieJWT } from "@scripts/utils";
 
-    class AstroDataAccount extends HTMLElement {
+    class DataAccount extends HTMLElement {
         constructor() {
             super();
             const $user = this.querySelector("#Usuario p"),
@@ -103,5 +103,5 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
         }
     }
 
-    customElements.define("astro-data-account", AstroDataAccount);
+    customElements.define("data-account", DataAccount);
 </script>

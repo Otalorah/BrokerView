@@ -2,9 +2,11 @@
 import LoaderIcon from "@components/loader/LoaderIcon.astro";
 ---
 
-<div id="loader-container">
-    <LoaderIcon />
-</div>
+<loader-div>
+    <div id="loader-container">
+        <LoaderIcon />
+    </div>
+</loader-div>
 
 <style>
     @keyframes disappear {
@@ -16,17 +18,17 @@ import LoaderIcon from "@components/loader/LoaderIcon.astro";
         }
     }
     #loader-container {
-        position: absolute;
-        top: 0;
+        position: fixed;
+        top: 56px;
 
-        height: 110%;
+        height: 99vh;
         width: 99%;
 
         display: flex;
         align-items: center;
         justify-content: center;
 
-        z-index: 100;
+        z-index: 70;
         background-color: var(--bg-color-dark);
 
         html.light & {
@@ -45,14 +47,20 @@ import LoaderIcon from "@components/loader/LoaderIcon.astro";
     }
 </style>
 <script>
-    document.addEventListener("astro:page-load", () => {
-        const $htmlElement = document.documentElement;
-        const $loader = document.querySelector("#loader");
+    class LoaderDIV extends HTMLElement {
+        constructor() {
+            super();
+            document.addEventListener("astro:page-load", () => {
+                const $loader = this.querySelector("#loader");
 
-        if ($htmlElement.className == "light") {
-            $loader.setAttribute("stroke", "#000");
-        } else {
-            $loader.setAttribute("stroke", "#fff");
+                if (document.documentElement.className == "light") {
+                    $loader.setAttribute("stroke", "#000");
+                } else {
+                    $loader.setAttribute("stroke", "#fff");
+                }
+            });
         }
-    });
+    }
+
+    customElements.define("loader-div", LoaderDIV);
 </script>

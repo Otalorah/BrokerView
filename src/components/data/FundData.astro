@@ -1,42 +1,151 @@
 ---
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+import BackgroundColors from "@components/BackgroundColors.astro";
 ---
 
-<astro-chart>
+<fund-data>
   <h1>Fondo</h1>
   <ContainerLoaderIcon />
-  <div>
+  <section>
     <canvas id="fund"></canvas>
+  </section>
+
+  <h2>Fechas de corte</h2>
+
+  <div>
+    <select name="cutoff-date" id="cutoff-date"> </select>
   </div>
-</astro-chart>
+  <BackgroundColors type="table-fund">
+    <ul id="table-fund">
+      <li class="title">Aporte Mes</li>
+      <li class="title">Fecha de aporte</li>
+      <li class="title">Saldo anterior</li>
+      <li class="title">Ganancia</li>
+      <li class="title">Saldo actual</li>
+    </ul>
+  </BackgroundColors>
+</fund-data>
 <style>
-  astro-chart {
+  fund-data {
     width: 98.5%;
     height: auto;
 
     h1 {
       text-align: center;
+      font-size: 2.5rem;
+
       margin-top: 1rem;
       margin-bottom: 2rem;
     }
-    div {
+
+    section {
       height: 70vh;
+    }
+
+    h2 {
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 2rem;
+      font-weight: 100;
+
+      margin: 4rem 0;
+    }
+
+    div {
+      width: 95%;
+      margin: auto;
+      margin-bottom: 2rem;
+
+      display: flex;
+      justify-content: end;
+
+      select {
+        color: inherit;
+        font-family: inherit;
+        font-size: 1rem;
+
+        border: none;
+
+        background-color: var(--bg-color-dark);
+
+        html.light & {
+          background-color: var(--bg-color-light);
+        }
+      }
+    }
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(50px, 1fr));
+      grid-template-rows: 50px;
+      grid-auto-rows: 50px;
+
+      width: 100%;
+      z-index: 1;
+
+      padding: 1rem;
+      border-radius: 8px;
+
+      background-color: var(--bg-color-dark);
+
+      html.light & {
+        background-color: var(--bg-color-light);
+      }
+
+      li {
+        text-align: center;
+        list-style: none;
+        font-weight: 100;
+        font-size: 1em;
+
+        align-content: center;
+
+        &.title {
+          margin: 0;
+          margin-bottom: 0.5rem;
+          padding-bottom: 0.5rem;
+
+          border-bottom: 3px solid var(--bg-color-light);
+
+          html.light & {
+            border-bottom: 3px solid var(--bg-color-dark);
+          }
+        }
+      }
+    }
+  }
+
+  @media (width < 570px) {
+    ul {
+      font-size: 0.85rem;
+    }
+  }
+  @media (width < 500px) {
+    ul {
+      font-size: 0.7rem;
     }
   }
 </style>
 <script>
-  import { getDataFund } from "@scripts/fundAPI";
-  import { createChart } from "@scripts/charts";
+  import { getDataFund } from "@scripts/fund/fundAPI";
+  import { createChart } from "@scripts/fund/chartFund";
+  import { renderTable, enableEventHandlers } from "@scripts/fund/tableFund";
   import { getCookieJWT } from "@scripts/utils";
 
-  class AstroChart extends HTMLElement {
+  class FundData extends HTMLElement {
     constructor() {
       super();
-
+    }
+    connectedCallback() {
       const token = getCookieJWT();
-      getDataFund(token).then((data: Object) => createChart("fund", data));
+
+      getDataFund(token).then((data: Object) => {
+        createChart("fund", data);
+        renderTable(data);
+        enableEventHandlers(data);
+      });
     }
   }
 
-  customElements.define("astro-chart", AstroChart);
+  customElements.define("fund-data", FundData);
 </script>

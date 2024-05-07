@@ -115,7 +115,7 @@ export async function getDataUser(token) {
 
 
 
-export async function GetToken(token) {
+export function GetToken(token) {
 
     return new Promise((resolve, reject) => {
         fetch("https://api-brokerview.onrender.com/user/token", {
