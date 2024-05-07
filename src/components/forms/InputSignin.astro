@@ -1,20 +1,20 @@
 ---
-import IconPassword from "@components/IconPassword.astro";
-import IconForm from "@components/IconForm.astro";
+import IconPassword from "@components/forms/IconPassword.astro";
+import IconForm from "@components/forms/IconForm.astro";
 
 const { id, type, text, textError } = Astro.props;
-const idLastname = id == "lastname" && 'label-lastname' 
+const idLastname = id == "lastname" && "label-lastname";
 ---
 
 <div class="form__group" id={`group__${id}`}>
     <label class="form__label" for={id} id={idLastname}>{text}</label>
     <div class="form__group-input">
-        <input type={type} class="form__input" name={id} {id} required/>
+        <input type={type} class="form__input" name={id} {id} required />
         {
             type == "password" ? (
                 <IconPassword />
             ) : (
-                <IconForm type="error" id={id + "_svg"}/>
+                <IconForm type="error" id={id + "_svg"} />
             )
         }
     </div>

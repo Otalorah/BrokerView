@@ -2,7 +2,7 @@
 import BtnTheme from "@components/BtnTheme.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 import BrokerLogo from "@components/BrokerLogo.astro";
-import HamburgerMenu from "@components/HamburgerMenu.astro";
+import HamburgerMenu from "@components/menu_toggle/HamburgerMenu.astro";
 
 interface Props {
     hasFooter: boolean;
@@ -12,7 +12,6 @@ const { hasFooter } = Astro.props;
 ---
 
 <BackgroundColors type="navBar">
-
     {!hasFooter && <HamburgerMenu />}
 
     <nav class="navBar">
