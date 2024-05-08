@@ -1,0 +1,73 @@
+---
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+import TableFund from "@components/fund_data/TableFund.astro";
+import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
+---
+
+<fund-data>
+  <h1>Fondo</h1>
+  <ContainerLoaderIcon />
+  <section>
+    <canvas id="fund"></canvas>
+  </section>
+
+  <!-- <hr /> -->
+
+  <TableFund />
+  <TitlesFundData />
+</fund-data>
+<style>
+  fund-data {
+    width: 98.5%;
+    height: auto;
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    section {
+      height: 70vh;
+    }
+
+    hr {
+
+      margin-top: 5rem;
+
+      body.red & {
+        border-color: var(--red-600);
+      }
+      body.green & {
+        border-color: var(--green-500);
+      }
+    }
+  }
+</style>
+<script>
+  import { getDataFund } from "@scripts/fund/fundAPI";
+  import { createChart } from "@scripts/fund/chartFund";
+  import { renderValues } from "@scripts/fund/titlesFund";
+  import { renderTable, enableEventHandlers } from "@scripts/fund/tableFund";
+  import { getCookieJWT } from "@scripts/utils";
+
+  class FundData extends HTMLElement {
+    constructor() {
+      super();
+    }
+    connectedCallback() {
+      const token = getCookieJWT();
+
+      getDataFund(token).then((data: Object) => {
+        createChart("fund", data);
+        renderTable(data);
+        enableEventHandlers(data);
+        renderValues(data);
+      });
+    }
+  }
+
+  customElements.define("fund-data", FundData);
+</script>

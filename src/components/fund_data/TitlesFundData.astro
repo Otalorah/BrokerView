@@ -1,0 +1,66 @@
+<section id="titles-fund-data">
+    <div>
+        <h3>Total ganancias</h3>
+        <p id="profits"></p>
+    </div>
+    <div>
+        <h3>Total aportes</h3>
+        <p id="contributions"></p>
+    </div>
+</section>
+
+<style>
+    #titles-fund-data {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+
+        height: auto;
+        width: 97%;
+        margin: 2.5rem auto;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            height: 100px;
+            width: 50%;
+
+            border-radius: 8px;
+            padding: 1rem;
+
+            &:first-child {
+                border: 3px solid #00ff0066;
+            }
+            &:last-child {
+                border: 3px solid #4488ee66;
+            }
+
+            h3 {
+                font-weight: 100;
+                font-size: 1.4rem;
+                text-align: center;
+                letter-spacing: 0.5px;
+
+                color: inherit;
+            }
+            p {
+                text-align: center;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+    @media (width < 500px) {
+        #titles-fund-data {
+            div {
+                h3 {
+                    font-size: 1rem;
+                }
+                p{
+                    font-size: .9rem;
+                }
+            }
+        }
+    }
+</style>
