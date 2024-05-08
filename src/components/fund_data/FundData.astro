@@ -11,10 +11,10 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
     <canvas id="fund"></canvas>
   </section>
 
-  <!-- <hr /> -->
-
-  <TableFund />
-  <TitlesFundData />
+  <section id="stats">
+    <TableFund />
+    <TitlesFundData />
+  </section>
 </fund-data>
 <style>
   fund-data {
@@ -30,19 +30,12 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
     }
 
     section {
-      height: 70vh;
+      height: 75dvh;
     }
-
-    hr {
-
-      margin-top: 5rem;
-
-      body.red & {
-        border-color: var(--red-600);
-      }
-      body.green & {
-        border-color: var(--green-500);
-      }
+    #stats {
+      height: 95dvh;
+      display: flex;
+      flex-direction: column;
     }
   }
 </style>
