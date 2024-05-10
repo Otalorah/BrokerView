@@ -1,5 +1,6 @@
 import Chart from "chart.js/auto";
 
+
 const $htmlElement = document.documentElement;
 
 Chart.defaults.borderColor = '#a9a9a977';
@@ -55,36 +56,29 @@ const observer = new MutationObserver((mutations) => {
 observer.observe($htmlElement, { attributes: true })
 
 
-export function createChart(id, data) {
+function createChart(data, id) {
 
     const dataChart = {
 
-        labels: data.map((element) => element.fecha_corte),
+        labels: data.map((element) => element.mes),
 
         datasets: [
             {
-                label: "Saldo (COP)",
-                data: data.map((element) => {
-                    let str = element.saldo_actual;
-                    str = str.slice(0, -4) + str.slice(-3);
-                    return str;
-                }),
+                label: 'inversión (USDT)',
+                data: data.map((element) => element.inversion),
                 borderWidth: 1,
-                backgroundColor: ['#00ff0066'],
-                borderColor: ['#00ff00']
+                backgroundColor: ['#1fe60077'],
+                borderColor: ['#1fe600']
+
             },
             {
-                label: "Aporte (COP)",
-                data: data.map((element) => {
-                    let str = element.aporte;
-                    str = str.slice(0, -4) + str.slice(-3);
-                    return str;
-                }),
+                label: 'Ganancia neta (USDT)',
+                data: data.map((element) => element.ganancia_neta),
                 borderWidth: 1,
-                backgroundColor: ['#4488ee66'],
-                borderColor: ['#4488ee']
-            },
-        ],
+                backgroundColor: ['#ffdd0088'],
+                borderColor: ['#ffdd00']
+            }
+        ]
     };
 
     const options = {
@@ -106,7 +100,7 @@ export function createChart(id, data) {
             }
         },
         maintainAspectRatio: false
-    };
+    }
 
     setColorCharts()
 
@@ -115,4 +109,17 @@ export function createChart(id, data) {
         data: dataChart,
         options: options,
     });
+}
+
+
+export function renderCharts(data) {
+
+    if (!data.hasOwnProperty('2023')) {
+        createChart(data['2024'], '2024')
+        return
+    }
+
+    createChart(data['2023'], '2023');
+    createChart(data['2024'], '2024');
+
 }

@@ -9,10 +9,13 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
 ---
 
 <BackgroundColors type={typeForm}>
+
     <form class=`form ${typeForm}` id={typeForm}>
         {type == "signin" ? <FormSignin /> : <FormLogin />}
     </form>
+
 </BackgroundColors>
+
 <style>
     .form {
         position: relative;

@@ -7,9 +7,9 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
 <fund-data>
   <h1>Fondo</h1>
   <ContainerLoaderIcon />
-  <section>
+  <div id="canvas-container">
     <canvas id="fund"></canvas>
-  </section>
+  </div>
 
   <section id="stats">
     <TableFund />
@@ -29,8 +29,8 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
       margin-bottom: 2rem;
     }
 
-    section {
-      height: 75dvh;
+    #canvas-container {
+      height: 77dvh;
     }
     #stats {
       height: 95dvh;
@@ -53,7 +53,7 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
     connectedCallback() {
       const token = getCookieJWT();
 
-      getDataFund(token).then((data: Object) => {
+      getDataFund(token).then((data: Array<Object>) => {
         createChart("fund", data);
         renderTable(data);
         enableEventHandlers(data);
