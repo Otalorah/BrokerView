@@ -1,7 +1,7 @@
-function enableEventHandlers() {
+function enableEventHandlers(component) {
 
-    const $tapHeaders = document.querySelectorAll('.tap-header');
-    const $pages = document.querySelectorAll('.tap-page');
+    const $tapHeaders = component.querySelectorAll('.tap-header');
+    const $pages = component.querySelectorAll('.page');
 
     $tapHeaders.forEach((tapHeader, i) => {
 
@@ -19,28 +19,26 @@ function enableEventHandlers() {
 }
 
 
-function setElementsHTML(year) {
+function renderPage2024(component) {
 
-    const $header = document.querySelector('.tap-header');
-    $header.classList.add('active');
+    // Render Li element
+    const $tapHeadersContainer = component.querySelector('#tap-headers');
 
-    const $page = document.querySelector('.tap-page');
-    $page.style.display = 'block';
+    const $li = document.createElement('li');
+    $li.textContent = '2024';
+    $li.classList.add('tap-header');
+    $tapHeadersContainer.appendChild($li);
 
-    const $canvasChart = document.querySelector('.canvas-container canvas');
+    // Render article element
+    const $pagesContainer = component.querySelector('#pages');
 
+    const $article = document.createElement('article');
+    $article.classList.add('page');
+    $article.id = 'page-2024';
 
-    $header.textContent = year;
-    $page.id = `page-${year}`;
-    $canvasChart.id = year;
+    $pagesContainer.appendChild($article);
 
-}
-
-
-function renderCanvasChart() {
-
-    const $article = document.querySelector('#page-2024');
-
+    // Render canvas element
     const $div = document.createElement('div');
     $div.classList.add('canvas-container');
 
@@ -49,88 +47,38 @@ function renderCanvasChart() {
 
     $div.appendChild($canvas);
     $article.appendChild($div);
-}
 
-
-function renderPagesHTML() {
-
-    const $tapHeadersContainer = document.querySelector('#tap-pages');
-
-    const $article = document.createElement('article');
-    $article.classList.add('tap-page');
-    $article.id = 'page-2024';
-
-    $tapHeadersContainer.appendChild($article);
-
+    enableEventHandlers(component);
 
 }
 
 
-function renderLiElement() {
+function setElementsHTML(year, component) {
 
+    const $header = component.querySelector('.tap-header');
+    $header.classList.add('active');
 
-    const $tapHeadersContainer = document.querySelector('#tap-headers');
+    const $page = component.querySelector('.page');
+    $page.style.display = 'block';
 
-    const $li = document.createElement('li');
-    $li.textContent = '2024';
-    $li.classList.add('tap-header');
-    $tapHeadersContainer.appendChild($li);
+    const $canvasChart = component.querySelector('.canvas-container canvas');
+
+    $header.textContent = year;
+    $page.id = `page-${year}`;
+    $canvasChart.id = year;
 
 }
 
 
-function renderPages(data) {
+export function renderPages(data, component) {
 
-    // If only has data from 2024
     if (!data.hasOwnProperty('2023')) {
 
-        setElementsHTML("2024")
+        setElementsHTML("2024", component);
         return
     }
 
-    setElementsHTML("2023")
-
-    renderLiElement();
-    renderPagesHTML();
-    renderCanvasChart();
-
-    enableEventHandlers();
+    setElementsHTML("2023", component);
+    renderPage2024(component);
 
 }
-
-
-export function transformDataByYear(dataList) {
-
-    const data = {};
-    const data2023 = [];
-    const data2024 = [];
-
-    dataList.forEach(element => {
-
-        if (element.año == '2023') {
-            data2023.push(element);
-        }
-        else if (element.año == '2024') {
-            data2024.push(element);
-        }
-
-    });
-
-    if (data2023.length == 0) {
-
-        data["2024"] = data2024;
-        renderPages(data);
-        return data
-
-    }
-
-    data["2023"] = data2023;
-    data["2024"] = data2024;
-
-    renderPages(data);
-
-    return data
-
-}
-
-
