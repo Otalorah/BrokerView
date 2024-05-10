@@ -1,6 +1,5 @@
 import Chart from "chart.js/auto";
 
-
 const $htmlElement = document.documentElement;
 
 Chart.defaults.borderColor = '#a9a9a977';
@@ -8,23 +7,23 @@ Chart.defaults.borderColor = '#a9a9a977';
 
 function setColorCharts() {
     if ($htmlElement.className == 'light') {
-        Chart.defaults.color = '#000'
+        Chart.defaults.color = '#000';
     } else {
-        Chart.defaults.color = '#fff'
+        Chart.defaults.color = '#fff';
     }
 }
 
 
 function setFontChart() {
 
-    const actualWidth = window.innerWidth
+    const actualWidth = window.innerWidth;
 
     if (actualWidth < 613) {
-        Chart.defaults.font.size = 9
+        Chart.defaults.font.size = 9;
         return 12
     }
     else if (actualWidth < 472) {
-        Chart.defaults.font.size = 8.4
+        Chart.defaults.font.size = 8.4;
         return 12
     }
     return 15
@@ -33,30 +32,36 @@ function setFontChart() {
 
 function changeColorCharts(color) {
     Object.values(Chart.instances).forEach((chart) => {
-        chart.options.scales.x.ticks.color = color
-        chart.options.scales.y.ticks.color = color
-        chart.legend.options.labels.color = color
-        chart.update()
+        chart.options.scales.x.ticks.color = color;
+        chart.options.scales.y.ticks.color = color;
+        chart.legend.options.labels.color = color;
+        chart.update();
     })
 }
 
 
 const observer = new MutationObserver((mutations) => {
+
     mutations.forEach(mutation => {
+
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+
             if ($htmlElement.className == 'light') {
-                changeColorCharts('#000')
+                changeColorCharts('#000');
             } else {
-                changeColorCharts('#fff')
+                changeColorCharts('#fff');
             }
+
         }
+
     });
+
 })
 
 observer.observe($htmlElement, { attributes: true })
 
 
-function createChart(data, id) {
+function createChart(id, data) {
 
     const dataChart = {
 
@@ -102,7 +107,7 @@ function createChart(data, id) {
         maintainAspectRatio: false
     }
 
-    setColorCharts()
+    setColorCharts();
 
     new Chart(id, {
         type: "bar",
@@ -115,11 +120,11 @@ function createChart(data, id) {
 export function renderCharts(data) {
 
     if (!data.hasOwnProperty('2023')) {
-        createChart(data['2024'], '2024')
+        createChart('2024', data['2024']);
         return
     }
 
-    createChart(data['2023'], '2023');
-    createChart(data['2024'], '2024');
+    createChart('2023', data['2023']);
+    createChart('2024', data['2024']);
 
 }

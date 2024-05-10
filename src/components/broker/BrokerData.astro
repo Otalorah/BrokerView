@@ -1,0 +1,51 @@
+---
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+import TapHeaders from "@components/broker/TapHeaders.astro";
+import PagesBroker from "@components/broker/PagesBroker.astro";
+---
+
+<broker-data>
+    <h1>Broker</h1>
+    <ContainerLoaderIcon />
+
+    <TapHeaders />
+
+    <PagesBroker />
+</broker-data>
+<style>
+    broker-data {
+        width: 100%;
+        height: auto;
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+    }
+</style>
+<script>
+    import { getDataBroker } from "@scripts/broker/brokerAPI";
+    import { renderCharts } from "@scripts/broker/chartsBroker";
+    import { renderPages } from "@scripts/broker/renderBroker";
+    import { getCookieJWT } from "@scripts/utils";
+    import { transformDataByYear } from "@scripts/utils";
+
+    class BrokerData extends HTMLElement {
+        constructor() {
+            super();
+        }
+        connectedCallback() {
+            const token = getCookieJWT();
+
+            getDataBroker(token).then((data: Array<Object>) => {
+                const dataObject = transformDataByYear(data);
+                renderPages(dataObject, this);
+                renderCharts(dataObject);
+            });
+        }
+    }
+    customElements.define("broker-data", BrokerData);
+</script>

@@ -1,7 +1,7 @@
 ---
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
-import TableFund from "@components/fund_data/TableFund.astro";
-import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
+import TableFund from "@components/fund/TableFund.astro";
+import TitlesFundData from "@components/fund/TitlesFundData.astro";
 ---
 
 <fund-data>
@@ -29,10 +29,10 @@ import TitlesFundData from "@components/fund_data/TitlesFundData.astro";
       margin-bottom: 2rem;
     }
 
-    #canvas-container {
+    div#canvas-container {
       height: 77dvh;
     }
-    #stats {
+    section#stats {
       height: 95dvh;
       display: flex;
       flex-direction: column;
