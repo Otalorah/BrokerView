@@ -90,6 +90,7 @@ function createChart(id, data) {
         scales: {
             y: {
                 beginAtZero: true,
+                min: 0
             },
         },
         plugins: {

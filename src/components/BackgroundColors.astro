@@ -67,10 +67,28 @@ const { type } = Astro.props;
         &.data-account{
             margin: auto;
         }
+        
         &.table-fund{
             height: auto;
             margin: 1rem auto;
+            padding: 3px;
             flex: 1;
+
+            &::before{
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    #48e,
+                );
+            }
+            &::after{
+                background-image: repeating-conic-gradient(
+                    from var(--a),
+                    #049,
+                    #48e,
+                    #049,
+                    #48e
+                );
+            }
         }
 
         &::before{
