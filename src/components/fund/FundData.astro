@@ -42,7 +42,7 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
 <script>
   import { getDataFund } from "@scripts/fund/fundAPI";
   import { createChart } from "@scripts/fund/chartFund";
-  import { renderValues } from "@scripts/fund/titlesFund";
+  import { renderMaxValues } from "@scripts/fund/titlesFund";
   import { renderTable, enableEventHandlers } from "@scripts/fund/tableFund";
   import { getCookieJWT } from "@scripts/utils";
 
@@ -55,9 +55,9 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
 
       getDataFund(token).then((data: Array<Object>) => {
         createChart("fund", data);
-        renderTable(data);
-        enableEventHandlers(data);
-        renderValues(data);
+        renderTable(data, this);
+        enableEventHandlers(data, this);
+        renderMaxValues(data, this);
       });
     }
   }

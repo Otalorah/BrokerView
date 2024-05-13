@@ -8,9 +8,9 @@ function getCutoffDate(data) {
 }
 
 
-function renderNewRows(data) {
+function renderNewRows(data, component) {
 
-    const $table = document.querySelector('#table-fund');
+    const $table = component.querySelector('#table-fund');
 
     data.forEach(element => {
 
@@ -28,10 +28,10 @@ function renderNewRows(data) {
 }
 
 
-function renderOptionsSelect(data) {
+function renderOptionsSelect(data, component) {
 
     const cutOffDates = getCutoffDate(data);
-    const $selectHTML = document.querySelector('#cutoff-date');
+    const $selectHTML = component.querySelector('#cutoff-date');
 
     cutOffDates.forEach(element => {
         const $optionHTML = document.createElement('option');
@@ -45,22 +45,22 @@ function renderOptionsSelect(data) {
 }
 
 
-export function renderTable(data) {
+export function renderTable(data, component) {
 
     const firstCutoffDate = getCutoffDate(data)[0];
     const dataFiltered = filterDataByCutoffDate(data, firstCutoffDate);
 
-    renderOptionsSelect(data)
-    renderNewRows(dataFiltered)
+    renderOptionsSelect(data, component)
+    renderNewRows(dataFiltered, component)
 
 }
 
 
-export function enableEventHandlers(data) {
+export function enableEventHandlers(data, component) {
 
-    const $table = document.querySelector('#table-fund');
+    const $table = component.querySelector('#table-fund');
 
-    document.querySelector('#cutoff-date').onchange = e => {
+    component.querySelector('#cutoff-date').onchange = e => {
 
         // Remove childrens
         const childrens = $table.children;
@@ -74,7 +74,7 @@ export function enableEventHandlers(data) {
 
         const dataFiltered = filterDataByCutoffDate(data, date);
 
-        renderNewRows(dataFiltered)
+        renderNewRows(dataFiltered, component)
 
     }
 

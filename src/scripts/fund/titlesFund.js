@@ -30,7 +30,7 @@ function sumValues(data) {
 }
 
 
-export function renderValues(data) {
+export function renderMaxValues(data, component) {
 
     const contributionsList = getDataByProperty(data, "aporte");
     const profitsList = getDataByProperty(data, "rendimientos");
@@ -41,7 +41,7 @@ export function renderValues(data) {
     const contributionsString = convertNumToString(totalContributions);
     const profitsString = convertNumToString(totalprofits);
 
-    document.querySelector('#contributions').textContent = contributionsString + ' (COP)';
-    document.querySelector('#profits').textContent = profitsString + ' (COP)';
- 
+    component.querySelector('#contributions').textContent = contributionsString + ' (COP)';
+    component.querySelector('#profits').textContent = profitsString + ' (COP)';
+
 }
