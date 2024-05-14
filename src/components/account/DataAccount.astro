@@ -1,12 +1,11 @@
 ---
-import CardDataAccount from "@components/account/CardDataAccount.astro
+import CardDataAccount from "@components/account/CardDataAccount.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
 
 <data-account>
     <ContainerLoaderIcon />
-
     <BackgroundColors type="data-account">
         <ul>
             <li>
@@ -75,8 +74,7 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     }
 </style>
 <script>
-    import { getDataUser } from "@scripts/usersAPI";
-    import { getCookieJWT } from "@scripts/utils";
+    import { getDataSessionStorage } from "@scripts/getData";
 
     class DataAccount extends HTMLElement {
         constructor() {
@@ -98,9 +96,9 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
                 }
             }
 
-            const token = getCookieJWT();
-
-            getDataUser(token).then((data) => renderDataAccount(data));
+            getDataSessionStorage("dataUser").then((data) =>
+                renderDataAccount(data),
+            );
         }
     }
 

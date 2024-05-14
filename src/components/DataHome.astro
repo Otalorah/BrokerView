@@ -69,11 +69,8 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     }
 </style>
 <script>
-    import {
-        getCookieJWT,
-        getAllData,
-        setSessionStorage,
-    } from "@scripts/utils";
+    import { getCookieJWT } from "@scripts/utils";
+    import { getAllData, setSessionStorage } from "@scripts/getData";
 
     import { renderDataBroker, renderDataFund } from "@scripts/home/renderHome";
 
@@ -87,14 +84,16 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 
             const token = getCookieJWT();
 
-            getAllData(token).then(([broker, fund]) => {
-                setSessionStorage(broker, fund);
+            getAllData(token).then(([user, broker, fund]) => {
+                setSessionStorage(user, broker, fund);
 
                 const lastRecordBroker = getLastRecord(broker);
                 const lastRecordFund = getLastRecord(fund);
 
                 renderDataBroker(lastRecordBroker, this);
                 renderDataFund(lastRecordFund, this);
+
+                console.log(user);
             });
         }
     }

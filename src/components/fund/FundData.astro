@@ -5,8 +5,10 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
 ---
 
 <fund-data>
-  <h1>Fondo</h1>
   <ContainerLoaderIcon />
+
+  <h1>Fondo</h1>
+
   <figure id="canvas-container">
     <canvas id="fund"></canvas>
   </figure>
@@ -41,20 +43,17 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
   }
 </style>
 <script>
-  import { getDataFund } from "@scripts/fund/fundAPI";
+  import { getDataSessionStorage } from "@scripts/getData";
   import { createChart } from "@scripts/fund/chartFund";
   import { renderMaxValues } from "@scripts/fund/titlesFund";
   import { renderTable, enableEventHandlers } from "@scripts/fund/tableFund";
-  import { getCookieJWT } from "@scripts/utils";
 
   class FundData extends HTMLElement {
     constructor() {
       super();
     }
     connectedCallback() {
-      const token = getCookieJWT();
-
-      getDataFund(token).then((data: Array<Object>) => {
+      getDataSessionStorage("dataFund").then((data: Array<Object>) => {
         createChart("fund", data);
         renderTable(data, this);
         enableEventHandlers(data, this);

@@ -82,39 +82,6 @@ export async function loginUser(data) {
 }
 
 
-
-export async function getDataUser(token) {
-
-    const dataCache = sessionStorage.getItem('dataUser');
-
-    const $loader = document.querySelector('#loader-container');
-
-    if (dataCache) {
-        $loader.classList.add('disappear');
-        return Promise.resolve(JSON.parse(dataCache));
-    }
-
-    try {
-        return await new Promise((resolve, reject) => {
-
-            fetch("https://api-brokerview.onrender.com/user", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(response => response.json())
-                .then(data => {
-                    sessionStorage.setItem('dataUser', JSON.stringify(data));
-                    resolve(data)
-                }).catch(e => reject(e));
-        })
-    } finally {
-        $loader.classList.add('disappear')
-    }
-}
-
-
-
 export function GetToken(token) {
 
     return new Promise((resolve, reject) => {

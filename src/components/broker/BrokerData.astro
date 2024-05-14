@@ -5,11 +5,11 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
 
 <broker-data>
-    <h1>Broker</h1>
     <ContainerLoaderIcon />
 
-    <TapHeaders />
+    <h1>Broker</h1>
 
+    <TapHeaders />
     <PagesBroker />
 </broker-data>
 <style>
@@ -27,10 +27,9 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     }
 </style>
 <script>
-    import { getDataBroker } from "@scripts/broker/brokerAPI";
+    import { getDataSessionStorage } from "@scripts/getData";
     import { renderCharts } from "@scripts/broker/chartsBroker";
     import { renderPages } from "@scripts/broker/renderBroker";
-    import { getCookieJWT } from "@scripts/utils";
     import { transformDataByYear } from "@scripts/utils";
 
     class BrokerData extends HTMLElement {
@@ -38,9 +37,7 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
             super();
         }
         connectedCallback() {
-            const token = getCookieJWT();
-
-            getDataBroker(token).then((data: Array<Object>) => {
+            getDataSessionStorage("dataBroker").then((data: Array<Object>) => {
                 const dataObject = transformDataByYear(data);
                 renderPages(dataObject, this);
                 renderCharts(dataObject);
