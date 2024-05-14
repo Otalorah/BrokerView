@@ -7,7 +7,7 @@
 </div>
 
 <style>
-    .hamburger_icon {
+    div.hamburger_icon {
         position: absolute;
         height: 40px;
         width: 23px;
@@ -50,13 +50,13 @@
             background-color: var(--bg-color-dark);
         }
 
-        #top {
+        span#top {
             top: 10px;
         }
-        #middle {
+        span#middle {
             top: 18.5px;
         }
-        #bottom {
+        span#bottom {
             top: 27px;
         }
     }
@@ -68,8 +68,8 @@
         }
     }
 </style>
-<script is:inline>
-    let screenWidth = window.innerWidth;
+<script>
+    const screenWidth = window.innerWidth;
     const $hamburger = document.getElementById("hamburger");
 
     $hamburger.addEventListener("click", () => {
@@ -82,7 +82,7 @@
             document.getElementById("menu-toggle").classList.toggle("expanded");
         }
     });
-    
+
     document.addEventListener("astro:page-load", () => {
         if (screenWidth < 666) {
             document

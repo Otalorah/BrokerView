@@ -5,7 +5,7 @@ export async function getDataBroker(token) {
     const $loader = document.querySelector('#loader-container');
 
     if (dataCache) {
-        $loader.classList.add('disappear')
+        $loader.classList.add('disappear');
         return Promise.resolve(JSON.parse(dataCache));
     }
     try {

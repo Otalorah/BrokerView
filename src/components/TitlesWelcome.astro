@@ -19,13 +19,16 @@ else text = "Buenas noches";
     <p>Saldo actual</p>
 </section>
 <style>
-    .titles {
+    section.titles {
         display: flex;
         flex-direction: column;
+        
+        margin: auto;
         margin-top: 1rem;
-        color: var(--text-color-dark);
 
-        #money {
+        max-width: 300px;
+
+        h2#money {
             text-align: center;
             font-size: 2rem;
         }
@@ -37,13 +40,6 @@ else text = "Buenas noches";
         p {
             text-align: end;
             font-size: 0.75rem;
-        }
-    }
-    html.light {
-        h2,
-        h5,
-        p {
-            color: var(--text-color-light);
         }
     }
 </style>

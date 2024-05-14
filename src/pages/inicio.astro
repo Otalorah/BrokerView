@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import TitlesWelcome from "@components/TitlesWelcome.astro";
 import MenuToggle from "@components/menu_toggle/MenuToggle.astro";
+import DataHome from "@components/DataHome.astro";
 
 import "@styles/main-content.css";
 
@@ -12,14 +12,8 @@ if (!Astro.cookies.get("jwt")) {
 
 <Layout title="BrokerView | Inicio" hasFooter={false}>
     <MenuToggle />
+
     <main>
-        <TitlesWelcome />
+        <DataHome />
     </main>
 </Layout>
-
-<style>
-    h1,
-    h3 {
-        text-align: center;
-    }
-</style>

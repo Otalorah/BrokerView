@@ -11,7 +11,7 @@ if (!Astro.cookies.has("jwt")) {
 
 import { GetToken } from "@scripts/usersAPI";
 
-let hasBroker;
+let hasBroker: Boolean;
 
 if (!Astro.cookies.has("dataToken")) {
     const token = Astro.cookies.get("jwt").value;

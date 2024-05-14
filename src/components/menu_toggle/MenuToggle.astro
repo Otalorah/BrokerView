@@ -70,7 +70,7 @@ import ModalLogout from "@components/menu_toggle/ModalLogout.astro";
 <ModalLogout />
 
 <style>
-    #background__menu-toggle {
+    div#background__menu-toggle {
         position: fixed;
         display: none;
 
@@ -86,7 +86,7 @@ import ModalLogout from "@components/menu_toggle/ModalLogout.astro";
             transform: translateX(200%);
         }
     }
-    #menu-toggle {
+    aside#menu-toggle {
         position: fixed;
         display: flex;
         justify-content: space-between;
@@ -129,12 +129,12 @@ import ModalLogout from "@components/menu_toggle/ModalLogout.astro";
         }
     }
     @media (width > 666px) {
-        #background__menu-toggle {
+        div#background__menu-toggle {
             &.appear {
                 display: none;
             }
         }
-        #menu-toggle {
+        aside#menu-toggle {
             left: 0;
 
             width: 50px;

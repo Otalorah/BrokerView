@@ -7,7 +7,7 @@ main{
     margin-left: var(--margin-close);
     transition: margin-left .15s ease;
 
-    .expanded ~ & {
+    aside.expanded ~ & {
         margin-left: var(--margin-open);
     }
 }

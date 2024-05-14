@@ -1,0 +1,39 @@
+---
+import TitlesWelcome from "@components/TitlesWelcome.astro";
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+---
+
+<home-data>
+    <TitlesWelcome />
+
+    <h2>HOLA</h2>
+    <ContainerLoaderIcon />
+    <button>click</button>
+</home-data>
+<style>
+    home-data {
+        width: 100%;
+        height: auto;
+    }
+</style>
+<script>
+    import { getDataBroker } from "@scripts/broker/brokerAPI";
+    import { getDataFund } from "@scripts/fund/fundAPI";
+
+    import { getCookieJWT } from "@scripts/utils";
+
+    const token = getCookieJWT();
+
+    class HomeData extends HTMLElement {
+        constructor() {
+            super();
+        }
+        connectedCallback() {
+            const token = getCookieJWT();
+            getDataBroker(token).then((data: Array<Object>) =>
+                console.log(data[data.length - 1]),
+            );
+        }
+    }
+    customElements.define("home-data", HomeData);
+</script>
