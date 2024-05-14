@@ -13,33 +13,17 @@ else if (timeNow >= hourAfternoon && timeNow < hourNight)
 else text = "Buenas noches";
 ---
 
-<section class="titles">
-    <h5>{text}</h5>
-    <h2 id="money">$ 1.000.000 COP</h2>
-    <p>Saldo actual</p>
-</section>
+<h5>{text}</h5>
 <style>
-    section.titles {
-        display: flex;
-        flex-direction: column;
-        
-        margin: auto;
-        margin-top: 1rem;
+    h5 {
+        width: 100%;
 
-        max-width: 300px;
+        text-align: center;
+        font-weight: 100;
+        font-size: 2rem;
+        letter-spacing: 5px;
 
-        h2#money {
-            text-align: center;
-            font-size: 2rem;
-        }
-        h5 {
-            font-weight: 100;
-            font-size: 1rem;
-            letter-spacing: 7px;
-        }
-        p {
-            text-align: end;
-            font-size: 0.75rem;
-        }
+        margin-top: 3rem;
+        margin-bottom: 3rem;
     }
 </style>

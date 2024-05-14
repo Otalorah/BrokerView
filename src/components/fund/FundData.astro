@@ -7,9 +7,9 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
 <fund-data>
   <h1>Fondo</h1>
   <ContainerLoaderIcon />
-  <div id="canvas-container">
+  <figure id="canvas-container">
     <canvas id="fund"></canvas>
-  </div>
+  </figure>
 
   <section id="stats">
     <TableFund />
@@ -30,7 +30,7 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
       margin-bottom: 2rem;
     }
 
-    div#canvas-container {
+    figure#canvas-container {
       height: 77dvh;
     }
     section#stats {

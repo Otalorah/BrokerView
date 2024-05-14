@@ -76,8 +76,8 @@ export function createChart(id, data) {
                     return str;
                 }),
                 borderWidth: 1,
-                backgroundColor: ['#00ff0066'],
-                borderColor: ['#00ff00']
+                backgroundColor: '#00ff0066',
+                borderColor: '#00ff00'
             },
             {
                 label: "Aporte (COP)",
@@ -87,8 +87,8 @@ export function createChart(id, data) {
                     return str;
                 }),
                 borderWidth: 1,
-                backgroundColor: ['#4488ee66'],
-                borderColor: ['#4488ee']
+                backgroundColor: '#4488ee66',
+                borderColor: '#4488ee'
             },
         ],
     };

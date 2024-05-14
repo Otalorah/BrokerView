@@ -72,16 +72,16 @@ function createChart(id, data) {
                 label: 'inversión (USDT)',
                 data: data.map((element) => element.inversion),
                 borderWidth: 1,
-                backgroundColor: ['#1fe60077'],
-                borderColor: ['#1fe600']
+                backgroundColor: '#1fe60077',
+                borderColor: '#1fe600'
 
             },
             {
                 label: 'Ganancia neta (USDT)',
                 data: data.map((element) => element.ganancia_neta),
                 borderWidth: 1,
-                backgroundColor: ['#ffdd0088'],
-                borderColor: ['#ffdd00']
+                backgroundColor: '#ffdd0088',
+                borderColor: '#ffdd00'
             }
         ]
     };

@@ -39,14 +39,14 @@ function renderPage2024(component) {
     $pagesContainer.appendChild($article);
 
     // Render canvas element
-    const $div = document.createElement('div');
-    $div.classList.add('canvas-container');
+    const $figure = document.createElement('figure');
+    $figure.classList.add('canvas-container');
 
     const $canvas = document.createElement('canvas');
     $canvas.id = '2024';
 
-    $div.appendChild($canvas);
-    $article.appendChild($div);
+    $figure.appendChild($canvas);
+    $article.appendChild($figure);
 
     enableEventHandlers(component);
 

@@ -1,5 +1,5 @@
 ---
-import CardDataAccount from "@components/data/CardDataAccount.astro";
+import CardDataAccount from "@components/account/CardDataAccount.astro
 import BackgroundColors from "@components/BackgroundColors.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
@@ -90,10 +90,11 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 
             function renderDataAccount(data: Object) {
                 const valuesData = Object.values(data) as Object;
+
                 for (let i = 0; i < elementsHTML.length; i++) {
-                    const element = elementsHTML[i] as HTMLElement;
+                    const elementHTML = elementsHTML[i] as HTMLElement;
                     const value = valuesData[i];
-                    element.textContent = value;
+                    elementHTML.textContent = value;
                 }
             }
 

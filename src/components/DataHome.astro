@@ -4,35 +4,98 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 ---
 
 <home-data>
+    <ContainerLoaderIcon />
+
     <TitlesWelcome />
 
-    <h2>HOLA</h2>
-    <ContainerLoaderIcon />
-    <button>click</button>
+    <section>
+        <div>
+            <h5>Broker</h5>
+            <p id="amount-broker"></p>
+
+            <hr />
+
+            <h5>Último mes</h5>
+            <p id="last-month">saldo: 000</p>
+        </div>
+        <div>
+            <h5>Fondo</h5>
+            <p id="amount-fund">saldo: 000</p>
+
+            <hr />
+
+            <h5>Última fecha de corte</h5>
+            <p id="last-cutoff-date"></p>
+        </div>
+    </section>
 </home-data>
 <style>
     home-data {
         width: 100%;
         height: auto;
     }
+    section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        width: 99%;
+        margin: 0 auto;
+        padding: 0 1rem;
+
+        div {
+            width: 100%;
+            height: auto;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 1rem;
+
+            border-radius: 8px;
+            border: 1px solid #0f0;
+
+            &:last-child {
+                border: 1px solid #f00;
+            }
+
+            h5 {
+                font-size: 2rem;
+                font-weight: 100;
+            }
+        }
+    }
 </style>
 <script>
-    import { getDataBroker } from "@scripts/broker/brokerAPI";
-    import { getDataFund } from "@scripts/fund/fundAPI";
+    import {
+        getCookieJWT,
+        getAllData,
+        setSessionStorage,
+    } from "@scripts/utils";
 
-    import { getCookieJWT } from "@scripts/utils";
-
-    const token = getCookieJWT();
+    import { renderDataBroker, renderDataFund } from "@scripts/home/renderHome";
 
     class HomeData extends HTMLElement {
         constructor() {
             super();
         }
         connectedCallback() {
+            const getLastRecord = (data: Array<Object>) =>
+                data[data.length - 1];
+
             const token = getCookieJWT();
-            getDataBroker(token).then((data: Array<Object>) =>
-                console.log(data[data.length - 1]),
-            );
+
+            getAllData(token).then(([broker, fund]) => {
+                setSessionStorage(broker, fund);
+
+                const lastRecordBroker = getLastRecord(broker);
+                const lastRecordFund = getLastRecord(fund);
+
+                renderDataBroker(lastRecordBroker, this);
+                renderDataFund(lastRecordFund, this);
+            });
         }
     }
     customElements.define("home-data", HomeData);
