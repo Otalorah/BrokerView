@@ -1,0 +1,70 @@
+---
+import CardInvalid from "@components/home/CardInvalid.astro";
+
+interface Props {
+    fund: boolean;
+    broker: boolean;
+}
+
+const { fund, broker } = Astro.props;
+---
+
+{
+    broker ? (
+        <div>
+            <h5>Broker</h5>
+            <p id="amount-broker" />
+
+            <hr />
+
+            <h5>Último mes</h5>
+            <p id="last-month">saldo: 000</p>
+        </div>
+    ) : (
+        <CardInvalid title="Broker" />
+    )
+}
+
+{
+    fund ? (
+        <div>
+            <h5>Fondo</h5>
+            <p id="amount-fund">saldo: 000</p>
+
+            <hr />
+
+            <h5>Última fecha de corte</h5>
+            <p id="last-cutoff-date" />
+        </div>
+    ) : (
+        <CardInvalid title="Fondo" />
+    )
+}
+
+<style>
+    div {
+        width: 100%;
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding: 1rem;
+
+        border-radius: 8px;
+        border: 2px solid var(--green);
+        box-shadow: 0 0 5px var(--green);
+
+        &:last-child {
+            border: 2px solid var(--red);
+            box-shadow: 0 0 5px var(--red);
+        }
+
+        h5 {
+            font-size: 2rem;
+            font-weight: 100;
+        }
+    }
+</style>

@@ -1,8 +1,10 @@
 ---
-import TitlesWelcome from "@components/TitlesWelcome.astro";
+import TitlesWelcome from "@components/home/TitlesWelcome.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+import CardsHome from "@components/home/CardsHome.astro";
 
 const token = Astro.cookies.get("dataToken").value;
+const tokenObject = JSON.parse(token)
 ---
 
 <home-data data-token={token}>
@@ -11,24 +13,7 @@ const token = Astro.cookies.get("dataToken").value;
     <TitlesWelcome />
 
     <section>
-        <div>
-            <h5>Broker</h5>
-            <p id="amount-broker"></p>
-
-            <hr />
-
-            <h5>Último mes</h5>
-            <p id="last-month">saldo: 000</p>
-        </div>
-        <div>
-            <h5>Fondo</h5>
-            <p id="amount-fund">saldo: 000</p>
-
-            <hr />
-
-            <h5>Última fecha de corte</h5>
-            <p id="last-cutoff-date"></p>
-        </div>
+        <CardsHome broker={tokenObject.broker} fund={tokenObject.fund} />
     </section>
 </home-data>
 <style>
@@ -44,30 +29,6 @@ const token = Astro.cookies.get("dataToken").value;
         width: 99%;
         margin: 0 auto;
         padding: 0 1rem;
-
-        div {
-            width: 100%;
-            height: auto;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            padding: 1rem;
-
-            border-radius: 8px;
-            border: 1px solid #0f0;
-
-            &:last-child {
-                border: 1px solid #f00;
-            }
-
-            h5 {
-                font-size: 2rem;
-                font-weight: 100;
-            }
-        }
     }
 </style>
 <script>
