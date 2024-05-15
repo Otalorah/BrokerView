@@ -9,19 +9,8 @@ if (!Astro.cookies.has("jwt")) {
     return Astro.redirect("/");
 }
 
-import { GetToken } from "src/scripts/usersAPI";
-
-let hasFund;
-
-if (!Astro.cookies.has("dataToken")) {
-    const token = Astro.cookies.get("jwt").value;
-    const response = await GetToken(token);
-    Astro.cookies.set("dataToken", response);
-    hasFund = response.fund;
-}
-
 const token = Astro.cookies.get("dataToken").value;
-hasFund = JSON.parse(token).fund;
+const hasFund = JSON.parse(token).fund;
 ---
 
 <Layout title="BrokerView | Fondo" hasFooter={false}>

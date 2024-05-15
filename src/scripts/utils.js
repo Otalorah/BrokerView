@@ -7,7 +7,7 @@ export function getCookieJWT() {
         const cookie = cookies[i].trim().split("=");
 
         if (cookie[0] == "jwt") {
-            return cookie[1];
+            return decodeURIComponent(cookie[1]);
         }
     }
 }
@@ -41,5 +41,21 @@ export function transformDataByYear(dataList) {
     data["2024"] = data2024;
 
     return data
+
+}
+
+
+export function getUrlsData(data) {
+
+    const urls = ["https://api-brokerview.onrender.com/user", false, false];
+
+    if (data.broker) {
+        urls[1] = ("https://api-brokerview.onrender.com/broker");
+    }
+    if (data.fund) {
+        urls[2] = ("https://api-brokerview.onrender.com/fund");
+    }
+
+    return urls
 
 }

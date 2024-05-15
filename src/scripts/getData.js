@@ -1,54 +1,45 @@
-export async function getAllData(token) {
+function verifySessionStorage() {
 
-    const dataCacheUser = sessionStorage.getItem('dataUser');
-    const dataCacheBroker = sessionStorage.getItem('dataBroker');
-    const dataCacheFund = sessionStorage.getItem('dataFund');
+    const dataCacheUser = sessionStorage.getItem('data-user');
+    const dataCacheBroker = sessionStorage.getItem('data-broker');
+    const dataCacheFund = sessionStorage.getItem('data-fund');
 
     const $loader = document.querySelector('#loader-container');
 
-    if (dataCacheUser) {
+    const promiseUser = dataCacheUser ? JSON.parse(dataCacheUser) : Promise.resolve(null);
+    const promiseBroker = dataCacheBroker ? JSON.parse(dataCacheBroker) : Promise.resolve(null);
+    const promiseFund = dataCacheFund ? JSON.parse(dataCacheFund) : Promise.resolve(null);
 
-        const promiseUser = JSON.parse(dataCacheUser);
-        const promiseBroker = JSON.parse(dataCacheBroker);
-        const promiseFund = JSON.parse(dataCacheFund);
+    const promises = [promiseUser, promiseBroker, promiseFund].filter(promise => promise !== null);
 
+    if (promises.length > 0) {
         $loader.classList.add('disappear');
-
-        return Promise.all([promiseUser, promiseBroker, promiseFund])
-
     }
 
-    const urls = ["https://api-brokerview.onrender.com/user", "https://api-brokerview.onrender.com/broker", "https://api-brokerview.onrender.com/fund"];
+    return Promise.all(promises);
+
+}
+
+
+export async function getAllData(token, urls) {
+
+    const dataCacheUser = sessionStorage.getItem('data-user');
+    if (dataCacheUser) return verifySessionStorage()
 
     const options = {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }
+    };
 
     try {
-        const promises = urls.map(url => fetch(url, options).then(res => res.json()))
+        const promises = urls.map(url => url ? fetch(url, options).then(res => res.json()) : Promise.resolve(null));
         return await Promise.all(promises)
     }
     finally {
-        $loader.classList.add('disappear');
+        document.querySelector('#loader-container').classList.add('disappear');
     }
-}
-
-
-export function setSessionStorage(user, broker, fund) {
-
-    const dataCacheUser = sessionStorage.getItem('dataUser');
-
-    if (dataCacheUser) {
-        return
-    }
-
-    sessionStorage.setItem("dataUser", JSON.stringify(user));
-    sessionStorage.setItem("dataBroker", JSON.stringify(broker));
-    sessionStorage.setItem("dataFund", JSON.stringify(fund));
-
 }
 
 

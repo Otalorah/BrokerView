@@ -37,7 +37,7 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
             super();
         }
         connectedCallback() {
-            getDataSessionStorage("dataBroker").then((data: Array<Object>) => {
+            getDataSessionStorage("data-broker").then((data: Array<Object>) => {
                 const dataObject = transformDataByYear(data);
                 renderPages(dataObject, this);
                 renderCharts(dataObject);

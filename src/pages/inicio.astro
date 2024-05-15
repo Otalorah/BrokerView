@@ -8,6 +8,12 @@ import "@styles/main-content.css";
 if (!Astro.cookies.get("jwt")) {
     return Astro.redirect("/");
 }
+
+import { GetToken } from "@scripts/usersAPI";
+
+const token = Astro.cookies.get("jwt").value;
+const response = await GetToken(token);
+Astro.cookies.set("dataToken", response);
 ---
 
 <Layout title="BrokerView | Inicio" hasFooter={false}>

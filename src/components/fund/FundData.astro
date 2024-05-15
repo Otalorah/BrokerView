@@ -53,7 +53,7 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
       super();
     }
     connectedCallback() {
-      getDataSessionStorage("dataFund").then((data: Array<Object>) => {
+      getDataSessionStorage("data-fund").then((data: Array<Object>) => {
         createChart("fund", data);
         renderTable(data, this);
         enableEventHandlers(data, this);

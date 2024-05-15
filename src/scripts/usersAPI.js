@@ -90,6 +90,6 @@ export function GetToken(token) {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(response => { return response.json() }).then(data => resolve(data)).catch(e => reject(e))
+        }).then(response => response.json()).then(data => resolve(data)).catch(e => reject(e))
     })
 }

@@ -1,9 +1,11 @@
 ---
 import TitlesWelcome from "@components/TitlesWelcome.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
+
+const token = Astro.cookies.get("dataToken").value;
 ---
 
-<home-data>
+<home-data data-token={token}>
     <ContainerLoaderIcon />
 
     <TitlesWelcome />
@@ -69,31 +71,25 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     }
 </style>
 <script>
-    import { getCookieJWT } from "@scripts/utils";
-    import { getAllData, setSessionStorage } from "@scripts/getData";
-
-    import { renderDataBroker, renderDataFund } from "@scripts/home/renderHome";
+    import { getCookieJWT, getUrlsData } from "@scripts/utils";
+    import { getAllData } from "@scripts/getData";
+    import { setHomePage } from "@scripts/home/renderHome";
 
     class HomeData extends HTMLElement {
         constructor() {
             super();
         }
         connectedCallback() {
-            const getLastRecord = (data: Array<Object>) =>
-                data[data.length - 1];
-
             const token = getCookieJWT();
+            const dataToken = JSON.parse(this.dataset.token);
 
-            getAllData(token).then(([user, broker, fund]) => {
-                setSessionStorage(user, broker, fund);
+            const urls = getUrlsData(dataToken);
 
-                const lastRecordBroker = getLastRecord(broker);
-                const lastRecordFund = getLastRecord(fund);
+            const hasBroker = dataToken.broker;
+            const hasFund = dataToken.fund;
 
-                renderDataBroker(lastRecordBroker, this);
-                renderDataFund(lastRecordFund, this);
-
-                console.log(user);
+            getAllData(token, urls).then((responses) => {
+                setHomePage(hasBroker, hasFund, responses, this);
             });
         }
     }
