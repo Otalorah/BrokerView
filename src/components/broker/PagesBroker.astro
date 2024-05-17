@@ -1,13 +1,21 @@
+---
+import TitlesValuesBroker from "@components/broker/TitlesValuesBroker.astro";
+---
+
 <section id="pages">
     <article class="page">
         <figure class="canvas-container">
             <canvas></canvas>
         </figure>
+
+        <h2 class="summary-title">Resumen del año</h2>
+
+        <TitlesValuesBroker />
     </article>
 </section>
 
 <style>
-    #pages {
+    section#pages {
         article.page {
             display: none;
             height: auto;
@@ -19,6 +27,82 @@
             width: 95%;
             margin: 0 auto;
             margin-bottom: 0.6rem;
+        }
+
+        h2.summary-title{
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 2px;
+
+            margin-top: 4rem;
+        }
+
+        div.titles-broker-data {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.8rem;
+
+            height: auto;
+            width: 97%;
+
+            margin: 2rem auto;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                height: 100px;
+                width: 100%;
+                margin: 0 auto;
+
+                border-radius: 8px;
+                padding: 1rem;
+
+                &:first-child {
+                    border: 3px solid #00ff0066;
+                }
+                &:nth-child(2) {
+                    border: 3px solid var(--red-800);
+                }
+                &:last-child {
+                    border: 3px solid #ffdd0088;
+                }
+
+                &.div-2024 {
+                    h3 {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                h3 {
+                    font-weight: 100;
+                    font-size: 1.4rem;
+                    text-align: center;
+                    letter-spacing: 0.5px;
+
+                    color: inherit;
+                }
+
+                p {
+                    text-align: center;
+                    letter-spacing: 0.5px;
+                }
+            }
+        }
+        @media (width < 666px) {
+            div.titles-broker-data {
+                flex-direction: column;
+                gap: 1rem;
+
+                div,div.div-2024 {
+                    gap: 0.5rem;
+
+                    h3{
+                        font-size: 1.5rem;
+                    }
+                }
+            }
         }
     }
 </style>

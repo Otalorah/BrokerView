@@ -105,16 +105,21 @@ export function createChart(id, data) {
             },
             legend: {
                 labels: {
+
+                    boxWidth: 40,
+                    boxHeight: 16,
+
                     font: {
                         size: setFontChart()
                     }
+
                 }
             }
         },
         maintainAspectRatio: false
     };
 
-    setColorCharts()
+    setColorCharts();
 
     new Chart(id, {
         type: "bar",

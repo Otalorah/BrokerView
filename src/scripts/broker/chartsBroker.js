@@ -69,7 +69,7 @@ function createChart(id, data) {
 
         datasets: [
             {
-                label: 'inversión (USDT)',
+                label: 'inversión USDT',
                 data: data.map((element) => element.inversion),
                 borderWidth: 1,
                 backgroundColor: '#1fe60077',
@@ -77,7 +77,7 @@ function createChart(id, data) {
 
             },
             {
-                label: 'Ganancia neta (USDT)',
+                label: 'Ganancia neta USDT',
                 data: data.map((element) => element.ganancia_neta),
                 borderWidth: 1,
                 backgroundColor: '#ffdd0088',
@@ -99,14 +99,19 @@ function createChart(id, data) {
             },
             legend: {
                 labels: {
+
+                    boxWidth: 40,
+                    boxHeight: 16,
+
                     font: {
                         size: setFontChart()
                     }
+
                 }
             }
         },
         maintainAspectRatio: false
-    }
+    };
 
     setColorCharts();
 

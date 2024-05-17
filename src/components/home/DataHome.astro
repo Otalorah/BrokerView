@@ -3,17 +3,21 @@ import TitlesWelcome from "@components/home/TitlesWelcome.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 import CardsHome from "@components/home/CardsHome.astro";
 
-const token = Astro.cookies.get("dataToken").value;
-const tokenObject = JSON.parse(token)
+const token = Astro.cookies.get("jwt").value;
+
+const dataToken = Astro.cookies.get("dataToken").value;
+const dataTokenObject = JSON.parse(dataToken);
 ---
 
-<home-data data-token={token}>
+<home-data data-token-jwt={token} data-token={dataToken}>
     <ContainerLoaderIcon />
-
     <TitlesWelcome />
 
     <section>
-        <CardsHome broker={tokenObject.broker} fund={tokenObject.fund} />
+        <CardsHome
+            broker={dataTokenObject.broker}
+            fund={dataTokenObject.fund}
+        />
     </section>
 </home-data>
 <style>
@@ -22,17 +26,24 @@ const tokenObject = JSON.parse(token)
         height: auto;
     }
     section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        justify-content: space-between;
         gap: 1rem;
 
         width: 99%;
         margin: 0 auto;
         padding: 0 1rem;
     }
+
+    @media (width < 666px) {
+        section {
+            flex-direction: column;
+            gap: 2rem;
+        }
+    }
 </style>
 <script>
-    import { getCookieJWT, getUrlsData } from "@scripts/utils";
+    import { getUrlsData } from "@scripts/utils";
     import { getAllData } from "@scripts/getData";
     import { setHomePage } from "@scripts/home/renderHome";
 
@@ -41,7 +52,7 @@ const tokenObject = JSON.parse(token)
             super();
         }
         connectedCallback() {
-            const token = getCookieJWT();
+            const token = this.dataset.tokenJwt;
             const dataToken = JSON.parse(this.dataset.token);
 
             const urls = getUrlsData(dataToken);
@@ -49,7 +60,7 @@ const tokenObject = JSON.parse(token)
             const hasBroker = dataToken.broker;
             const hasFund = dataToken.fund;
 
-            getAllData(token, urls).then((responses) => {
+            getAllData(token, urls).then((responses: Array<Object>) => {
                 setHomePage(hasBroker, hasFund, responses, this);
             });
         }
