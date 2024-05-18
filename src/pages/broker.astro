@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@components/menu_toggle/MenuToggle.astro";
 import BrokerData from "@components/broker/BrokerData.astro";
+import NotAvailable from "@components/NotAvailable.astro";
 
 import "@styles/main-content.css";
 
@@ -16,6 +17,6 @@ const hasBroker = JSON.parse(token).broker;
 <Layout title="BrokerView | Broker" hasFooter={false}>
     <MenuToggle />
     <main>
-        {hasBroker ? <BrokerData /> : <h1>Su cuenta no tiene este recurso</h1>}
+        {hasBroker ? <BrokerData /> : <NotAvailable />}
     </main>
 </Layout>

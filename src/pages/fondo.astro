@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import MenuToggle from "@components/menu_toggle/MenuToggle.astro";
 import FundData from "@components/fund/FundData.astro";
+import NotAvailable from "@components/NotAvailable.astro";
 
 import "@styles/main-content.css";
 
@@ -16,6 +17,6 @@ const hasFund = JSON.parse(token).fund;
 <Layout title="BrokerView | Fondo" hasFooter={false}>
     <MenuToggle />
     <main>
-        {hasFund ? <FundData /> : <h1>Su cuenta no tiene este recurso</h1>}
+        {hasFund ? <FundData /> : <NotAvailable />}
     </main>
 </Layout>
