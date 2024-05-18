@@ -31,7 +31,6 @@ const isPassword = key == "Contraseña";
 
         border-radius: 8px;
         padding: 10px;
-        margin: 10px;
         background-color: #454545;
 
         html.light & {
@@ -39,7 +38,11 @@ const isPassword = key == "Contraseña";
         }
 
         h5 {
-            color: #989898;
+            font-size: 1rem;
+            margin: 0.2rem 0;
+
+            color: #ececec;
+            letter-spacing: 1px;
 
             html.light & {
                 color: #454545;
@@ -48,10 +51,14 @@ const isPassword = key == "Contraseña";
 
         hr {
             height: 1px;
-            margin-top: 1px;
+            margin-top: 5px;
 
-            background-color: #989898;
             box-shadow: none;
+            background-color: var(--bg-color-light);
+
+            html.light & {
+                background-color: var(--bg-color-dark);
+            }
         }
 
         p {
