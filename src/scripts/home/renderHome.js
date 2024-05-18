@@ -1,22 +1,50 @@
+function renderComponent(id, component, text) {
+
+    const $component = component.querySelector(`#${id}`);
+    $component.textContent = text.trim();
+
+}
+
+
+function renderData(data, component, mappings) {
+
+    for (const [key, [id, suffix]] of Object.entries(mappings)) {
+        renderComponent(id, component, `${data[key]}${suffix}`);
+    }
+
+}
+
+
 function renderDataBroker(data, component) {
 
-    const $amount = component.querySelector('#amount-broker');
-    $amount.textContent = `inversión: ${data.inversion} (USDT)`;
+    const mappings = {
+        inversion: ["amount-broker", " USDT"],
+        mes: ["month", ""],
+        ganancia_neta: ["profit-broker", " USDT"],
+        ganancia_bruta: ["gross-profit", " USDT"],
+        porcentaje_ganancia: ["percentage", ""],
+        lote: ["lote", ""],
+        retiros: ["retreats", " USDT"]
+    };
 
-    const $lastCutoffDate = component.querySelector('#last-month');
-    $lastCutoffDate.textContent = data.mes;
+    renderData(data, component, mappings);
 
 }
 
 
 function renderDataFund(data, component) {
 
-    const $amount = component.querySelector('#amount-fund');
-    $amount.textContent = `Saldo: ${data.saldo_actual} (COP)`;
+    const mappings = {
+        saldo_actual: ["amount-fund", " COP"],
+        fecha_corte: ["cutoff-date", ""],
+        rendimientos: ["profit-fund", " COP"],
+        aporte: ["contribution", " COP"],
+        fecha_aporte: ["date-contribution", ""],
+        saldo_anterior: ["previus-balance", " COP"]
+    };
 
+    renderData(data, component, mappings);
 
-    const $lastCutoffDate = component.querySelector('#last-cutoff-date')
-    $lastCutoffDate.textContent = data.fecha_corte
 }
 
 
@@ -67,4 +95,5 @@ export function setHomePage(hasBroker, hasFund, responses, component) {
     }
 
     component.querySelector("#title").textContent += user.name;
+
 }

@@ -13,33 +13,12 @@ const dataTokenObject = JSON.parse(dataToken);
     <ContainerLoaderIcon />
     <TitlesWelcome />
 
-    <section>
-        <CardsHome
-            broker={dataTokenObject.broker}
-            fund={dataTokenObject.fund}
-        />
-    </section>
+    <CardsHome broker={dataTokenObject.broker} fund={dataTokenObject.fund} />
 </home-data>
 <style>
     home-data {
         width: 100%;
         height: auto;
-    }
-    section {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-
-        width: 99%;
-        margin: 0 auto;
-        padding: 0 1rem;
-    }
-
-    @media (width < 666px) {
-        section {
-            flex-direction: column;
-            gap: 2rem;
-        }
     }
 </style>
 <script>

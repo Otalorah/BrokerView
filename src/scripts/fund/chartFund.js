@@ -69,7 +69,7 @@ export function createChart(id, data) {
 
         datasets: [
             {
-                label: "Saldo (COP)",
+                label: "Saldo COP",
                 data: data.map((element) => {
                     let str = element.saldo_actual;
                     str = str.slice(0, -4) + str.slice(-3);
@@ -80,7 +80,7 @@ export function createChart(id, data) {
                 borderColor: '#00ff00'
             },
             {
-                label: "Aporte (COP)",
+                label: "Aporte COP",
                 data: data.map((element) => {
                     let str = element.aporte;
                     str = str.slice(0, -4) + str.slice(-3);

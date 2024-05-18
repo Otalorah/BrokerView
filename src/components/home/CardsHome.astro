@@ -1,5 +1,6 @@
 ---
 import CardInvalid from "@components/home/CardInvalid.astro";
+import LiHome from "@components/home/LiHome.astro";
 
 interface Props {
     fund: boolean;
@@ -9,62 +10,128 @@ interface Props {
 const { fund, broker } = Astro.props;
 ---
 
-{
-    broker ? (
-        <div>
-            <h5>Broker</h5>
-            <p id="amount-broker" />
+<section>
+    {
+        broker ? (
+            <ul>
+                <li class="subtitle">
+                    <h3>Broker</h3>
+                    <p id="amount-broker" />
+                </li>
 
-            <hr />
+                <hr />
 
-            <h5>Último mes</h5>
-            <p id="last-month">saldo: 000</p>
-        </div>
-    ) : (
-        <CardInvalid title="Broker" />
-    )
-}
+                <h4 id="month" />
 
-{
-    fund ? (
-        <div>
-            <h5>Fondo</h5>
-            <p id="amount-fund">saldo: 000</p>
+                <LiHome text="Ganancia" id="profit-broker" />
+                <LiHome text="Ganancia bruta" id="gross-profit" />
+                <LiHome text="Porcentaje ganancia" id="percentage" />
+                <LiHome text="Lotaje" id="lote" />
+                <LiHome text="Retiros" id="retreats" />
+            </ul>
+        ) : (
+            <CardInvalid title="Broker" />
+        )
+    }
 
-            <hr />
+    {
+        fund ? (
+            <ul>
+                <li class="subtitle">
+                    <h3>Fondo</h3>
+                    <p id="amount-fund" />
+                </li>
 
-            <h5>Última fecha de corte</h5>
-            <p id="last-cutoff-date" />
-        </div>
-    ) : (
-        <CardInvalid title="Fondo" />
-    )
-}
+                <hr />
+
+                <h4 id="cutoff-date" />
+
+                <LiHome text="Rendimientos" id="profit-fund" />
+                <LiHome text="Aporte" id="contribution" />
+                <LiHome text="Fecha aporte" id="date-contribution" />
+                <LiHome text="Saldo anterior" id="previus-balance" />
+            </ul>
+        ) : (
+            <CardInvalid title="Fondo" />
+        )
+    }
+</section>
 
 <style>
-    div {
-        width: 100%;
-        height: auto;
-
+    section {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 1rem;
 
-        padding: 1rem;
+        width: 99%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
 
-        border-radius: 8px;
-        border: 2px solid var(--green);
-        box-shadow: 0 0 5px var(--green);
+        ul {
+            width: 100%;
+            height: auto;
 
-        &:last-child {
-            border: 2px solid var(--red);
-            box-shadow: 0 0 5px var(--red);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            padding: 1rem;
+
+            border-radius: 8px;
+            border: 2px solid var(--green);
+            box-shadow: 0 0 5px var(--green);
+
+            &:last-child {
+                border: 2px solid var(--red);
+                box-shadow: 0 0 5px var(--red);
+            }
+
+            li.subtitle {
+                margin: 0;
+
+                h3 {
+                    font-size: 2rem;
+                    font-weight: 100;
+                    text-align: start;
+                    color: inherit;
+                }
+
+                p {
+                    align-content: center;
+                }
+            }
+
+            li {
+                display: flex;
+                justify-content: space-between;
+
+                width: 100%;
+                margin: 0.5rem;
+            }
+
+            hr {
+                height: 1px;
+                width: 100%;
+                background-color: var(--bg-color-light);
+
+                html.light & {
+                    background-color: var(--bg-color-dark);
+                }
+            }
+
+            h4 {
+                font-size: 1.5rem;
+                font-weight: 100;
+
+                margin: 0.5rem 0;
+            }
         }
-
-        h5 {
-            font-size: 2rem;
-            font-weight: 100;
+    }
+    @media (width < 666px) {
+        section {
+            flex-direction: column;
+            gap: 2rem;
         }
     }
 </style>
