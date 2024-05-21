@@ -12,7 +12,7 @@ const { fund, broker } = Astro.props;
 
 <section>
     {
-        broker ? (
+        broker && (
             <ul>
                 <li class="subtitle">
                     <h3>Broker</h3>
@@ -29,13 +29,11 @@ const { fund, broker } = Astro.props;
                 <LiHome text="Lotaje" id="lote" />
                 <LiHome text="Retiros" id="retreats" />
             </ul>
-        ) : (
-            <CardInvalid title="Broker" />
         )
     }
 
     {
-        fund ? (
+        fund && (
             <ul>
                 <li class="subtitle">
                     <h3>Fondo</h3>
@@ -51,8 +49,6 @@ const { fund, broker } = Astro.props;
                 <LiHome text="Fecha aporte" id="date-contribution" />
                 <LiHome text="Saldo anterior" id="previus-balance" />
             </ul>
-        ) : (
-            <CardInvalid title="Fondo" />
         )
     }
 </section>
@@ -64,6 +60,7 @@ const { fund, broker } = Astro.props;
         gap: 1rem;
 
         width: 99%;
+        max-width: 750px;
         margin: 0 auto;
         margin-bottom: 2rem;
         padding: 0 1rem;
@@ -79,12 +76,12 @@ const { fund, broker } = Astro.props;
             padding: 1rem;
 
             border-radius: 8px;
-            border: 2px solid var(--green);
-            box-shadow: 0 0 5px var(--green);
+            border: 2px solid var(--red);
+            box-shadow: 0 0 5px var(--red);
 
             &:last-child {
-                border: 2px solid var(--red);
-                box-shadow: 0 0 5px var(--red);
+                border: 2px solid var(--green);
+                box-shadow: 0 0 5px var(--green);
             }
 
             li.subtitle {
