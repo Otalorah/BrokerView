@@ -48,6 +48,10 @@
                 rotate 0.4s ease,
                 opacity 0.4s ease;
             background-color: var(--bg-color-dark);
+
+            html.light & {
+                background-color: var(--bg-color-light);
+            }
         }
 
         span#top {
@@ -60,17 +64,10 @@
             top: 27px;
         }
     }
-    html.light {
-        .hamburger_icon {
-            span {
-                background-color: var(--bg-color-light);
-            }
-        }
-    }
 </style>
 <script is:inline>
     const screenWidth = window.innerWidth;
-    const $hamburger = document.getElementById("hamburger");
+    const $hamburger = document.querySelector("#hamburger");
 
     $hamburger.addEventListener("click", () => {
         $hamburger.classList.toggle("hamburger-active");

@@ -17,7 +17,9 @@ const isPassword = key == "Contraseña";
         isPassword ? (
             <span>
                 <input type="password" value={"Contraseña"} readonly />
-                <BtnColor text="Cambiar" type="change_password" />
+                <a href="/password" data-astro-reload>
+                    <BtnColor text="Cambiar" type="change_password" />
+                </a>
             </span>
         ) : (
             <p />
@@ -89,11 +91,10 @@ const isPassword = key == "Contraseña";
                     outline: none;
                 }
             }
+            a {
+                width: 100px;
+                color: inherit;
+            }
         }
     }
 </style>
-<script>
-    document.querySelector(".change_password").addEventListener("click", () => {
-        console.log("hola");
-    });
-</script>

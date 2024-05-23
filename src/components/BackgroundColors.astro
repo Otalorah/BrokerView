@@ -1,12 +1,18 @@
 ---
 const { type } = Astro.props;
 ---
-{
-    type == 'navBar' ? 
-    <header class=`background ${type}`><slot/></header> 
-    : <section class=`background ${type}`><slot /></section>
-}
 
+{
+    type == "navBar" ? (
+        <header class={`background ${type}`}>
+            <slot />
+        </header>
+    ) : (
+        <section class={`background ${type}`}>
+            <slot />
+        </section>
+    )
+}
 
 <style>
     @property --a {
@@ -39,11 +45,12 @@ const { type } = Astro.props;
             z-index: 100;
             inset: 0;
 
-            &::after,&::before {
+            &::after,
+            &::before {
                 border-radius: 0;
                 animation: none;
             }
-            &:has(div.hamburger_icon){
+            &:has(div.hamburger_icon) {
                 padding-left: 33px;
             }
         }
@@ -59,28 +66,25 @@ const { type } = Astro.props;
             z-index: 50;
             padding: 3px;
         }
-        &.modal-logout{ 
+        &.modal-logout {
             width: 85%;
-            max-width: 500px; 
+            max-width: 500px;
             padding: 3px;
         }
-        &.data-account{
+        &.data-account {
             width: 100%;
         }
-        
-        &.table-fund{
+
+        &.table-fund {
             height: auto;
             margin: 1rem auto;
             padding: 3px;
             flex: 1;
 
-            &::before{
-                background-image: repeating-conic-gradient(
-                    from var(--a),
-                    #48e,
-                );
+            &::before {
+                background-image: repeating-conic-gradient(from var(--a), #48e);
             }
-            &::after{
+            &::after {
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     #049,
@@ -91,7 +95,13 @@ const { type } = Astro.props;
             }
         }
 
-        &::before{
+        &.change_password {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2px;
+        }
+
+        &::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -99,7 +109,7 @@ const { type } = Astro.props;
             animation: rotating 20s linear infinite;
         }
 
-        &::after{
+        &::after {
             content: "";
             position: absolute;
             inset: 0;
@@ -109,9 +119,9 @@ const { type } = Astro.props;
         }
     }
 
-    body.red{
-        .background{
-            &::before{
+    body.red {
+        .background {
+            &::before {
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--red),
@@ -121,7 +131,7 @@ const { type } = Astro.props;
                     var(--red)
                 );
             }
-            &::after{
+            &::after {
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--red-600),
@@ -132,9 +142,9 @@ const { type } = Astro.props;
             }
         }
     }
-    body.green{
-        .background{
-            &::before{
+    body.green {
+        .background {
+            &::before {
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--green),
@@ -144,7 +154,7 @@ const { type } = Astro.props;
                     var(--green)
                 );
             }
-            &::after{
+            &::after {
                 background-image: repeating-conic-gradient(
                     from var(--a),
                     var(--green-500),

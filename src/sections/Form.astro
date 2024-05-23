@@ -9,15 +9,13 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
 ---
 
 <BackgroundColors type={typeForm}>
-
-    <form class=`form ${typeForm}` id={typeForm}>
+    <form class={`form ${typeForm}`} id={typeForm}>
         {type == "signin" ? <FormSignin /> : <FormLogin />}
     </form>
-
 </BackgroundColors>
 
 <style>
-    .form {
+    form.form {
         position: relative;
         display: grid;
         grid-template-columns: 1fr;
@@ -45,7 +43,7 @@ const typeForm = type == "login" ? "form-login" : "form-signin";
     }
 
     @media screen and (666px < width) {
-        .form {
+        form.form {
             &.form-signin {
                 grid-template-columns: 1fr 1fr;
 
