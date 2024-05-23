@@ -1,3 +1,5 @@
+import { renderLoader } from "./utils";
+
 function verifyResponse(data) {
     if (data.detail) {
 
@@ -11,18 +13,6 @@ function verifyResponse(data) {
         document.cookie = "jwt=" + token;;
         window.location.href = data.redirect;
 
-    }
-}
-
-
-function renderLoader() {
-    const $loader = document.querySelector("#loader");
-    document.querySelector('.btn').id = 'disable';
-
-    if (document.documentElement.className == "light") {
-        $loader.setAttribute("stroke", "#dfdfdf");
-    } else {
-        $loader.setAttribute("stroke", "#121212");
     }
 }
 

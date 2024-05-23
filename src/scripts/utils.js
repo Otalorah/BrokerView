@@ -44,3 +44,15 @@ export function getUrlsData(data) {
     return urls
 
 }
+
+
+export function renderLoader() {
+    const $loader = document.querySelector("#loader");
+    document.querySelector('.btn').id = 'disable';
+
+    if (document.documentElement.className == "light") {
+        $loader.setAttribute("stroke", "#dfdfdf");
+    } else {
+        $loader.setAttribute("stroke", "#121212");
+    }
+}
