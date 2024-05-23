@@ -21,7 +21,6 @@ function renderDataBroker(data, component) {
         inversion: ["amount-broker", " USDT"],
         mes: ["month", ""],
         ganancia_neta: ["profit-broker", " USDT"],
-        ganancia_bruta: ["gross-profit", " USDT"],
         porcentaje_ganancia: ["percentage", ""],
         lote: ["lote", ""],
         retiros: ["retreats", " USDT"]

@@ -24,7 +24,6 @@ const { fund, broker } = Astro.props;
                 <h4 id="month" />
 
                 <LiHome text="Ganancia" id="profit-broker" />
-                <LiHome text="Ganancia bruta" id="gross-profit" />
                 <LiHome text="Porcentaje ganancia" id="percentage" />
                 <LiHome text="Lotaje" id="lote" />
                 <LiHome text="Retiros" id="retreats" />
@@ -56,17 +55,17 @@ const { fund, broker } = Astro.props;
 <style>
     section {
         display: flex;
-        justify-content: space-between;
-        gap: 1rem;
+        justify-content: center;
+        gap: 2rem;
 
         width: 99%;
-        max-width: 750px;
         margin: 0 auto;
         margin-bottom: 2rem;
         padding: 0 1rem;
 
         ul {
             width: 100%;
+            max-width: 750px;
             height: auto;
 
             display: flex;
