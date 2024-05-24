@@ -1,19 +1,27 @@
 import { renderLoader } from "./utils";
 
-function verifyResponse(data) {
-    if (data.detail) {
+function verifyResponse(response) {
+    if (response.detail) {
 
         const $error = document.querySelector('.form__error-send');
-        $error.innerHTML = data.detail;
+        $error.innerHTML = response.detail;
         $error.style.display = 'block';
 
     } else {
 
-        const token = data.access_token.token;
-        document.cookie = "jwt=" + token;;
-        window.location.href = data.redirect;
+        const token = response.access_token.token;
+        document.cookie = "jwt=" + token;
+        window.location.href = response.redirect;
 
     }
+}
+
+
+function setEmailUser(data, response) {
+
+    if (response.detail) return
+    else sessionStorage.setItem("email-user", JSON.parse(data).email)
+
 }
 
 
@@ -33,9 +41,10 @@ export async function createUser(data) {
             body: bodyContent
         })
 
-        const data = await res.json();
+        const response = await res.json();
 
-        verifyResponse(data);
+        setEmailUser(bodyContent, response)
+        verifyResponse(response);
 
     } finally {
         document.querySelector('.btn').removeAttribute('id');

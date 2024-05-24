@@ -1,9 +1,17 @@
 import { renderLoader } from "../utils";
 
+
+function verifyResponse(response) {
+
+    if (response.detail) document.getElementById('error').style.opacity = '1';
+    else console.log(response);
+
+}
+
+
 export async function sendEmail(email) {
 
     const bodyContent = JSON.stringify(email)
-
 
     try {
 
@@ -17,9 +25,9 @@ export async function sendEmail(email) {
             body: bodyContent
         })
 
-        const data = await res.json();
+        const response = await res.json();
 
-        console.log(data)
+        verifyResponse(response)
 
     } finally {
         document.querySelector('.btn').removeAttribute('id');
