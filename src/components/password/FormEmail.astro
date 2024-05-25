@@ -1,0 +1,50 @@
+---
+import BtnColor from "@components/BtnColor.astro";
+---
+
+<form id="form-email">
+    <div id="forgot_password">
+        <p>Ingrese su correo para restablecer su contraseña:</p>
+        <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="nombre@gmail.com"
+        />
+    </div>
+
+    <div id="change_password">
+        <p>Se enviará un código de verificación al correo:</p>
+    </div>
+
+    <p class="error" id="error-email">El correo no se encuentra registrado</p>
+
+    <span>
+        <BtnColor text="CONFIRMAR" type="form" />
+    </span>
+</form>
+
+<style>
+    form#form-email {
+        position: relative;
+
+        div {
+            display: none;
+
+            flex-direction: column;
+            gap: 1rem;
+
+            padding-bottom: 2rem;
+
+            p {
+                text-align: center;
+                letter-spacing: 0.5px;
+                font-size: 1.2rem;
+            }
+        }
+
+        span {
+            margin: 2rem auto 0;
+        }
+    }
+</style>

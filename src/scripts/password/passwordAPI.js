@@ -1,23 +1,56 @@
-import { renderLoader } from "../utils";
+import { renderLoader, deleteData } from "../utils";
 
 
-function verifyResponse(response) {
+function removeLoader() {
 
-    if (response.detail) document.getElementById('error').style.opacity = '1';
-    else console.log(response);
+    const $loaders = document.querySelectorAll(".loader");
+    const $btns = document.querySelectorAll('.btn');
+
+    $btns.forEach(btn => btn.removeAttribute("id"));
+    $loaders.forEach(loader => loader.setAttribute("stroke", "transparent"));
 
 }
 
 
 export async function sendEmail(email) {
 
-    const bodyContent = JSON.stringify(email)
+    const bodyContent = JSON.stringify(email);
 
     try {
 
-        renderLoader()
+        renderLoader();
 
         const res = await fetch("https://api-brokerview.onrender.com/email", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: bodyContent
+        });
+
+        const response = await res.json();
+
+        if (response.detail) document.getElementById('error-email').style.opacity = '1';
+        else {
+            document.getElementById('forms').classList.add('send');
+            document.querySelector(".text__link").style.display = "none";
+            sessionStorage.setItem("email-user", JSON.parse(bodyContent).email)
+        }
+
+    } finally { removeLoader() }
+
+}
+
+
+export async function sendCode(dataCode) {
+
+    const bodyContent = JSON.stringify(dataCode);
+
+    try {
+
+        renderLoader();
+
+        const res = await fetch("https://api-brokerview.onrender.com/email/code", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,10 +60,9 @@ export async function sendEmail(email) {
 
         const response = await res.json();
 
-        verifyResponse(response)
+        if (response.detail) document.getElementById('error-code').style.opacity = '1';
+        else deleteData()
 
-    } finally {
-        document.querySelector('.btn').removeAttribute('id');
-        document.querySelector("#loader").setAttribute("stroke", "transparent")
-    }
+    } finally { removeLoader() }
+
 }

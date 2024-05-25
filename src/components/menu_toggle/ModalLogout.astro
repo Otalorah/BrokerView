@@ -14,7 +14,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
     </BackgroundColors>
 </div>
 <style>
-    .background-modal {
+    div.background-modal {
         position: fixed;
         top: -55px;
 
@@ -102,6 +102,8 @@ import BackgroundColors from "@components/BackgroundColors.astro";
     }
 </style>
 <script>
+    import { deleteData } from "@scripts/utils";
+
     document.addEventListener("astro:page-load", () => {
         document.querySelector(".cancel").addEventListener("click", () => {
             document
@@ -109,13 +111,6 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                 .classList.toggle("modal-open");
         });
 
-        document.querySelector(".accept").addEventListener("click", () => {
-            document.cookie = "jwt=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
-            document.cookie =
-                "dataToken=; expires=Thu, 01 Jan 1999 00:00:00 UTC;";
-            sessionStorage.clear();
-
-            window.location.href = "/";
-        });
+        document.querySelector(".accept").addEventListener("click", deleteData);
     });
 </script>

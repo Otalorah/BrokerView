@@ -47,12 +47,31 @@ export function getUrlsData(data) {
 
 
 export function renderLoader() {
-    const $loader = document.querySelector("#loader");
-    document.querySelector('.btn').id = 'disable';
 
-    if (document.documentElement.className == "light") {
-        $loader.setAttribute("stroke", "#dfdfdf");
-    } else {
-        $loader.setAttribute("stroke", "#121212");
-    }
+    const $loaders = document.querySelectorAll(".loader");
+    const $btns = document.querySelectorAll('.btn');
+
+    $btns.forEach(btn => btn.id = "disable")
+
+    $loaders.forEach((loader) => {
+
+        if (document.documentElement.className == "light") {
+            loader.setAttribute("stroke", "#dfdfdf");
+        } else {
+            loader.setAttribute("stroke", "#121212");
+        }
+
+    })
+
+}
+
+
+export function deleteData() {
+
+    document.cookie = "jwt=; expires=Thu, 01 Jan 2000 00:00:00 UTC;";
+    document.cookie = "dataToken=; expires=Thu, 01 Jan 2000 00:00:00 UTC;";
+    sessionStorage.clear();
+
+    window.location.href = "/";
+
 }

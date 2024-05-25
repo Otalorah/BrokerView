@@ -1,22 +1,16 @@
-import { sendEmail } from "@scripts/password/passwordAPI";
+import { sendEmail, sendCode } from "@scripts/password/passwordAPI";
 
-export function enableSendEmail(component) {
+export function enableSendEmail(component, cache, emailUser) {
 
     component.querySelector("#form-email").addEventListener("submit", (e) => {
 
         e.preventDefault();
 
-        const cacheEmailUser = JSON.parse(
-            sessionStorage.getItem("data-user"),
-        );
-        const emailUser = sessionStorage.getItem("email-user");
-
         const objectEmail = {};
 
+        if (cache) {
 
-        if (cacheEmailUser) {
-
-            objectEmail.email = cacheEmailUser.email;
+            objectEmail.email = cache.email;
             sendEmail(objectEmail);
             return
 
@@ -31,7 +25,29 @@ export function enableSendEmail(component) {
 
         const email = Object.fromEntries(new FormData(e.target));
         sendEmail(email);
+        return email
 
+    });
+
+}
+
+
+export function enableSendCode(component, cache, emailUser) {
+
+    component.querySelector("#form-code").addEventListener("submit", (e) => {
+
+        e.preventDefault();
+
+        const objectCode = {};
+
+        if (cache) objectCode.email = cache.email;
+        else if (emailUser) objectCode.email = emailUser;
+
+        const numsInputs = Object.fromEntries(new FormData(e.target));
+        const code = Object.values(numsInputs).join("");
+        objectCode.code = code;
+
+        sendCode(objectCode);
     });
 
 }

@@ -1,0 +1,53 @@
+---
+import BtnColor from "@components/BtnColor.astro";
+---
+
+<form id="form-code">
+    <p>Ingrese el código que se envió al correo</p>
+    <div id="code">
+        <input type="text" name="1" id="1" maxlength="1" autocomplete="off" />
+        <input type="text" name="2" id="2" maxlength="1" autocomplete="off" />
+        <input type="text" name="3" id="3" maxlength="1" autocomplete="off" />
+        <input type="text" name="4" id="4" maxlength="1" autocomplete="off" />
+        <input type="text" name="5" id="5" maxlength="1" autocomplete="off" />
+        <input type="text" name="6" id="6" maxlength="1" autocomplete="off" />
+    </div>
+    <p class="error" id="error-code">Código incorrecto</p>
+
+    <span>
+        <BtnColor text="CONFIRMAR" type="form" />
+    </span>
+</form>
+
+<style>
+    form#form-code {
+        position: absolute; 
+        top: 0;
+        left: 100%; 
+
+        gap: 1rem;
+
+        p {
+            text-align: center;
+        }
+
+        div#code {
+            display: flex;
+            gap: 0.8rem;
+
+            width: 100%;
+            height: 40px;
+
+            margin: 1rem 0;
+
+            input {
+                text-align: center;
+                font-size: 1.5rem;
+                border-radius: 8px;
+            }
+        }
+        span {
+            margin: 1rem auto 0;
+        }
+    }
+</style>
