@@ -48,7 +48,7 @@ export async function createUser(data) {
 
     } finally {
         document.querySelector('.btn').removeAttribute('id');
-        document.querySelector("#loader").setAttribute("stroke", "transparent")
+        document.querySelector(".loader").setAttribute("stroke", "transparent")
     }
 }
 
@@ -76,7 +76,7 @@ export async function loginUser(data) {
 
     } finally {
         document.querySelector('.btn').removeAttribute('id');
-        document.querySelector("#loader").setAttribute("stroke", "transparent");
+        document.querySelector(".loader").setAttribute("stroke", "transparent");
     }
 }
 
