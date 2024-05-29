@@ -3,10 +3,13 @@ import TextLink from "@sections/TextLink.astro";
 import FormEmail from "@components/forgotpw/FormEmail.astro";
 import FormCode from "@components/forgotpw/FormCode.astro";
 import FormPassword from "@components/forgotpw/FormPassword.astro";
+import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 ---
 
 <form-password>
+    <ContainerLoaderIcon />
+
     <h1>Restablecer contraseña</h1>
 
     <BackgroundColors type="change_password">
@@ -148,6 +151,9 @@ import BackgroundColors from "@components/BackgroundColors.astro";
             enableSendEmail(cacheEmailUser, emailUser, this);
             enableSendCode(this);
             verifyInputsPassword(this);
+        }
+        connectedCallback() {
+            this.querySelector("#loader-container").classList.add("disappear");
         }
     }
 
