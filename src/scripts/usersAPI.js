@@ -1,10 +1,11 @@
 import { renderLoader } from "./utils";
 
 function verifyResponse(response) {
+
     if (response.detail) {
 
         const $error = document.querySelector('.form__error-send');
-        $error.innerHTML = response.detail;
+        $error.textContent = response.detail;
         $error.style.display = 'block';
 
     } else {

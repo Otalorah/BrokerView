@@ -1,6 +1,6 @@
 import { sendEmail, sendCode } from "@scripts/password/passwordAPI";
 
-export function enableSendEmail(component, cache, emailUser) {
+export function enableSendEmail(cache, emailUser, component) {
 
     component.querySelector("#form-email").addEventListener("submit", (e) => {
 
@@ -71,7 +71,7 @@ export function enableSendCode(component) {
         e.preventDefault();
 
         const cache = JSON.parse(sessionStorage.getItem("data-user"));
-        const emailUser = sessionStorage.getItem("email-user");
+        const emailUser = sessionStorage.getItem("email-forgotten");
 
         const objectCode = {};
 
@@ -83,7 +83,6 @@ export function enableSendCode(component) {
         objectCode.code = code;
 
         sendCode(objectCode);
-        console.log(objectCode);
 
     });
 

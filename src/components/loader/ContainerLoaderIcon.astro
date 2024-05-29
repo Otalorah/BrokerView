@@ -51,7 +51,7 @@ import LoaderIcon from "@components/loader/LoaderIcon.astro";
         constructor() {
             super();
             document.addEventListener("astro:page-load", () => {
-                const $loader = this.querySelector("#loader");
+                const $loader = this.querySelector(".loader");
 
                 if (document.documentElement.className == "light") {
                     $loader.setAttribute("stroke", "#000");

@@ -34,10 +34,18 @@ export async function sendEmail(email) {
         else {
             document.getElementById('forms').classList.add('send');
             document.querySelector(".text__link").style.display = "none";
-            sessionStorage.setItem("email-user", JSON.parse(bodyContent).email)
+            sessionStorage.setItem("email-forgotten", JSON.parse(bodyContent).email)
         }
 
     } finally { removeLoader() }
+
+}
+
+
+function verifyResponseCode() {
+
+    if (sessionStorage.getItem("email-user")) window.location.href = "/";
+    else console.log("va el siguiente form")
 
 }
 
@@ -61,7 +69,7 @@ export async function sendCode(dataCode) {
         const response = await res.json();
 
         if (response.detail) document.getElementById('error-code').style.opacity = '1';
-        else deleteData()
+        else verifyResponseCode()
 
     } finally { removeLoader() }
 
