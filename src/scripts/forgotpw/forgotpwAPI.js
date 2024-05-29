@@ -1,4 +1,4 @@
-import { renderLoader, deleteData } from "../utils";
+import { renderLoader, deleteData } from "@scripts/utils";
 
 
 function removeLoader() {
@@ -42,10 +42,15 @@ export async function sendEmail(email) {
 }
 
 
-function verifyResponseCode() {
+function verifyResponseCode(response) {
 
     if (sessionStorage.getItem("email-user")) window.location.href = "/";
-    else console.log("va el siguiente form")
+    else {
+        const $forms = document.getElementById('forms');
+        $forms.classList.remove('send');
+        $forms.classList.add('password');
+        document.cookie = "forgotpw=" + response.token;
+    }
 
 }
 
@@ -69,7 +74,31 @@ export async function sendCode(dataCode) {
         const response = await res.json();
 
         if (response.detail) document.getElementById('error-code').style.opacity = '1';
-        else verifyResponseCode()
+        else verifyResponseCode(response)
+
+    } finally { removeLoader() }
+
+}
+
+export async function sendNewPassword(password, token) {
+
+    const bodyContent = JSON.stringify(password);
+
+    try {
+
+        renderLoader();
+
+        const res = await fetch("https://api-brokerview.onrender.com/user/password", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: bodyContent
+        })
+
+        const response = await res.json();
+        deleteData()
 
     } finally { removeLoader() }
 

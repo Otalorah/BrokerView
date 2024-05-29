@@ -75,3 +75,19 @@ export function deleteData() {
     window.location.href = "/";
 
 }
+
+
+export function getCookieForgotpw() {
+
+    const cookies = document.cookie;
+    const cookieArray = cookies.split(';');
+
+    for (let cookie of cookieArray) {
+
+        cookie = cookie.trim();
+
+        if (cookie.startsWith("forgotpw=")) return cookie.substring(9);
+
+    }
+
+}

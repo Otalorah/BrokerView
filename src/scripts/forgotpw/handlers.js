@@ -1,4 +1,4 @@
-import { sendEmail, sendCode } from "@scripts/password/passwordAPI";
+import { sendEmail, sendCode } from "@scripts/forgotpw/forgotpwAPI";
 
 export function enableSendEmail(cache, emailUser, component) {
 

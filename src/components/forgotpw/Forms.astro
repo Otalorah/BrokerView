@@ -1,7 +1,8 @@
 ---
 import TextLink from "@sections/TextLink.astro";
-import FormEmail from "@components/password/FormEmail.astro";
-import FormCode from "@components/password/FormCode.astro";
+import FormEmail from "@components/forgotpw/FormEmail.astro";
+import FormCode from "@components/forgotpw/FormCode.astro";
+import FormPassword from "@components/forgotpw/FormPassword.astro";
 import BackgroundColors from "@components/BackgroundColors.astro";
 ---
 
@@ -12,6 +13,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
         <div id="forms">
             <FormEmail />
             <FormCode />
+            <FormPassword />
         </div>
     </BackgroundColors>
 
@@ -60,6 +62,17 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                     left: 0;
                 }
             }
+            &.password {
+                form#form-email {
+                    left: -100%;
+                }
+                form#form-code {
+                    left: -100%;
+                }
+                form#form-password {
+                    left: 0;
+                }
+            }
 
             form {
                 display: flex;
@@ -98,7 +111,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
                     }
                 }
 
-                span {
+                span.btn {
                     width: 100%;
                     display: flex;
                 }
@@ -116,11 +129,12 @@ import BackgroundColors from "@components/BackgroundColors.astro";
 </style>
 
 <script>
-    import { renderFormsEmail } from "@scripts/password/renderEmailForms";
+    import { renderFormsEmail } from "@scripts/forgotpw/renderEmailForms";
     import {
         enableSendEmail,
         enableSendCode,
-    } from "@scripts/password/handlers";
+    } from "@scripts/forgotpw/handlers";
+    import { verifyInputsPassword } from "@scripts/forgotpw/password";
 
     class FormPassword extends HTMLElement {
         constructor() {
@@ -133,6 +147,7 @@ import BackgroundColors from "@components/BackgroundColors.astro";
             renderFormsEmail(cacheEmailUser, emailUser, this);
             enableSendEmail(cacheEmailUser, emailUser, this);
             enableSendCode(this);
+            verifyInputsPassword(this);
         }
     }
 
