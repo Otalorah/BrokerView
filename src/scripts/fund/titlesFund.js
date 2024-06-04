@@ -41,7 +41,7 @@ export function renderMaxValues(data, component) {
     const contributionsString = convertNumToString(totalContributions);
     const profitsString = convertNumToString(totalprofits);
 
-    component.querySelector('#contributions').textContent = contributionsString + ' (COP)';
-    component.querySelector('#profits').textContent = profitsString + ' (COP)';
+    component.querySelector('#contributions').textContent = contributionsString + ' COP';
+    component.querySelector('#profits').textContent = profitsString + ' COP';
 
 }
