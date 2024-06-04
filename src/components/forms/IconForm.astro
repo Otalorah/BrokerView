@@ -1,16 +1,16 @@
 ---
 const { type, id } = Astro.props;
 
-let iconClass;
+let iconClass: String;
 
-if (type == "no-view") iconClass = "password_icon"
-else if (type == "error") iconClass = "status_icon"
-else if (type == "moon") iconClass = "theme_icon"
+if (type == "no-view") iconClass = "password_icon";
+else if (type == "error") iconClass = "status_icon";
+else if (type == "moon") iconClass = "theme_icon";
 ---
 
 <img
-    class=`icon ${iconClass}`
-    src=`/src/icons/${type}.svg`
+    class={`icon ${iconClass}`}
+    src={`/${type}.svg`}
     id={id}
     alt="icono"
     width="18"
@@ -29,11 +29,11 @@ else if (type == "moon") iconClass = "theme_icon"
             cursor: pointer;
             top: 6.5px;
         }
-        &.theme_icon{
+        &.theme_icon {
             top: 4px;
             right: 2.5px;
         }
-        &.BrokerView_Logo{
+        &.BrokerView_Logo {
             position: relative;
             right: 0;
         }

@@ -5,66 +5,105 @@ import IconPassword from "@components/IconPassword.astro";
 import "src/styles/forms.css";
 ---
 
-<div class="form__group">
-	<label class="form__label" for="user-login">Usuario:</label>
-	<input
-		class="form__input"
-		type="text"
-		id="user-login"
-		name="username"
-		required
-	/>
-</div>
-
-<div class="form__group">
-	<label class="form__label" for="password-login">Contraseña:</label>
-	<div class="form__group-input">
+<form-login>
+	<div class="form__group">
+		<label class="form__label" for="user-login">Usuario:</label>
 		<input
-			type="password"
 			class="form__input"
-			name="password"
-			id="password-login"
+			type="text"
+			id="user-login"
+			name="username"
 			required
 		/>
-		<IconPassword />
 	</div>
-	<p>
-		<a
-			href="/password"
-			aria-label="Ir a la página para restablecer contraseña"
-			data-astro-reload>¿Has olvidado tu contraseña?</a
-		>
-	</p>
-</div>
 
-<p class="form__error-send"></p>
+	<div class="form__group">
+		<label class="form__label" for="password-login">Contraseña:</label>
+		<div class="form__group-input">
+			<input
+				type="password"
+				class="form__input"
+				name="password"
+				id="password-login"
+				required
+			/>
+			<IconPassword />
+		</div>
+		<p>
+			<a
+				href="/password"
+				aria-label="Ir a la página para restablecer contraseña"
+				data-astro-reload>¿Has olvidado tu contraseña?</a
+			>
+		</p>
+	</div>
 
-<div class="form__group">
-	<BtnColor text="INGRESAR" type="form" />
-</div>
+	<p class="form__error-send"></p>
+
+	<div class="form__group">
+		<BtnColor text="INGRESAR" type="form" />
+	</div>
+</form-login>
+
 <style>
-	div {
-		p {
-			margin-top: 0.5rem;
-			font-size: 0.8rem;
-			text-align: end;
+	form-login {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-auto-rows: auto;
+		gap: 20px;
 
-			a {
-				text-decoration: none;
-				color: inherit;
-				letter-spacing: 1px;
+		padding: 20px;
+        border-radius: 8px;
+
+		color: var(--text-color-dark);
+		background-color: var(--bg-color-dark);
+
+		body.red & {
+			border: 1px solid var(--red-light);
+		}
+		body.green & {
+			border: 1px solid var(--green-light);
+		}
+		html.light & {
+			color: var(--text-color-light);
+			background-color: var(--bg-color-light);
+		}
+
+		div {
+			p {
+				margin-top: 0.5rem;
+				font-size: 0.8rem;
+				text-align: end;
+
+				a {
+					text-decoration: none;
+					color: inherit;
+					letter-spacing: 1px;
+				}
 			}
 		}
 	}
 </style>
-<script is:inline type="module">
-	import { loginUser } from "./src/scripts/usersAPI";
+<script>
+	import { loginUser } from "@scripts/usersAPI";
 
-	document.getElementById("form-login").addEventListener("submit", (e) => {
-		e.preventDefault();
+	class FormLogin extends HTMLElement {
+		constructor() {
+			super();
+		}
+		connectedCallback() {
+			document
+				.getElementById("form-login")
+				.addEventListener("submit", (e) => {
+					e.preventDefault();
 
-		const data = new FormData(e.target);
+					const formElement = e.target as HTMLFormElement;
+					const data = new FormData(formElement);
 
-		loginUser(data);
-	});
+					loginUser(data);
+				});
+		}
+	}
+
+	customElements.define("form-login", FormLogin);
 </script>
