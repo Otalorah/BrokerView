@@ -166,6 +166,13 @@ export function enableInputsForm(component) {
 export function sendDataCreateUser(data) {
 
     const formComplete = fields.name && fields.lastname && fields.lastname2 && fields.username && fields.password && fields.password2 && fields.email;
-    if (formComplete) createUser(data);
 
+    if (formComplete) {
+
+        if (window.innerWidth < 666) data["lastname"] = data["lastname"] + " " + data["lastname2"];
+
+        createUser(data)
+
+    }
+    
 }
