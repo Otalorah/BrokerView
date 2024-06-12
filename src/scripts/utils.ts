@@ -1,3 +1,5 @@
+import type { DataToken } from "@scripts/types"
+
 export function transformDataByYear(dataList) {
 
     const data = {};
@@ -30,16 +32,12 @@ export function transformDataByYear(dataList) {
 }
 
 
-export function getUrlsData(data) {
+export function getUrlsData(data: DataToken): (string | false)[] {
 
-    const urls = ["https://api-brokerview.onrender.com/user", false, false];
+    const urls: (string | false)[] = ["https://api-brokerview.onrender.com/user", false, false];
 
-    if (data.broker) {
-        urls[1] = ("https://api-brokerview.onrender.com/broker");
-    }
-    if (data.fund) {
-        urls[2] = ("https://api-brokerview.onrender.com/fund");
-    }
+    if (data.broker) urls[1] = ("https://api-brokerview.onrender.com/broker");
+    if (data.fund) urls[2] = ("https://api-brokerview.onrender.com/fund");
 
     return urls
 
@@ -53,13 +51,10 @@ export function renderLoader() {
 
     $btns.forEach(btn => btn.id = "disable")
 
-    $loaders.forEach((loader) => {
+    $loaders.forEach(loader => {
 
-        if (document.documentElement.className == "light") {
-            loader.setAttribute("stroke", "#dfdfdf");
-        } else {
-            loader.setAttribute("stroke", "#121212");
-        }
+        if (document.documentElement.className == "light") loader.setAttribute("stroke", "#dfdfdf");
+        else loader.setAttribute("stroke", "#121212");
 
     })
 

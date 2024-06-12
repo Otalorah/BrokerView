@@ -3,9 +3,9 @@ import TitlesWelcome from "@components/home/TitlesWelcome.astro";
 import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
 import CardsHome from "@components/home/CardsHome.astro";
 
-const token = Astro.cookies.get("jwt").value;
+const token = Astro.cookies.get("jwt")?.value;
 
-const dataToken = Astro.cookies.get("dataToken").value;
+const dataToken: string = Astro.cookies.get("dataToken")?.value;
 const dataTokenObject = JSON.parse(dataToken);
 ---
 
@@ -26,22 +26,21 @@ const dataTokenObject = JSON.parse(dataToken);
     import { getAllData } from "@scripts/getData";
     import { setHomePage } from "@scripts/home/renderHome";
 
+    import type { DataToken, DataArray } from "@scripts/types";
+
     class HomeData extends HTMLElement {
         constructor() {
             super();
         }
         connectedCallback() {
             const token = this.dataset.tokenJwt;
-            const dataToken = JSON.parse(this.dataset.token);
+            const dataToken: DataToken = JSON.parse(this.dataset.token);
 
             const urls = getUrlsData(dataToken);
 
-            const hasBroker = dataToken.broker;
-            const hasFund = dataToken.fund;
-
-            getAllData(token, urls).then((responses: Array<Object>) => {
-                setHomePage(hasBroker, hasFund, responses, this);
-            });
+            getAllData(token, urls).then((responses: DataArray) =>
+                setHomePage(dataToken.broker, dataToken.fund, responses, this),
+            );
         }
     }
     customElements.define("home-data", HomeData);

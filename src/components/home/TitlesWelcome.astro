@@ -1,5 +1,12 @@
 ---
-const timeNow = new Date().getHours();
+const date = new Date();
+const timeNow = parseInt(
+    date.toLocaleTimeString("en-US", {
+        timeZone: "America/Bogota",
+        hour: "2-digit",
+        hour12: false,
+    }),
+);
 
 const hourMorning = 0;
 const hourAfternoon = 12;
@@ -13,14 +20,14 @@ else if (timeNow >= hourAfternoon && timeNow < hourNight)
 else text = "Buenas noches";
 ---
 
-<h5 id="title">{text}, </h5>
+<h1 id="title">{text}, </h1>
 <style>
-    h5 {
+    h1 {
         width: 100%;
 
         text-align: center;
         font-weight: 100;
-        font-size: 2rem;
+        font-size: 2.5rem;
         letter-spacing: 5px;
 
         margin-top: 3rem;
