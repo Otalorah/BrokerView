@@ -1,4 +1,5 @@
 import { renderLoader, deleteData } from "@scripts/utils";
+import type { AccessToken, EmailUser, CodeUser } from "@scripts/types"
 
 
 function removeLoader() {
@@ -9,10 +10,10 @@ function removeLoader() {
     $btns.forEach(btn => btn.removeAttribute("id"));
     $loaders.forEach(loader => loader.setAttribute("stroke", "transparent"));
 
-}
+};
 
 
-export async function sendEmail(email) {
+export async function sendEmail(email: EmailUser) {
 
     const bodyContent = JSON.stringify(email);
 
@@ -33,16 +34,16 @@ export async function sendEmail(email) {
         if (response.detail) document.getElementById('error-email').style.opacity = '1';
         else {
             document.getElementById('forms').classList.add('send');
-            document.querySelector(".text__link").style.display = "none";
-            sessionStorage.setItem("email-forgotten", JSON.parse(bodyContent).email)
+            (document.querySelector(".text__link") as HTMLElement).style.display = "none";
+            sessionStorage.setItem("email-forgotten", JSON.parse(bodyContent).email);
         }
 
     } finally { removeLoader() }
 
-}
+};
 
 
-function verifyResponseCode(response) {
+function verifyResponseCode(response: AccessToken) {
 
     if (sessionStorage.getItem("email-user")) window.location.href = "/";
     else {
@@ -52,10 +53,10 @@ function verifyResponseCode(response) {
         document.cookie = "forgotpw=" + response.token;
     }
 
-}
+};
 
 
-export async function sendCode(dataCode) {
+export async function sendCode(dataCode: CodeUser) {
 
     const bodyContent = JSON.stringify(dataCode);
 
@@ -78,9 +79,10 @@ export async function sendCode(dataCode) {
 
     } finally { removeLoader() }
 
-}
+};
 
-export async function sendNewPassword(password, token) {
+
+export async function sendNewPassword(password: { password: string }, token: string) {
 
     const bodyContent = JSON.stringify(password);
 
@@ -102,4 +104,4 @@ export async function sendNewPassword(password, token) {
 
     } finally { removeLoader() }
 
-}
+};

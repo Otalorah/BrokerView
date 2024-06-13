@@ -12,7 +12,9 @@ const expressions = {
 };
 
 
-function validatePassword(value, input) {
+function validatePassword(value: string, input: HTMLInputElement) {
+
+    if (!(input.parentNode instanceof HTMLElement)) return
 
     if (expressions.password.test(value) && expressions.characterEspecial.test(value)) {
 
@@ -28,13 +30,15 @@ function validatePassword(value, input) {
 
     }
 
-}
+};
 
 
-function validatePassword2(component) {
+function validatePassword2(component: HTMLElement) {
 
     const $inputs = component.querySelectorAll(".input_password");
     const $parentInputConfirm = $inputs[1].parentNode;
+
+    if (!($parentInputConfirm instanceof HTMLElement) || !($inputs[0] instanceof HTMLInputElement) || !($inputs[1] instanceof HTMLInputElement)) return
 
     if ($inputs[0].value === $inputs[1].value) {
         $parentInputConfirm.classList.add("correct");
@@ -47,43 +51,49 @@ function validatePassword2(component) {
 
         fields["password2"] = false;
     }
-}
+};
 
 
-function validateForm(e, input, component) {
+function validateForm(e: FocusEvent | KeyboardEvent, component: HTMLElement) {
 
-    if (e.target.name == "pw") validatePassword(e.target.value, input);
+    const $input = e.target;
+    if (!($input instanceof HTMLInputElement)) return
+
+    if ($input.name == "pw") validatePassword($input.value, $input);
     validatePassword2(component);
 
 };
 
 
-function enableSendPassword(component) {
+function enableSendPassword(component: HTMLElement) {
 
     component.querySelector("#form-password").addEventListener("submit", (e) => {
 
         e.preventDefault();
+        const $form = e.target;
 
-        const newPassword = Object.fromEntries(new FormData(e.target)).pw;
+        if (!($form instanceof HTMLFormElement)) return
+
+        const newPassword = Object.fromEntries(new FormData($form)).pw;
 
         const token = getCookieForgotpw();
 
-        if (fields.password && fields.password2) sendNewPassword({ password: newPassword }, token);
+        if (fields.password && fields.password2) sendNewPassword({ password: newPassword.toString() }, token);
 
     });
 
-}
+};
 
 
-export function verifyInputsPassword(component) {
+export function verifyInputsPassword(component: HTMLElement) {
 
     const $inputs = component.querySelectorAll(".input_password");
 
     $inputs.forEach((input) => {
-        input.addEventListener("keyup", (e) => { validateForm(e, input, component) });
-        input.addEventListener("blur", (e) => { validateForm(e, input, component) });
+        input.addEventListener("keyup", (e: KeyboardEvent) => { validateForm(e, component) });
+        input.addEventListener("blur", (e: FocusEvent) => { validateForm(e, component) });
     });
 
     enableSendPassword(component);
 
-}
+};

@@ -1,6 +1,7 @@
 import { createUser } from "@scripts/usersAPI";
 import type { DataUserCreate } from "@scripts/types";
 
+
 const expressions = {
     user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
     name: /^[a-zA-ZÀ-ÿ]{3,}( [a-zA-ZÀ-ÿ]{3,})? ?$/,
@@ -132,7 +133,6 @@ const enum INPUT_TYPE {
     PASSWORD = "password",
     PASSWORD2 = "password2"
 }
-
 
 
 const validateForm = (e: FocusEvent | KeyboardEvent) => {

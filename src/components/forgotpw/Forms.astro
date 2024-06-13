@@ -138,11 +138,12 @@ import BackgroundColors from "@components/BackgroundColors.astro";
         enableSendCode,
     } from "@scripts/forgotpw/handlers";
     import { verifyInputsPassword } from "@scripts/forgotpw/password";
+    import type { DataUser } from "@scripts/types";
 
     class FormPassword extends HTMLElement {
         constructor() {
             super();
-            const cacheEmailUser = JSON.parse(
+            const cacheEmailUser: DataUser = JSON.parse(
                 sessionStorage.getItem("data-user"),
             );
             const emailUser = sessionStorage.getItem("email-user");

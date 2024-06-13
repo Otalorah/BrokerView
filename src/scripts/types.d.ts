@@ -76,7 +76,20 @@ export interface ErrorAPI {
 }
 
 
+export type AccessToken = { token: string, token_type: "bearer" }
+
+
 export interface CorrectAPI {
     redirect: string
-    access_token: { token: string, token_type: "bearer" }
+    access_token: AccessToken
+}
+
+
+export interface EmailUser {
+    email: string
+}
+
+
+export interface CodeUser extends EmailUser {
+    code: string
 }
