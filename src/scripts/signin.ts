@@ -1,4 +1,5 @@
 import { createUser } from "@scripts/usersAPI";
+import type { DataUserCreate } from "@scripts/types";
 
 const expressions = {
     user: /^[a-zA-Z0-9\_\-]{4,16} ?$/,
@@ -21,7 +22,6 @@ const fields = {
 };
 
 
-// MediaQuery for desktop
 const desktopDevice = window.innerWidth > 666;
 
 if (desktopDevice) {
@@ -30,13 +30,12 @@ if (desktopDevice) {
 }
 
 
-
-
-
 function validatePassword(value) {
 
     const $groupPassword = document.getElementById("group__password"),
         $textError = document.querySelector(".form__error");
+
+    if (!($textError instanceof HTMLElement)) return
 
     if (expressions.password.test(value) && expressions.characterEspecial.test(value)) {
 
@@ -61,7 +60,7 @@ function validatePassword(value) {
 }
 
 
-function validateField(expression, input, field) {
+function validateField(expression: RegExp, input: HTMLInputElement, field: string) {
 
     const $groupInput = document.getElementById(`group__${field}`);
     const $svg = document.getElementById(`${field}_svg`);
@@ -96,6 +95,9 @@ function validatePassword2() {
         $groupPassword2 = document.getElementById(`group__password2`),
         $textError2 = document.querySelectorAll(".form__error")[1];
 
+    if (!($inputPassword1 instanceof HTMLInputElement) || !($inputPassword2 instanceof HTMLInputElement) || !($textError2 instanceof HTMLElement)) return
+
+
     if ($inputPassword1.value !== $inputPassword2.value) {
 
         $groupPassword2.classList.add("form__group-wrong");
@@ -121,29 +123,43 @@ function validatePassword2() {
 }
 
 
-const validateForm = (e) => {
+const enum INPUT_TYPE {
+    USER_NAME = "username",
+    NAME = "name",
+    LASTNAME = "lastname",
+    LASTNAME2 = "lastname2",
+    EMAIL = "email",
+    PASSWORD = "password",
+    PASSWORD2 = "password2"
+}
 
-    switch (e.target.name) {
-        case "username":
-            validateField(expressions.user, e.target, "username");
+
+
+const validateForm = (e: FocusEvent | KeyboardEvent) => {
+
+    const $input = e.target as HTMLInputElement;
+
+    switch ($input.name) {
+        case INPUT_TYPE.USER_NAME:
+            validateField(expressions.user, $input, INPUT_TYPE.USER_NAME);
             break;
-        case "name":
-            validateField(expressions.name, e.target, "name");
+        case INPUT_TYPE.NAME:
+            validateField(expressions.name, $input, INPUT_TYPE.NAME);
             break;
-        case "lastname":
-            validateField(expressions.lastname, e.target, "lastname");
+        case INPUT_TYPE.LASTNAME:
+            validateField(expressions.lastname, $input, INPUT_TYPE.LASTNAME);
             break;
-        case "lastname2":
-            validateField(expressions.lastname, e.target, "lastname2");
+        case INPUT_TYPE.LASTNAME2:
+            validateField(expressions.lastname, $input, INPUT_TYPE.LASTNAME2);
             break;
-        case "email":
-            validateField(expressions.email, e.target, "email");
+        case INPUT_TYPE.EMAIL:
+            validateField(expressions.email, $input, INPUT_TYPE.EMAIL);
             break;
-        case "password":
-            validatePassword(e.target.value);
+        case INPUT_TYPE.PASSWORD:
+            validatePassword($input.value);
             validatePassword2();
             break;
-        case "password2":
+        case INPUT_TYPE.PASSWORD2:
             validatePassword2();
             break;
     }
@@ -151,7 +167,7 @@ const validateForm = (e) => {
 };
 
 
-export function enableInputsForm(component) {
+export function enableInputsForm(component: HTMLElement) {
 
     const $inputs = component.querySelectorAll(".form__input");
 
@@ -163,7 +179,9 @@ export function enableInputsForm(component) {
 }
 
 
-export function sendDataCreateUser(data) {
+export function sendDataCreateUser(data: DataUserCreate) {
+
+    delete data.password2
 
     const formComplete = fields.name && fields.lastname && fields.lastname2 && fields.username && fields.password && fields.password2 && fields.email;
 
@@ -174,5 +192,5 @@ export function sendDataCreateUser(data) {
         createUser(data)
 
     }
-    
+
 }

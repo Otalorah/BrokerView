@@ -53,7 +53,7 @@ import "src/styles/forms.css";
 		gap: 20px;
 
 		padding: 20px;
-        border-radius: 8px;
+		border-radius: 8px;
 
 		color: var(--text-color-dark);
 		background-color: var(--bg-color-dark);
@@ -97,10 +97,13 @@ import "src/styles/forms.css";
 				.addEventListener("submit", (e) => {
 					e.preventDefault();
 
-					const formElement = e.target as HTMLFormElement;
-					const data = new FormData(formElement);
+					const formElement = e.target;
 
-					loginUser(data);
+					if (formElement instanceof HTMLFormElement) {
+						const data = new FormData(formElement);
+
+						loginUser(data);
+					}
 				});
 		}
 	}

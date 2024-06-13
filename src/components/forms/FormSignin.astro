@@ -90,7 +90,8 @@ import "src/styles/forms.css";
     }
 </script>
 <script>
-    import { enableInputsForm, sendDataCreateUser } from "@scripts/signin";
+    import { enableInputsForm, sendDataCreateUser } from "@scripts/signin.ts";
+    import type { DataUserCreate } from "@scripts/types";
 
     class FormSignin extends HTMLElement {
         constructor() {
@@ -104,11 +105,15 @@ import "src/styles/forms.css";
                 .addEventListener("submit", (e) => {
                     e.preventDefault();
 
-                    const formElement = e.target as HTMLFormElement;
-                    const data = Object.fromEntries(new FormData(formElement));
-                    delete data.password2;
+                    const formElement = e.target;
 
-                    sendDataCreateUser(data);
+                    if (formElement instanceof HTMLFormElement) {
+                        const data: Object = Object.fromEntries(
+                            new FormData(formElement),
+                        );
+
+                        sendDataCreateUser(data as DataUserCreate);
+                    }
                 });
         }
     }

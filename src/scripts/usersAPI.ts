@@ -1,12 +1,23 @@
-import { renderLoader } from "./utils";
+import { renderLoader } from "@scripts/utils";
+import type { CorrectAPI, ErrorAPI, DataUserCreate } from "@scripts/types";
 
-function verifyResponse(response) {
 
-    if (response.detail) {
+function isError(response: ErrorAPI | CorrectAPI): response is ErrorAPI {
+    return (response as ErrorAPI).detail !== undefined
+}
+
+
+function verifyResponse(response: ErrorAPI | CorrectAPI) {
+
+    if (isError(response)) {
 
         const $error = document.querySelector('.form__error-send');
-        $error.textContent = response.detail;
-        $error.style.display = 'block';
+
+        if ($error instanceof HTMLElement) {
+            $error.textContent = response.detail;
+            $error.style.display = 'block';
+        }
+
 
     } else {
 
@@ -18,15 +29,15 @@ function verifyResponse(response) {
 }
 
 
-function setEmailUser(data, response) {
+function setEmailUser(data: string, response: ErrorAPI | CorrectAPI) {
 
-    if (response.detail) return
-    else sessionStorage.setItem("email-user", JSON.parse(data).email)
+    if (isError(response)) return
+    sessionStorage.setItem("email-user", JSON.parse(data).email)
 
 }
 
 
-export async function createUser(data) {
+export async function createUser(data: DataUserCreate) {
 
     const bodyContent = JSON.stringify(data);
 
@@ -42,9 +53,9 @@ export async function createUser(data) {
             body: bodyContent
         })
 
-        const response = await res.json();
+        const response: ErrorAPI | CorrectAPI = await res.json();
 
-        setEmailUser(bodyContent, response)
+        setEmailUser(bodyContent, response);
         verifyResponse(response);
 
     } finally {
@@ -55,7 +66,7 @@ export async function createUser(data) {
 
 
 
-export async function loginUser(data) {
+export async function loginUser(data: any) {
 
     const bodyContent = new URLSearchParams(data).toString();
 
@@ -71,18 +82,19 @@ export async function loginUser(data) {
             body: bodyContent
         });
 
-        const data = await res.json()
+        const data: ErrorAPI | CorrectAPI = await res.json();
 
-        verifyResponse(data)
+        verifyResponse(data);
 
     } finally {
         document.querySelector('.btn').removeAttribute('id');
         document.querySelector(".loader").setAttribute("stroke", "transparent");
     }
+
 }
 
 
-export function GetToken(token) {
+export function GetToken(token: string) {
 
     return new Promise((resolve, reject) => {
         fetch("https://api-brokerview.onrender.com/user/token", {

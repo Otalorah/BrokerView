@@ -1,12 +1,4 @@
-import type { DataArray, BrokerObject, FundObject } from "@scripts/types";
-
-interface Data {
-    [key: string]: any;
-}
-
-interface Mappings {
-    [key: string]: [string, string];
-}
+import type { DataArray, DataUser, Broker, Fund, Mappings } from "@scripts/types";
 
 
 function renderComponent(id: string, component: HTMLElement, text: string): void {
@@ -16,7 +8,7 @@ function renderComponent(id: string, component: HTMLElement, text: string): void
 }
 
 
-function renderData(data: Data, component: HTMLElement, mappings: Mappings): void {
+function renderData(data: Broker | Fund, component: HTMLElement, mappings: Mappings): void {
 
     for (const [key, [id, suffix]] of Object.entries(mappings)) {
 
@@ -28,7 +20,7 @@ function renderData(data: Data, component: HTMLElement, mappings: Mappings): voi
 
 
 function createRenderFunction(mappings: Mappings) {
-    return (data: Data, component: HTMLElement): void => renderData(data, component, mappings);
+    return (data: Broker | Fund, component: HTMLElement): void => renderData(data, component, mappings)
 }
 
 
@@ -52,7 +44,7 @@ const renderDataFund = createRenderFunction({
 });
 
 
-function setSessionStorage(items: string[], values: Object[]) {
+function setSessionStorage(items: string[], values: (DataUser | Broker[] | Fund[])[]) {
 
     if (sessionStorage.getItem('data-user')) return
 
@@ -63,7 +55,7 @@ function setSessionStorage(items: string[], values: Object[]) {
 
 export function setHomePage(hasBroker: boolean, hasFund: boolean, responses: DataArray, component: HTMLElement) {
 
-    const getLastRecord = (data: BrokerObject[] | FundObject[]) => data[data.length - 1];
+    const getLastRecord = (data: Broker[] | Fund[]) => data[data.length - 1];
 
     const items = ["user"];
     let renderBroker = false;
