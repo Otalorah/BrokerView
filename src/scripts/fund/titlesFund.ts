@@ -1,9 +1,11 @@
-function getDataByProperty(data, property) {
+import type { Fund } from "@scripts/types";
+
+function getDataByProperty(data: Fund[], property: string): string[] {
     return data.map((obj => obj[property]))
 }
 
 
-function convertNumToString(num) {
+function convertNumToString(num: number) {
 
     const numStr = num.toString();
 
@@ -17,11 +19,11 @@ function convertNumToString(num) {
 }
 
 
-function sumValues(data) {
+function sumValues(list: string[]) {
 
     let result = 0;
 
-    data.forEach(num => {
+    list.forEach(num => {
         const strNum = num.slice(0, -4) + num.slice(-3);
         result += parseInt(strNum)
     });
@@ -30,7 +32,7 @@ function sumValues(data) {
 }
 
 
-export function renderMaxValues(data, component) {
+export function renderMaxValues(data: Fund[], component: HTMLElement) {
 
     const contributionsList = getDataByProperty(data, "aporte");
     const profitsList = getDataByProperty(data, "rendimientos");

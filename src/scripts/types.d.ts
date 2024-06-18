@@ -35,6 +35,12 @@ export interface Broker {
 }
 
 
+export interface BrokerByYear {
+    2023?: Broker[]
+    2024: Broker[]
+}
+
+
 export interface Fund {
     aporte: string;
     fecha_corte: string;

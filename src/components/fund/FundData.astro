@@ -34,7 +34,7 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
 
     figure#canvas-container {
       height: 77dvh;
-      margin: 0; 
+      margin: 0;
     }
     section#stats {
       height: 95dvh;
@@ -49,13 +49,15 @@ import TitlesFundData from "@components/fund/TitlesFundData.astro";
   import { renderMaxValues } from "@scripts/fund/titlesFund";
   import { renderTable, enableEventHandlers } from "@scripts/fund/tableFund";
 
+  import type { Fund } from "@scripts/types";
+
   class FundData extends HTMLElement {
     constructor() {
       super();
     }
     connectedCallback() {
-      getDataSessionStorage("data-fund").then((data: Array<Object>) => {
-        createChart("fund", data);
+      getDataSessionStorage("data-fund").then((data: Fund[]) => {
+        createChart(data, "fund");
         renderTable(data, this);
         enableEventHandlers(data, this);
         renderMaxValues(data, this);

@@ -1,9 +1,11 @@
-function getDataByProperty(data, property) {
+import type { Broker, BrokerByYear } from "@scripts/types"
+
+function getDataByProperty(data: Broker[], property: string): string[] {
     return data.map((obj => obj[property]))
 }
 
 
-function sumValues(data) {
+function sumValues(data: string[]) {
 
     let result = 0;
     data.forEach(num => result += parseInt(num));
@@ -12,7 +14,7 @@ function sumValues(data) {
 }
 
 
-function renderValues2023(data, component) {
+function renderValues2023(data: Broker[], component: HTMLElement) {
 
     const initialInvestment = getDataByProperty(data, "inversion")[0];
     const profitsList = getDataByProperty(data, "ganancia_neta");
@@ -23,7 +25,7 @@ function renderValues2023(data, component) {
 }
 
 
-function renderValues2024(data, component) {
+function renderValues2024(data: Broker[], component: HTMLElement) {
 
     const profitsList = getDataByProperty(data, "ganancia_neta");
     const retreatsList = getDataByProperty(data, "retiros");
@@ -39,15 +41,12 @@ function renderValues2024(data, component) {
 }
 
 
-export function renderTitles(data, component) {
+export function renderTitles(dataByYear: BrokerByYear, component: HTMLElement) {
 
-    if (!data.hasOwnProperty('2023')) {
+    renderValues2024(dataByYear["2024"], component)
 
-        renderValues2024(data["2024"], component)
-        return
-    }
+    if (!dataByYear.hasOwnProperty('2023')) return
 
-    renderValues2023(data["2023"], component)
-    renderValues2024(data["2024"], component)
+    renderValues2023(dataByYear["2023"], component)
 
 }

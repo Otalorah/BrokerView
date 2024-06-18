@@ -1,9 +1,10 @@
 import { renderTitles } from "@scripts/broker/titlesBroker";
+import type { BrokerByYear } from "@scripts/types"
 
-function enableEventHandlers(component) {
+function enableEventHandlers(component: HTMLElement) {
 
     const $tapHeaders = component.querySelectorAll('.tap-header');
-    const $pages = component.querySelectorAll('.page');
+    const $pages = component.querySelectorAll('.page') as NodeListOf<HTMLElement>;
 
     $tapHeaders.forEach((tapHeader, i) => {
 
@@ -16,12 +17,13 @@ function enableEventHandlers(component) {
             $pages[i].style.display = 'block'
 
         })
+
     })
 
 }
 
 
-function renderDivsTitle(position) {
+function renderDivsTitle(position: number) {
 
     const positions = {
         1: { text: "Ganancia total", id: "total-profits" },
@@ -46,7 +48,7 @@ function renderDivsTitle(position) {
 }
 
 
-function renderPage2024(component) {
+function renderPage2024(component: HTMLElement) {
 
     // Render Li element
     const $tapHeadersContainer = component.querySelector('#tap-headers');
@@ -87,18 +89,17 @@ function renderPage2024(component) {
 
     $page.appendChild($divTitles);
 
-
     enableEventHandlers(component);
 
 }
 
 
-function setElementsHTML(year, component) {
+function setElementsHTML(year: string, component: HTMLElement) {
 
     const $header = component.querySelector('.tap-header');
     $header.classList.add('active');
 
-    const $page = component.querySelector('.page');
+    const $page = component.querySelector('.page') as HTMLElement;
     $page.style.display = 'block';
 
     const $canvasChart = component.querySelector('.canvas-container canvas');
@@ -113,7 +114,7 @@ function setElementsHTML(year, component) {
     const $h3SecondTitle = component.querySelector("#second-title h3");
     const $pSecondTitle = component.querySelector("#second-title p");
 
-    let firstTitleText, firstTitleId, secondTitleText, secondTitleId;
+    let firstTitleText: string, firstTitleId: string, secondTitleText: string, secondTitleId: string;
 
     if (year === "2023") {
 
@@ -141,17 +142,16 @@ function setElementsHTML(year, component) {
 }
 
 
-export function renderPages(data, component) {
+export function renderPages(dataByYear: BrokerByYear, component: HTMLElement) {
 
-    if (!data.hasOwnProperty('2023')) {
-
+    if (!dataByYear.hasOwnProperty('2023')) {
         setElementsHTML("2024", component);
-        renderTitles(data, component);
+        renderTitles(dataByYear, component);
         return
     }
 
-    setElementsHTML("2023", component);
     renderPage2024(component);
-    renderTitles(data, component);
+    setElementsHTML("2023", component);
+    renderTitles(dataByYear, component);
 
 }

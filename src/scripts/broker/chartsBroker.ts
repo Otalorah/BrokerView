@@ -1,3 +1,4 @@
+import type { Broker, BrokerByYear } from "@scripts/types"
 import Chart from "chart.js/auto";
 
 const $htmlElement = document.documentElement;
@@ -6,11 +7,10 @@ Chart.defaults.borderColor = '#a9a9a977';
 
 
 function setColorCharts() {
-    if ($htmlElement.className == 'light') {
-        Chart.defaults.color = '#000';
-    } else {
-        Chart.defaults.color = '#fff';
-    }
+
+    if ($htmlElement.className == 'light') Chart.defaults.color = '#000';
+    else Chart.defaults.color = '#fff';
+
 }
 
 
@@ -30,7 +30,7 @@ function setFontChart() {
 }
 
 
-function changeColorCharts(color) {
+function changeColorCharts(color: string) {
     Object.values(Chart.instances).forEach((chart) => {
         chart.options.scales.x.ticks.color = color;
         chart.options.scales.y.ticks.color = color;
@@ -61,7 +61,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe($htmlElement, { attributes: true })
 
 
-function createChart(id, data) {
+function createChart(id: string, data: Broker[]) {
 
     const dataChart = {
 
@@ -123,14 +123,12 @@ function createChart(id, data) {
 }
 
 
-export function renderCharts(data) {
+export function renderCharts(dataByYear: BrokerByYear) {
 
-    if (!data.hasOwnProperty('2023')) {
-        createChart('2024', data['2024']);
-        return
-    }
+    createChart('2024', dataByYear['2024']);
 
-    createChart('2023', data['2023']);
-    createChart('2024', data['2024']);
+    if (!dataByYear.hasOwnProperty('2023')) return
+
+    createChart('2023', dataByYear['2023']);
 
 }

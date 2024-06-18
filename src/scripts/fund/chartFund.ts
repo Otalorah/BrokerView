@@ -1,4 +1,6 @@
 import Chart from "chart.js/auto";
+import type { Fund } from "@scripts/types";
+
 
 const $htmlElement = document.documentElement;
 
@@ -30,7 +32,7 @@ function setFontChart() {
 }
 
 
-function changeColorCharts(color) {
+function changeColorCharts(color: string) {
     Object.values(Chart.instances).forEach((chart) => {
         chart.options.scales.x.ticks.color = color;
         chart.options.scales.y.ticks.color = color;
@@ -61,7 +63,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe($htmlElement, { attributes: true })
 
 
-export function createChart(id, data) {
+export function createChart(data: Fund[], id: string) {
 
     const dataChart = {
 

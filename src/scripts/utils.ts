@@ -1,33 +1,25 @@
-import type { DataToken } from "@scripts/types"
+import type { DataToken, Broker, BrokerByYear } from "@scripts/types"
 
-export function transformDataByYear(dataList) {
+export function transformDataByYear(data: Broker[]) {
 
-    const data = {};
+    const dataByYear: BrokerByYear = { "2024": [] };
     const data2023 = [];
     const data2024 = [];
 
-    dataList.forEach(element => {
+    data.forEach(element => {
 
-        if (element.año == '2023') {
-            data2023.push(element);
-        }
-        else if (element.año == '2024') {
-            data2024.push(element);
-        }
+        if (element.año == '2023') data2023.push(element);
+        else if (element.año == '2024') data2024.push(element);
 
     });
 
-    if (data2023.length == 0) {
+    dataByYear["2024"] = data2024;
 
-        data["2024"] = data2024;
-        return data
+    if (data2023.length == 0) return dataByYear
 
-    }
+    dataByYear["2023"] = data2023;
 
-    data["2023"] = data2023;
-    data["2024"] = data2024;
-
-    return data
+    return dataByYear
 
 }
 

@@ -32,15 +32,17 @@ import ContainerLoaderIcon from "@components/loader/ContainerLoaderIcon.astro";
     import { renderPages } from "@scripts/broker/renderBroker";
     import { transformDataByYear } from "@scripts/utils";
 
+    import type { Broker } from "@scripts/types";
+
     class BrokerData extends HTMLElement {
         constructor() {
             super();
         }
         connectedCallback() {
-            getDataSessionStorage("data-broker").then((data: Array<Object>) => {
-                const dataObject = transformDataByYear(data);
-                renderPages(dataObject, this);
-                renderCharts(dataObject);
+            getDataSessionStorage("data-broker").then((data: Broker[]) => {
+                const dataByYear = transformDataByYear(data);
+                renderPages(dataByYear, this);
+                renderCharts(dataByYear);
             });
         }
     }

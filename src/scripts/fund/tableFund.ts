@@ -1,14 +1,16 @@
-function filterDataByCutoffDate(data, date) {
+import type { Fund } from "@scripts/types";
+
+function filterDataByCutoffDate(data: Fund[], date: string) {
     return data.filter((obj => obj.fecha_corte == date))
 }
 
 
-function getCutoffDate(data) {
+function getCutoffDate(data: Fund[]) {
     return [...new Set(data.map((element) => element.fecha_corte))]
 }
 
 
-function renderNewRows(data, component) {
+function renderNewRows(data: Fund[], component: HTMLElement) {
 
     const $table = component.querySelector('#table-fund');
 
@@ -28,24 +30,26 @@ function renderNewRows(data, component) {
 }
 
 
-function renderOptionsSelect(data, component) {
+function renderOptionsSelect(data: Fund[], component: HTMLElement) {
 
     const cutOffDates = getCutoffDate(data);
     const $selectHTML = component.querySelector('#cutoff-date');
 
     cutOffDates.forEach(element => {
+
         const $optionHTML = document.createElement('option');
 
         $optionHTML.value = element;
         $optionHTML.textContent = element;
 
         $selectHTML.appendChild($optionHTML);
+
     });
 
 }
 
 
-export function renderTable(data, component) {
+export function renderTable(data: Fund[], component: HTMLElement) {
 
     const firstCutoffDate = getCutoffDate(data)[0];
     const dataFiltered = filterDataByCutoffDate(data, firstCutoffDate);
@@ -56,11 +60,14 @@ export function renderTable(data, component) {
 }
 
 
-export function enableEventHandlers(data, component) {
+export function enableEventHandlers(data: Fund[], component: HTMLElement) {
 
     const $table = component.querySelector('#table-fund');
+    const $selectElement = component.querySelector('#cutoff-date');
 
-    component.querySelector('#cutoff-date').onchange = e => {
+    if (!($table instanceof HTMLElement) || !($selectElement instanceof HTMLSelectElement)) return
+
+    $selectElement.onchange = e => {
 
         // Remove childrens
         const childrens = $table.children;
@@ -69,8 +76,11 @@ export function enableEventHandlers(data, component) {
             $table.removeChild(childrens[i]);
         }
 
+        const $selectElement = e.target;
+        if (!($selectElement instanceof HTMLSelectElement)) return
+
         // Add new childrens
-        const { value: date, text } = e.target.selectedOptions[0]
+        const { value: date } = $selectElement.selectedOptions[0]
 
         const dataFiltered = filterDataByCutoffDate(data, date);
 
