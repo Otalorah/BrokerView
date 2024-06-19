@@ -29,7 +29,7 @@ import TitlesValuesBroker from "@components/broker/TitlesValuesBroker.astro";
             margin-bottom: 0.6rem;
         }
 
-        h2.summary-title{
+        h2.summary-title {
             text-align: center;
             font-size: 2rem;
             letter-spacing: 2px;
@@ -47,7 +47,7 @@ import TitlesValuesBroker from "@components/broker/TitlesValuesBroker.astro";
 
             margin: 2rem auto;
 
-            div {
+            & > div {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -88,6 +88,19 @@ import TitlesValuesBroker from "@components/broker/TitlesValuesBroker.astro";
                     text-align: center;
                     letter-spacing: 0.5px;
                 }
+                div#profit_div {
+                    display: flex;
+                    justify-content: center;
+
+                    span {
+                        letter-spacing: 0.5px;
+                        color: #ffdd00;
+
+                        html.light & {
+                            color: #aa9900;
+                        }
+                    }
+                }
             }
         }
         @media (width < 666px) {
@@ -95,10 +108,11 @@ import TitlesValuesBroker from "@components/broker/TitlesValuesBroker.astro";
                 flex-direction: column;
                 gap: 1rem;
 
-                div,div.div-2024 {
+                div,
+                div.div-2024 {
                     gap: 0.5rem;
 
-                    h3{
+                    h3 {
                         font-size: 1.5rem;
                     }
                 }

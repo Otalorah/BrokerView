@@ -18,9 +18,13 @@ function renderValues2023(data: Broker[], component: HTMLElement) {
 
     const initialInvestment = getDataByProperty(data, "inversion")[0];
     const profitsList = getDataByProperty(data, "ganancia_neta");
+    const totalProfits = sumValues(profitsList);
+
+    const percentageProfits = (totalProfits / parseInt(initialInvestment)) * 100;
 
     component.querySelector('#investment').textContent = initialInvestment + ' USDT';
-    component.querySelector('#profits').textContent = sumValues(profitsList) + ' USDT';
+    component.querySelector('#profits').textContent = totalProfits + ' USDT';
+    component.querySelector('#profit_div span').textContent = percentageProfits.toFixed(1) + '%';
 
 }
 

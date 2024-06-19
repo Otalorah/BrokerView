@@ -109,10 +109,10 @@ function setElementsHTML(year: string, component: HTMLElement) {
     $canvasChart.id = year;
 
 
-    const $h3FirstTitle = component.querySelector("#first-title h3");
-    const $pFirstTitle = component.querySelector("#first-title p");
-    const $h3SecondTitle = component.querySelector("#second-title h3");
-    const $pSecondTitle = component.querySelector("#second-title p");
+    const $h3FirstTitle = component.querySelector("#first-title h3"),
+        $pFirstTitle = component.querySelector("#first-title p"),
+        $h3SecondTitle = component.querySelector("#second-title h3"),
+        $pSecondTitle = component.querySelector("#second-title p");
 
     let firstTitleText: string, firstTitleId: string, secondTitleText: string, secondTitleId: string;
 
