@@ -24,7 +24,7 @@ function renderValues2023(data: Broker[], component: HTMLElement) {
 
     component.querySelector('#investment').textContent = initialInvestment + ' USDT';
     component.querySelector('#profits').textContent = totalProfits + ' USDT';
-    component.querySelector('#profit_div span').textContent = percentageProfits.toFixed(1) + '%';
+    component.querySelector('#profit_div span').textContent = '= ' + percentageProfits.toFixed(1) + '%';
 
 }
 
