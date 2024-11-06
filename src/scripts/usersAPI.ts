@@ -96,12 +96,13 @@ export async function loginUser(data: any) {
 
 export function GetToken(token: string) {
 
-    return new Promise((resolve, reject) => {
-        fetch("https://api-brokerview.onrender.com/user/token", {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(response => response.json()).then(data => resolve(data)).catch(e => reject(e))
-    })
+    return fetch("https://api-brokerview.onrender.com/user/token", {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(res => res.json())
+    .then(data => data)
+    .catch(e => console.log(e))
+    
 }

@@ -17,7 +17,7 @@ function verifySessionStorage() {
 }
 
 
-export async function getAllData(token: string, urls: (string | false)[]) {
+export function getAllData(token: string, urls: (string | false)[]) {
 
     if (sessionStorage.getItem('data-user')) return verifySessionStorage()
 
@@ -30,7 +30,7 @@ export async function getAllData(token: string, urls: (string | false)[]) {
 
     try {
         const promises = urls.map(url => url ? fetch(url, options).then(res => res.json()) : Promise.resolve(null));
-        return await Promise.all(promises)
+        return Promise.all(promises)
     }
     finally { document.querySelector('#loader-container').classList.add('disappear'); }
 }

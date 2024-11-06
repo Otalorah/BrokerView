@@ -99,7 +99,6 @@ export async function sendNewPassword(password: { password: string }, token: str
             body: bodyContent
         })
 
-        const response = await res.json();
         deleteData()
 
     } finally { removeLoader() }
