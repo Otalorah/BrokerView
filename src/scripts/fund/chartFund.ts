@@ -53,11 +53,8 @@ const observer = new MutationObserver((mutations) => {
             } else {
                 changeColorCharts('#fff');
             }
-
         }
-
     });
-
 })
 
 observer.observe($htmlElement, { attributes: true })
@@ -77,7 +74,7 @@ export function createChart(data: Fund[], id: string) {
                     str = str.slice(0, -4) + str.slice(-3);
                     return str;
                 }),
-                borderWidth: 1,
+                borderWidth: 4,
                 backgroundColor: '#00ff0066',
                 borderColor: '#00ff00'
             },
@@ -88,7 +85,7 @@ export function createChart(data: Fund[], id: string) {
                     str = str.slice(0, -4) + str.slice(-3);
                     return str;
                 }),
-                borderWidth: 1,
+                borderWidth: 4,
                 backgroundColor: '#4488ee66',
                 borderColor: '#4488ee'
             },
@@ -124,7 +121,7 @@ export function createChart(data: Fund[], id: string) {
     setColorCharts();
 
     new Chart(id, {
-        type: "bar",
+        type: "line",
         data: dataChart,
         options: options,
     });

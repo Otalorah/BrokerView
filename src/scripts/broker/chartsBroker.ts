@@ -69,17 +69,9 @@ function createChart(id: string, data: Broker[]) {
 
         datasets: [
             {
-                label: 'inversión USDT',
-                data: data.map((element) => element.inversion),
-                borderWidth: 1,
-                backgroundColor: '#1fe60077',
-                borderColor: '#1fe600'
-
-            },
-            {
                 label: 'Ganancia neta USDT',
                 data: data.map((element) => element.ganancia_neta),
-                borderWidth: 1,
+                borderWidth: 4,
                 backgroundColor: '#ffdd0088',
                 borderColor: '#ffdd00'
             }
@@ -116,7 +108,7 @@ function createChart(id: string, data: Broker[]) {
     setColorCharts();
 
     new Chart(id, {
-        type: "bar",
+        type: "line",
         data: dataChart,
         options: options,
     });
